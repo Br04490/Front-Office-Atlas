@@ -57,6 +57,26 @@ Visit `http://localhost:3000` to access Front Office Atlas.
 
 ---
 
+## 🔐 Environment Variables & Security Boundaries
+
+Front Office Atlas follows the current Supabase API key model with strict client/server isolation:
+
+### Browser / Client-Side (React Front-End)
+Browser code is strictly restricted to public parameters:
+- `SUPABASE_URL` / `VITE_SUPABASE_URL`
+- `SUPABASE_PUBLISHABLE_KEY` / `VITE_SUPABASE_PUBLISHABLE_KEY`
+
+### Server-Side Only (Never Exposed to Browser)
+Protected administrative credentials reside solely on server runtimes:
+- `SUPABASE_SECRET_KEY`: Administrative database operations & service-role bypass
+- `DATABASE_URL`: Direct PostgreSQL connection string
+- `GOOGLE_AI_API_KEY`: Server-side CBA semantic intelligence operations
+- `GEMINI_API_KEY`: AI Studio runtime authentication
+
+*Rule*: Never expose server-only keys (`SUPABASE_SECRET_KEY`, `DATABASE_URL`, `GOOGLE_AI_API_KEY`) to client-side bundles or `import.meta.env` client access.
+
+---
+
 ## 🧱 Future PostgreSQL / Supabase Schema
 
 The service abstraction layer (`src/services/index.ts`) is designed for seamless transition to Supabase/PostgreSQL tables:
