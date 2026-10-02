@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TeamService } from './services';
+import { TeamService, PlayerService } from './services';
 import { Team, Player } from './types';
 import { Navbar } from './components/Navbar';
 import { LeagueView } from './views/LeagueView';
@@ -12,6 +12,7 @@ import { InjuriesView } from './views/InjuriesView';
 import { ProspectsView } from './views/ProspectsView';
 import { ScenariosView } from './views/ScenariosView';
 import { SourceDeskView } from './views/SourceDeskView';
+import { TwoWayCommandView } from './views/TwoWayCommandView';
 import { AskCbaDrawer } from './components/AskCbaDrawer';
 import { AskAtlasModal } from './components/AskAtlasModal';
 import { PlayerDetailDrawer } from './components/PlayerDetailDrawer';
@@ -87,6 +88,14 @@ export default function App() {
 
         {currentNav === 'Trade Lab' && (
           <TradeLabView onOpenCba={handleOpenAskCba} />
+        )}
+
+        {currentNav === 'Two-Way Command' && (
+          <TwoWayCommandView onSelectPlayerName={(name) => {
+            // Find player and open drawer if matches
+            const match = PlayerService.getPlayersByTeam(currentTeam.id).find((p) => p.full_name === name);
+            if (match) setSelectedPlayer(match);
+          }} />
         )}
 
         {currentNav === 'Draft Ledger' && (

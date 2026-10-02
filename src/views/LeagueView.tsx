@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TeamService, CapService } from '../services';
 import { Team, Division, Conference } from '../types';
 import { EvidenceBadge } from '../components/EvidenceBadge';
@@ -12,7 +12,10 @@ import {
   DollarSign, 
   ShieldAlert, 
   ShieldCheck, 
-  Layers 
+  Layers,
+  Database,
+  RefreshCw,
+  AlertCircle
 } from 'lucide-react';
 
 interface LeagueViewProps {
@@ -27,9 +30,29 @@ export const LeagueView: React.FC<LeagueViewProps> = ({ onSelectTeam }) => {
   const [capFilter, setCapFilter] = useState<CapStatusFilter>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const allTeams = TeamService.getAllTeams();
+  // Dynamically load teams from Supabase with instant local fallback
+  const [teams, setTeams] = useState<Team[]>(TeamService.getAllTeams());
+  const [dataSource, setDataSource] = useState<'SUPABASE' | 'LOCAL_SEED'>('LOCAL_SEED');
+  const [sourceLabel, setSourceLabel] = useState<string>('Syncing Supabase database...');
+  const [sourceError, setSourceError] = useState<string | null>(null);
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
 
-  const filteredTeams = allTeams.filter((t) => {
+  const loadTeams = () => {
+    setIsRefreshing(true);
+    TeamService.fetchTeamsWithProvenance().then((res) => {
+      setTeams(res.teams);
+      setDataSource(res.source);
+      setSourceLabel(res.label);
+      setSourceError(res.error || null);
+      setIsRefreshing(false);
+    });
+  };
+
+  useEffect(() => {
+    loadTeams();
+  }, []);
+
+  const filteredTeams = teams.filter((t) => {
     const matchesConf = conferenceFilter === 'ALL' || t.conference === conferenceFilter;
     const matchesDiv = divisionFilter === 'ALL' || t.division === divisionFilter;
     const matchesSearch =
@@ -173,8 +196,47 @@ export const LeagueView: React.FC<LeagueViewProps> = ({ onSelectTeam }) => {
           </p>
         </div>
 
-        {/* Freshness & Active Season Callout */}
-        <div className="flex items-center gap-3">
+        {/* Data Source Provenance & Freshness Callout */}
+        <div className="flex flex-wrap items-center gap-3">
+          {dataSource === 'SUPABASE' ? (
+            <div 
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 font-mono text-xs text-emerald-400"
+              title="Connected to Supabase PostgreSQL table public.teams"
+            >
+              <Database className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="font-bold">SUPABASE DB: CONNECTED</span>
+              <span className="text-emerald-500/80">({teams.length} Teams)</span>
+              <button 
+                onClick={loadTeams}
+                title="Refresh from Supabase"
+                className="hover:text-white transition-colors ml-1 p-0.5"
+              >
+                <RefreshCw className={`w-3 h-3 ${isRefreshing ? 'animate-spin' : ''}`} />
+              </button>
+            </div>
+          ) : (
+            <div 
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 font-mono text-xs text-amber-300"
+              title={sourceError ? `Supabase Sync Notice: ${sourceError}. Using verified local seed.` : 'Using verified local seed fallback'}
+            >
+              <Database className="w-3.5 h-3.5 text-amber-400" />
+              <span className="font-bold">SOURCE: LOCAL SEED</span>
+              <span className="text-amber-400/70">(FALLBACK)</span>
+              {sourceError && (
+                <span className="text-[10px] text-amber-400/80 bg-amber-400/10 px-1.5 py-0.5 rounded max-w-[180px] truncate" title={sourceError}>
+                  {sourceError}
+                </span>
+              )}
+              <button 
+                onClick={loadTeams}
+                title="Retry connecting to Supabase"
+                className="hover:text-white transition-colors ml-1 p-0.5"
+              >
+                <RefreshCw className={`w-3 h-3 ${isRefreshing ? 'animate-spin' : ''}`} />
+              </button>
+            </div>
+          )}
+
           <FreshnessIndicator effectiveDate="October 1, 2026" rosterPhase="training_camp" />
         </div>
       </div>

@@ -15,11 +15,52 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 const DEFAULT_SUPABASE_URL = 'https://sebnhkmgjxhgiyrrxtsy.supabase.co';
 const DEFAULT_SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_QlYmR9uQUNgv3qo2ZVSEvA_wl2QZMhH';
 
-export const supabaseUrl: string =
+/**
+ * Normalizes input URL strings.
+ * Supports full HTTPS URLs, bare domain names, and project ref IDs (e.g. 'sebnhkmgjxhgiyrrxtsy').
+ */
+export function normalizeSupabaseUrl(rawUrl?: string | null): string {
+  if (!rawUrl || typeof rawUrl !== 'string') return DEFAULT_SUPABASE_URL;
+  const trimmed = rawUrl.trim();
+  if (!trimmed) return DEFAULT_SUPABASE_URL;
+
+  // Already a full HTTP or HTTPS URL
+  if (/^https?:\/\//i.test(trimmed)) {
+    return trimmed;
+  }
+
+  // Already includes domain suffix (e.g. sebnhkmgjxhgiyrrxtsy.supabase.co)
+  if (trimmed.includes('.')) {
+    return `https://${trimmed}`;
+  }
+
+  // Raw Supabase project ID / ref (e.g. sebnhkmgjxhgiyrrxtsy)
+  if (/^[a-z0-9_-]+$/i.test(trimmed)) {
+    return `https://${trimmed}.supabase.co`;
+  }
+
+  return `https://${trimmed}`;
+}
+
+/**
+ * Verifies if string can be parsed as a valid HTTP/HTTPS URL
+ */
+export function isValidHttpUrl(candidate: string): boolean {
+  try {
+    const parsed = new URL(candidate);
+    return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
+const rawEnvUrl =
   (typeof import.meta !== 'undefined' &&
     import.meta.env &&
     (import.meta.env.VITE_SUPABASE_URL || import.meta.env.SUPABASE_URL)) ||
   DEFAULT_SUPABASE_URL;
+
+export const supabaseUrl: string = normalizeSupabaseUrl(rawEnvUrl);
 
 export const supabasePublishableKey: string =
   (typeof import.meta !== 'undefined' &&
@@ -36,6 +77,7 @@ export interface SupabaseClientConfig {
 
 const isConfigured = Boolean(
   supabaseUrl &&
+    isValidHttpUrl(supabaseUrl) &&
     supabasePublishableKey &&
     !supabasePublishableKey.includes('your-publishable-key')
 );
@@ -51,15 +93,24 @@ export const isSupabaseConfigured = (): boolean => {
   return supabaseConfig.isConfigured;
 };
 
-// Singleton Supabase Browser Client initialized with public publishable key
-export const supabase: SupabaseClient | null = isConfigured
-  ? createClient(supabaseUrl, supabasePublishableKey, {
+// Singleton Supabase Browser Client initialized safely with error protection
+let initializedClient: SupabaseClient | null = null;
+
+if (isConfigured && isValidHttpUrl(supabaseUrl)) {
+  try {
+    initializedClient = createClient(supabaseUrl, supabasePublishableKey, {
       auth: {
         persistSession: false,
         autoRefreshToken: false,
       },
-    })
-  : null;
+    });
+  } catch (err) {
+    console.warn('[FOA Supabase] Failed to initialize Supabase client:', err);
+    initializedClient = null;
+  }
+}
+
+export const supabase: SupabaseClient | null = initializedClient;
 
 /**
  * Safe fetch helper for future Supabase tables.

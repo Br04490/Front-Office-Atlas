@@ -1,0 +1,2 @@
+nba_player_id,full_name,team_identifier,jersey_number,position,secondary_position,date_of_birth,height,weight,college_or_origin,roster_status,contract_type,two_way_status,headshot_url,roster_phase,effective_date,source_url,retrieved_at
+1641708,Amen Thompson,houston-rockets,1,Guard / Forward,Guard,2003-01-30,6-7,200 lbs,Overtime Elite,Active Roster,Rookie Scale (Standard NBA),false,https://cdn.nba.com/headshots/nba/latest/1040x760/1641708.png,training_camp,2026-10-01,https://data.nba.com/v1/league_operations,2026-10-01T12:00:00Z

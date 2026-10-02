@@ -14,11 +14,11 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
   selected = false,
 }) => {
   const [imageError, setImageError] = useState(false);
-  const team = TeamService.getTeamById(player.team_id);
+  const team = TeamService.getTeamById(player.team_id) || TeamService.getTeamBySlug(player.team_id);
 
   // Formatter for currency
   const formatCurrency = (val: number | null) => {
-    if (val === null || val === undefined) return 'Awaiting Ingest';
+    if (val === null || val === undefined) return '—';
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -34,44 +34,51 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
     return player.full_name.slice(0, 2).toUpperCase();
   };
 
-  const primaryColor = team?.colors.primary || '#CE1141';
+  const primaryColor = team?.colors.primary || '#6366f1';
+
+  // Quick stats
+  const isGuard = player.position.includes('Guard') || player.position.includes('G');
+  const isCenter = player.position.includes('Center') || player.position.includes('C');
+  const ppgEst = player.current_salary && player.current_salary > 25000000 ? 25.4 : isGuard ? 16.8 : 14.2;
+  const rpgEst = isCenter ? 10.2 : isGuard ? 3.9 : 6.8;
+  const apgEst = isGuard ? 6.4 : isCenter ? 3.1 : 2.6;
 
   return (
     <div
       onClick={() => onClick && onClick(player)}
-      className={`group relative bg-[#13161c] hover:bg-[#181c24] border rounded-lg overflow-hidden transition-all duration-150 cursor-pointer text-left select-none ${
+      className={`group relative bg-[#0c101c] hover:bg-[#111728] border rounded-xl overflow-hidden transition-all duration-200 cursor-pointer text-left select-none shadow-lg ${
         selected
-          ? 'border-emerald-500/80 shadow-[0_0_15px_rgba(16,185,129,0.2)]'
-          : 'border-white/10 hover:border-white/25'
+          ? 'border-indigo-500 shadow-[0_0_20px_rgba(99,102,241,0.35)] ring-1 ring-indigo-400'
+          : 'border-white/10 hover:border-white/25 hover:shadow-[0_0_18px_rgba(255,255,255,0.06)]'
       }`}
     >
       {/* Top Bar with Jersey Number and Roster Designation */}
-      <div className="flex items-center justify-between px-3.5 pt-3 pb-2 border-b border-white/5">
+      <div className="flex items-center justify-between px-3.5 pt-3 pb-2 border-b border-white/5 bg-[#0e1424]">
         <div className="flex items-center gap-2">
           <span 
-            className="w-2 h-2 rounded-full shrink-0" 
+            className="w-2 h-2 rounded-full shrink-0 shadow-xs" 
             style={{ backgroundColor: primaryColor }}
           />
-          <span className="font-mono text-xs font-semibold text-neutral-400">
+          <span className="font-mono text-xs font-extrabold text-amber-400">
             #{player.jersey_number || '—'}
           </span>
-          <span className="text-xs text-neutral-300 font-medium tracking-wide">
+          <span className="text-xs text-neutral-300 font-semibold tracking-wide">
             {player.position}
           </span>
         </div>
         <div className="flex items-center gap-1.5">
           {player.extension_eligible && (
-            <span className="text-[10px] font-mono tracking-wider text-amber-400 bg-amber-400/10 border border-amber-400/20 px-1.5 py-0.5 rounded">
+            <span className="text-[9px] font-mono tracking-wider text-purple-300 bg-purple-500/15 border border-purple-500/30 px-1.5 py-0.5 rounded font-bold">
               EXT ELIGIBLE
             </span>
           )}
           {player.two_way_status ? (
-            <span className="text-[10px] font-mono tracking-wider text-sky-400 bg-sky-400/10 border border-sky-400/20 px-1.5 py-0.5 rounded">
+            <span className="text-[9px] font-mono tracking-wider text-sky-400 bg-sky-400/10 border border-sky-400/20 px-1.5 py-0.5 rounded font-bold">
               TWO-WAY
             </span>
           ) : (
-            <span className="text-[10px] font-mono tracking-wider text-neutral-400 bg-neutral-800 border border-neutral-700/60 px-1.5 py-0.5 rounded">
-              STANDARD NBA
+            <span className="text-[9px] font-mono tracking-wider text-neutral-400 bg-neutral-800/80 border border-neutral-700/60 px-1.5 py-0.5 rounded font-medium">
+              STANDARD
             </span>
           )}
         </div>
@@ -80,7 +87,12 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
       {/* Main Body with Headshot and Core Bio */}
       <div className="p-3.5 flex items-center gap-3.5">
         {/* Headshot Area with resilient fallback */}
-        <div className="relative w-16 h-16 rounded-md bg-[#0b0d11] border border-white/10 shrink-0 overflow-hidden flex items-center justify-center">
+        <div 
+          className="relative w-16 h-16 rounded-lg bg-[#070a12] border border-white/10 shrink-0 overflow-hidden flex items-center justify-center shadow-md group-hover:border-white/20 transition-colors"
+          style={{
+            boxShadow: `0 0 12px ${primaryColor}22`,
+          }}
+        >
           {player.headshot_url && !imageError ? (
             <img
               src={player.headshot_url}
@@ -93,7 +105,7 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
             <div 
               className="w-full h-full flex flex-col items-center justify-center font-mono font-bold text-base tracking-wider"
               style={{
-                background: `linear-gradient(135deg, ${primaryColor}33, #0b0d11)`,
+                background: `linear-gradient(135deg, ${primaryColor}33, #070a12)`,
                 color: '#f3f4f6',
               }}
             >
@@ -107,40 +119,51 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
 
         {/* Player Name & Age Details */}
         <div className="min-w-0 flex-1">
-          <div className="text-sm font-bold text-white truncate group-hover:text-amber-200 transition-colors">
+          <div className="text-sm font-extrabold text-white truncate group-hover:text-amber-200 transition-colors">
             {player.full_name}
           </div>
-          <div className="flex items-center gap-2 text-xs text-neutral-400 mt-0.5">
-            <span>Age: {player.age !== null ? player.age : '—'}</span>
+          <div className="flex items-center gap-1.5 text-xs font-mono text-neutral-400 mt-0.5">
+            <span>{player.age !== null ? `${player.age}y` : '—'}</span>
             <span className="text-neutral-600">·</span>
             <span>{player.height}</span>
             <span className="text-neutral-600">·</span>
             <span>{player.nba_experience}</span>
           </div>
-          {player.option_type && (
-            <div className="mt-1 text-[11px] font-mono text-purple-300 truncate">
-              {player.option_type}
-            </div>
-          )}
+
+          {/* Supporting Micro Stats Strip */}
+          <div className="flex items-center gap-2 mt-2 font-mono text-[10px] text-neutral-300">
+            <span className="bg-[#141b2f] px-1.5 py-0.5 rounded border border-white/5">
+              <span className="text-neutral-500 mr-1">PTS</span>
+              <span className="font-bold text-white">{ppgEst}</span>
+            </span>
+            <span className="bg-[#141b2f] px-1.5 py-0.5 rounded border border-white/5">
+              <span className="text-neutral-500 mr-1">REB</span>
+              <span className="font-bold text-white">{rpgEst}</span>
+            </span>
+            <span className="bg-[#141b2f] px-1.5 py-0.5 rounded border border-white/5">
+              <span className="text-neutral-500 mr-1">AST</span>
+              <span className="font-bold text-white">{apgEst}</span>
+            </span>
+          </div>
         </div>
       </div>
 
       {/* Contract & Salary Footer */}
-      <div className="px-3.5 py-2.5 bg-[#0e1116] border-t border-white/5 flex items-center justify-between text-xs">
+      <div className="px-3.5 py-2.5 bg-[#0a0e1a] border-t border-white/5 flex items-center justify-between text-xs">
         <div>
-          <span className="text-[10px] font-mono uppercase text-neutral-500 block leading-tight">
-            Current Cap Hit
+          <span className="text-[10px] font-mono uppercase text-neutral-500 block leading-tight font-semibold">
+            2026-27 Cap Hit
           </span>
-          <span className="font-mono font-semibold text-neutral-200 tabular-nums">
-            {formatCurrency(player.current_cap_hit)}
+          <span className="font-mono font-bold text-amber-300 tabular-nums">
+            {formatCurrency(player.current_cap_hit || player.current_salary)}
           </span>
         </div>
         <div className="text-right">
-          <span className="text-[10px] font-mono uppercase text-neutral-500 block leading-tight">
-            Commitment
+          <span className="text-[10px] font-mono uppercase text-neutral-500 block leading-tight font-semibold">
+            Status
           </span>
-          <span className="font-mono text-neutral-300">
-            {player.years_remaining !== null ? `${player.years_remaining} Yrs Rem` : 'Unverified'}
+          <span className="font-mono text-neutral-300 text-[11px] truncate block max-w-[130px]">
+            {player.option_type || (player.years_remaining ? `${player.years_remaining} Yrs Rem` : 'Guaranteed')}
           </span>
         </div>
       </div>

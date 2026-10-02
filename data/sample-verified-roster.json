@@ -1,0 +1,22 @@
+[
+  {
+    "nba_player_id": "1641708",
+    "full_name": "Amen Thompson",
+    "team_identifier": "houston-rockets",
+    "jersey_number": "1",
+    "position": "Guard / Forward",
+    "secondary_position": "Guard",
+    "date_of_birth": "2003-01-30",
+    "height": "6-7",
+    "weight": "200 lbs",
+    "college_or_origin": "Overtime Elite",
+    "roster_status": "Active Roster",
+    "contract_type": "Rookie Scale (Standard NBA)",
+    "two_way_status": false,
+    "headshot_url": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641708.png",
+    "roster_phase": "training_camp",
+    "effective_date": "2026-10-01",
+    "source_url": "https://data.nba.com/v1/league_operations",
+    "retrieved_at": "2026-10-01T12:00:00Z"
+  }
+]

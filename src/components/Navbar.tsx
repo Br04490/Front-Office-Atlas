@@ -36,6 +36,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: 'Teams', id: 'Teams' },
     { label: 'Cap & Apron', id: 'Cap & Apron' },
     { label: 'Trade Lab', id: 'Trade Lab' },
+    { label: 'Two-Way Command', id: 'Two-Way Command' },
     { label: 'Draft Ledger', id: 'Draft Ledger' },
     { label: 'G League', id: 'G League' },
     { label: 'Injuries', id: 'Injuries' },

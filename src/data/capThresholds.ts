@@ -5,6 +5,7 @@ export const CAP_THRESHOLDS_BY_SEASON: Record<string, CapThreshold> = {
     season: '2026-27',
     cba_era: 'CURRENT CBA',
     status: 'VERIFIED_CURRENT',
+    verification_status: 'OFFICIAL',
     salary_cap: 164961000,        // Official 2026-27 NBA Salary Cap
     salary_floor: 148465000,      // Official 2026-27 Minimum Team Salary (90% of cap)
     luxury_tax: 200428000,        // Official 2026-27 Luxury Tax Level
@@ -23,6 +24,7 @@ export const CAP_THRESHOLDS_BY_SEASON: Record<string, CapThreshold> = {
     season: '2027-28',
     cba_era: 'CURRENT CBA',
     status: 'SCENARIO',
+    verification_status: 'PROJECTED',
     salary_cap: 181457000,        // 10% maximum annual cap growth projection under 2023 CBA
     salary_floor: 163311000,
     luxury_tax: 220471000,
@@ -41,6 +43,7 @@ export const CAP_THRESHOLDS_BY_SEASON: Record<string, CapThreshold> = {
     season: '2028-29',
     cba_era: 'CURRENT CBA',
     status: 'SCENARIO',
+    verification_status: 'PROJECTED',
     salary_cap: 199603000,
     salary_floor: 179643000,
     luxury_tax: 242518000,
@@ -59,6 +62,7 @@ export const CAP_THRESHOLDS_BY_SEASON: Record<string, CapThreshold> = {
     season: '2029-30',
     cba_era: 'CONDITIONAL CBA',
     status: 'SCENARIO',
+    verification_status: 'CALCULATED',
     salary_cap: 219563000,
     salary_floor: 197607000,
     luxury_tax: 266770000,
@@ -77,6 +81,7 @@ export const CAP_THRESHOLDS_BY_SEASON: Record<string, CapThreshold> = {
     season: '2030-31',
     cba_era: 'FUTURE CBA UNKNOWN',
     status: 'SCENARIO',
+    verification_status: 'UNKNOWN',
     salary_cap: 241519000,
     salary_floor: 217367000,
     luxury_tax: 293447000,
@@ -95,6 +100,7 @@ export const CAP_THRESHOLDS_BY_SEASON: Record<string, CapThreshold> = {
     season: '2031-32',
     cba_era: 'FUTURE CBA UNKNOWN',
     status: 'SCENARIO',
+    verification_status: 'UNKNOWN',
     salary_cap: 265671000,
     salary_floor: 239104000,
     luxury_tax: 322792000,
@@ -107,6 +113,6 @@ export const CAP_THRESHOLDS_BY_SEASON: Record<string, CapThreshold> = {
     min_salary_veteran: 6006000,
     source_id: 'src_cba_2023_ratified',
     effective_date: '2026-10-01',
-    notes: 'FUTURE CBA UNKNOWN: Post-2023 CBA horizon. Governing rules and apron penalties subject to future collective bargaining negotiations.',
+    notes: 'FUTURE CBA UNKNOWN: Post-2023 CBA horizon. Projected at baseline 10% smoothing assuming new collective agreement preserves structure.',
   },
 };
