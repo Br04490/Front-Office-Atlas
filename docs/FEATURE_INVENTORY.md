@@ -16,15 +16,18 @@ Crystal hero, decorative sphere, data-source status, six clickable workspace car
 
 Official logo, conference, division, accent color, watermark, three status pills, a 30-team selector, six original tabs, and Team BRI Impact. Houston is the default. Team choice persists across tab changes during the current page session.
 
+Selecting a franchise opens Trends by default. The original tabs remain; an additional Salary Cap tab shares the roster scenario and tower with Trends and Roster.
+
 ## Tabs
 
-1. **Roster:** Actual current NBA.com and NBA Stats roster size (17 or 18), verified official player thumbnails, and name-and-number placeholders where the CDN image is outdated or missing. Player details show NBA ID and verification status.
-2. **Season Trends:** four empty KPI cards, Last 5 / Last 10 controls, illustrative wave, and evidence-first recommendation.
-3. **Lineups:** four empty KPIs, illustrative possession window, and context recommendation.
-4. **Games & Box Scores:** four unconnected KPIs and future schedule/box-score region.
-5. **Possession Windows:** four empty KPIs, no inferred timings, and separated time/possession framework.
-6. **Coaching Reasoning:** empty evidence log and a recommendation framework without invented interviews.
-7. **Team BRI Impact:** entry to the league-wide BRI Calculator with the selected franchise carried as context.
+1. **Roster:** Actual current NBA.com and NBA Stats roster size (17 or 18), verified official player thumbnails, and name-and-number placeholders where the CDN image is outdated or missing. Player details show NBA ID and verification status. The expanded shared Salary Cap Tower appears below the original roster cards.
+2. **Season Trends:** four empty KPI cards, Last 5 / Last 10 controls, illustrative wave, evidence-first recommendation, and a compact Salary Cap Tower at right.
+3. **Salary Cap:** expanded shared tower, season path, financial modes, hypothetical roster actions, loss analysis, candidate exploration, and official 2026–27 league thresholds. Team allocation and performance projections are withheld pending verified data.
+4. **Lineups:** four empty KPIs, illustrative possession window, and context recommendation.
+5. **Games & Box Scores:** four unconnected KPIs and future schedule/box-score region.
+6. **Possession Windows:** four empty KPIs, no inferred timings, and separated time/possession framework.
+7. **Coaching Reasoning:** empty evidence log and a recommendation framework without invented interviews.
+8. **Team BRI Impact:** entry to the league-wide BRI Calculator with the selected franchise carried as context.
 
 ## Six internal workspaces
 
