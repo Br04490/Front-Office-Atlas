@@ -28,12 +28,12 @@ Official logo, conference, division, accent color, watermark, three status pills
 
 ## Six internal workspaces
 
-1. **Automated Sheets:** seven sections for basketball paperwork, local file selection, and a clearly labeled review-draft prototype. No official submission.
-2. **Ask CBA:** seven sections, question capture, source/evidence placeholders, and links to related workspaces. No rule engine or legal conclusion.
+1. **Automated Sheets:** the seven original sections plus Official Form Library & Generator. The registry cites the published 2023 CBA exhibits and distinguishes unavailable official form population from available Atlas supporting worksheets. No official submission.
+2. **Ask CBA:** seven sections, question capture, source/evidence placeholders, and links to related workspaces. A specific proposed action can offer temporary preparation. No rule engine or legal conclusion.
 3. **BRI Calculator:** eight sections and user-entered hypothetical BRI growth arithmetic. No NBA cap, tax, or apron projection is represented as official.
-4. **Execution Planner:** seven sections, audience selector, format selector, source-idea input, and an editable briefing draft. The wording changes by audience; facts remain the author's input.
-5. **Intelligence Lab:** ten sections and a query form. Current NBA player search uses the shared verified roster/image record; commercial and other unconnected data sources are explicitly marked unavailable.
-6. **Scenario Lab:** eight sections with 18 locked one-click templates. Launching creates an editable working copy that can be saved, duplicated, or reset without changing the original. Working copies are stored in browser local storage.
+4. **Execution Planner:** six internal sections, multi-audience selector, evidence notes, presentation styles, editable briefing drafts, real PowerPoint export, and opt-in temporary server-side supporting packets with review/Save/Discard. Private RAG, video, official forms, and transaction validation remain unavailable.
+5. **Intelligence Lab:** ten sections and a query form. Current NBA player search uses the shared verified roster/image record; commercial and other unconnected data sources are explicitly marked unavailable. Trade Case Builder can initiate an opt-in supporting packet.
+6. **Scenario Lab:** eight sections with 18 locked one-click templates. Launching creates an editable working copy that can be saved, duplicated, or reset without changing the original. Working copies are stored in browser local storage; an actionable copy can offer temporary supporting paperwork.
 
 ## Deferred phases
 
