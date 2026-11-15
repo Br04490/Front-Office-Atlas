@@ -18,7 +18,7 @@ Official logo, conference, division, accent color, watermark, three status pills
 
 ## Tabs
 
-1. **Roster:** 18 interactive silhouette placeholders and pending-source notice. The eventual roster component should follow verified roster size.
+1. **Roster:** Actual current NBA.com and NBA Stats roster size (17 or 18), verified official player thumbnails, and name-and-number placeholders where the CDN image is outdated or missing. Player details show NBA ID and verification status.
 2. **Season Trends:** four empty KPI cards, Last 5 / Last 10 controls, illustrative wave, and evidence-first recommendation.
 3. **Lineups:** four empty KPIs, illustrative possession window, and context recommendation.
 4. **Games & Box Scores:** four unconnected KPIs and future schedule/box-score region.
@@ -32,9 +32,9 @@ Official logo, conference, division, accent color, watermark, three status pills
 2. **Ask CBA:** seven sections, question capture, source/evidence placeholders, and links to related workspaces. No rule engine or legal conclusion.
 3. **BRI Calculator:** eight sections and user-entered hypothetical BRI growth arithmetic. No NBA cap, tax, or apron projection is represented as official.
 4. **Execution Planner:** seven sections, audience selector, format selector, source-idea input, and an editable briefing draft. The wording changes by audience; facts remain the author's input.
-5. **Intelligence Lab:** ten sections and a query form. Commercial and other unconnected data sources are explicitly marked unavailable.
+5. **Intelligence Lab:** ten sections and a query form. Current NBA player search uses the shared verified roster/image record; commercial and other unconnected data sources are explicitly marked unavailable.
 6. **Scenario Lab:** eight sections with 18 locked one-click templates. Launching creates an editable working copy that can be saved, duplicated, or reset without changing the original. Working copies are stored in browser local storage.
 
 ## Deferred phases
 
-Four verified Houston player photo cards after visual approval; all-roster ingestion after card approval; deeper analytics, contracts, and trade features later. No backend or live feed is connected.
+Deeper analytics, contracts, and trade features remain deferred. No backend or live feed is connected. Player and photo data is a November 15, 2026 snapshot, with unresolved items documented in `outputs/nba-player-photo-audit.md`.
