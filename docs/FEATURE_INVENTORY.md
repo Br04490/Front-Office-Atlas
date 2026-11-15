@@ -6,7 +6,7 @@ Translucent top bar with six navigation controls, search, notifications, setting
 
 ## Home
 
-Crystal hero, decorative sphere, data-source status, six clickable module cards, and a 30-team grid. The status panel explicitly identifies unconnected feeds.
+Crystal hero, decorative sphere, data-source status, six clickable workspace cards, and a 30-team grid. The status panel explicitly identifies unconnected feeds. The original homepage card layout and styling remain; the six labels, subtitles, icons, and destinations changed.
 
 ## Directory
 
@@ -14,7 +14,7 @@ Crystal hero, decorative sphere, data-source status, six clickable module cards,
 
 ## Franchise portal
 
-Official logo, conference, division, accent color, watermark, three status pills, a 30-team selector, and six tabs. Houston is the default. Team choice persists across tab changes during the current page session.
+Official logo, conference, division, accent color, watermark, three status pills, a 30-team selector, six original tabs, and Team BRI Impact. Houston is the default. Team choice persists across tab changes during the current page session.
 
 ## Tabs
 
@@ -24,6 +24,16 @@ Official logo, conference, division, accent color, watermark, three status pills
 4. **Games & Box Scores:** four unconnected KPIs and future schedule/box-score region.
 5. **Possession Windows:** four empty KPIs, no inferred timings, and separated time/possession framework.
 6. **Coaching Reasoning:** empty evidence log and a recommendation framework without invented interviews.
+7. **Team BRI Impact:** entry to the league-wide BRI Calculator with the selected franchise carried as context.
+
+## Six internal workspaces
+
+1. **Automated Sheets:** seven sections for basketball paperwork, local file selection, and a clearly labeled review-draft prototype. No official submission.
+2. **Ask CBA:** seven sections, question capture, source/evidence placeholders, and links to related workspaces. No rule engine or legal conclusion.
+3. **BRI Calculator:** eight sections and user-entered hypothetical BRI growth arithmetic. No NBA cap, tax, or apron projection is represented as official.
+4. **Execution Planner:** seven sections, audience selector, format selector, source-idea input, and an editable briefing draft. The wording changes by audience; facts remain the author's input.
+5. **Intelligence Lab:** ten sections and a query form. Commercial and other unconnected data sources are explicitly marked unavailable.
+6. **Scenario Lab:** eight sections with 18 locked one-click templates. Launching creates an editable working copy that can be saved, duplicated, or reset without changing the original. Working copies are stored in browser local storage.
 
 ## Deferred phases
 
