@@ -2,10 +2,12 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import {preparationApi,presentationApi} from './services/preparation.mjs';
+import {sheetExtractApi} from './services/sheet-extract.mjs';
 const root=process.cwd();
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.png':'image/png','.json':'application/json; charset=utf-8'};
 http.createServer((req,res)=>{
  const url=new URL(req.url,'http://localhost:3000');
+ if(url.pathname==='/api/sheets/extract'){if(req.headers.origin&&!['http://localhost:3000','http://127.0.0.1:3000'].includes(req.headers.origin)){res.writeHead(403).end('Origin denied');return}sheetExtractApi(req,res);return}
  if(url.pathname==='/api/presentations'){if(req.headers.origin&&!['http://localhost:3000','http://127.0.0.1:3000'].includes(req.headers.origin)){res.writeHead(403).end('Origin denied');return}presentationApi(req,res);return}
  if(url.pathname.startsWith('/api/preparations')){if(req.headers.origin&&!['http://localhost:3000','http://127.0.0.1:3000'].includes(req.headers.origin)){res.writeHead(403).end('Origin denied');return}preparationApi(req,res,url);return}
  let file;try{file=path.resolve(root,'.'+decodeURIComponent(url.pathname))}catch{res.writeHead(400).end('Bad path');return}
