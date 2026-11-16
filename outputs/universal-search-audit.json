@@ -1,0 +1,267 @@
+{
+  "generatedAt": "2026-11-16T18:35:35.768Z",
+  "roster": {
+    "records": 525,
+    "uniqueNbaIds": 525,
+    "teams": 30,
+    "tatumNbaId": 1628369,
+    "verifiedHeightRecords": 0,
+    "verifiedAgeRecords": 0,
+    "verifiedWingspanRecords": 0,
+    "populatedNbaPerformanceMetrics": 0,
+    "verifiedNbaContractRecords": 0
+  },
+  "provider": {
+    "acbPlayerTeamRecords": 323,
+    "acbMetricDefinitions": 12,
+    "competition": "Liga ACB",
+    "nbaCrosswalks": 0
+  },
+  "draft": {
+    "totalOriginalPickSlots": 300,
+    "conditionalImported": 3,
+    "unverified": 297,
+    "years": [
+      2027,
+      2028,
+      2029,
+      2030,
+      2031
+    ],
+    "prospectRecordsByClass": {
+      "2027": 0,
+      "2028": 0,
+      "2029": 0,
+      "2030": 0,
+      "2031": 0
+    },
+    "collegeCornerThreeRecords": 0,
+    "validatedProspectRankingModels": 0
+  },
+  "requiredQuestions": [
+    {
+      "number": 1,
+      "question": "Find players whose last name starts with T",
+      "parserIntent": "search_players",
+      "resultStatus": "ok",
+      "returnedPlayers": 20,
+      "missing": [],
+      "working": true
+    },
+    {
+      "number": 2,
+      "question": "Find Jayson Tatum",
+      "parserIntent": "search_players",
+      "resultStatus": "ok",
+      "returnedPlayers": 1,
+      "missing": [],
+      "working": true
+    },
+    {
+      "number": 3,
+      "question": "Find all players at least 6-foot-8",
+      "parserIntent": "search_players",
+      "resultStatus": "insufficient_data",
+      "returnedPlayers": 0,
+      "missing": [
+        "height_inches is not populated in the connected NBA roster"
+      ],
+      "working": false
+    },
+    {
+      "number": 4,
+      "question": "Find players who have made at least 50 catch-and-shoot threes this season",
+      "parserIntent": "search_players",
+      "resultStatus": "insufficient_data",
+      "returnedPlayers": 0,
+      "missing": [
+        "catch_shoot_three_made is not populated in the connected NBA roster"
+      ],
+      "working": false
+    },
+    {
+      "number": 5,
+      "question": "Find college prospects 6-foot-5 with at least 17 corner threes and wingspans of at least 6-foot-9",
+      "parserIntent": "search_players",
+      "resultStatus": "insufficient_data",
+      "returnedPlayers": 0,
+      "missing": [
+        "NCAA player records are not connected",
+        "height_inches is not populated in the connected NBA roster",
+        "wingspan_inches is not populated in the connected NBA roster",
+        "corner_three_made is not populated in the connected NBA roster"
+      ],
+      "working": false
+    },
+    {
+      "number": 6,
+      "question": "Find international players with statistical profiles similar to this NBA player",
+      "parserIntent": "search_players",
+      "resultStatus": "insufficient_data",
+      "returnedPlayers": 0,
+      "missing": [
+        "International player records are not connected"
+      ],
+      "working": false
+    },
+    {
+      "number": 7,
+      "question": "Find players using our custom Off-Ball Gravity metric",
+      "parserIntent": "search_players",
+      "resultStatus": "insufficient_data",
+      "returnedPlayers": 0,
+      "missing": [
+        "The requested scouting, film, or research metric is not populated for this NBA roster"
+      ],
+      "working": false
+    },
+    {
+      "number": 8,
+      "question": "Who owns Milwaukee's 2029 second-round pick?",
+      "parserIntent": "draft_assets",
+      "resultStatus": "conditional",
+      "returnedPlayers": 0,
+      "missing": [],
+      "working": true
+    },
+    {
+      "number": 9,
+      "question": "Show every future first-round and second-round pick controlled by Oklahoma City",
+      "parserIntent": "draft_assets",
+      "resultStatus": "insufficient_data",
+      "returnedPlayers": 0,
+      "missing": [
+        "draft_pick_rights"
+      ],
+      "working": false
+    },
+    {
+      "number": 10,
+      "question": "Show the five most valuable 2029 draft assets under our selected model",
+      "parserIntent": "draft_assets",
+      "resultStatus": "insufficient_data",
+      "returnedPlayers": 0,
+      "missing": [
+        "draft_pick_rights"
+      ],
+      "working": false
+    },
+    {
+      "number": 11,
+      "question": "Rank available 2027 through 2031 draft prospects by our custom two-way wing model",
+      "parserIntent": "search_players",
+      "resultStatus": "insufficient_data",
+      "returnedPlayers": 0,
+      "missing": [
+        "Prospect player records are not connected"
+      ],
+      "working": false
+    },
+    {
+      "number": 12,
+      "question": "Find cheaper contract twins for this player",
+      "parserIntent": "search_players",
+      "resultStatus": "insufficient_data",
+      "returnedPlayers": 0,
+      "missing": [
+        "Verified NBA contract amounts are not connected"
+      ],
+      "working": false
+    },
+    {
+      "number": 13,
+      "question": "Find trade partners who can construct a CBA-compliant package around this player",
+      "parserIntent": "trade_discovery",
+      "resultStatus": "insufficient_data",
+      "returnedPlayers": 0,
+      "missing": [
+        "contracts",
+        "cba_rules",
+        "team_needs"
+      ],
+      "working": false
+    },
+    {
+      "number": 14,
+      "question": "Find a feasible three-team alternative",
+      "parserIntent": "trade_discovery",
+      "resultStatus": "insufficient_data",
+      "returnedPlayers": 0,
+      "missing": [
+        "contracts",
+        "cba_rules",
+        "team_needs"
+      ],
+      "working": false
+    },
+    {
+      "number": 15,
+      "question": "Build a scouting report with supporting metrics and authorized film",
+      "parserIntent": "search_players",
+      "resultStatus": "insufficient_data",
+      "returnedPlayers": 0,
+      "missing": [
+        "The requested scouting, film, or research metric is not populated for this NBA roster"
+      ],
+      "working": false
+    },
+    {
+      "number": 16,
+      "question": "Compare this draft prospect's shooting to historical players at the same age",
+      "parserIntent": "search_players",
+      "resultStatus": "insufficient_data",
+      "returnedPlayers": 0,
+      "missing": [
+        "Prospect player records are not connected"
+      ],
+      "working": false
+    },
+    {
+      "number": 17,
+      "question": "Exclude players who lack verified physical measurements",
+      "parserIntent": "search_players",
+      "resultStatus": "insufficient_data",
+      "returnedPlayers": 0,
+      "missing": [
+        "Verified physical measurements are not populated for this NBA roster"
+      ],
+      "working": false
+    },
+    {
+      "number": 18,
+      "question": "Show only the prospects whose corner-three sample is large enough to meet our custom threshold",
+      "parserIntent": "search_players",
+      "resultStatus": "insufficient_data",
+      "returnedPlayers": 0,
+      "missing": [
+        "Prospect player records are not connected",
+        "corner_three_made requested without a numeric value"
+      ],
+      "working": false
+    },
+    {
+      "number": 19,
+      "question": "Open the third player profile",
+      "parserIntent": "context_command",
+      "resultStatus": "working_in_browser_flow",
+      "returnedPlayers": null,
+      "missing": [],
+      "working": true
+    },
+    {
+      "number": 20,
+      "question": "Return to my previous search without losing filters",
+      "parserIntent": "context_command",
+      "resultStatus": "working_in_browser_flow",
+      "returnedPlayers": null,
+      "missing": [],
+      "working": true
+    }
+  ],
+  "limitations": [
+    "Only three original 2029 second-round assets share one sourced conditional rights event; the remaining 297 five-year original-pick slots have no verified current-rights event.",
+    "No current NBA height, age, wingspan, shot statistics, contract amounts, or commercial scouting metrics are loaded.",
+    "A status of insufficient_data means no match conclusion can be made.",
+    "Ask Atlas routes typed and browser-recognized speech to the same deterministic parser; microphone capture depends on browser/device permission."
+  ]
+}
