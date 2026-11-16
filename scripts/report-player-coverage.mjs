@@ -1,0 +1,9 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const roster=JSON.parse(fs.readFileSync(path.join(root,'src/data/players.json'),'utf8'));
+const intelligence=JSON.parse(fs.readFileSync(path.join(root,'src/data/player-intelligence.json'),'utf8'));
+const records=Object.values(intelligence.players||{});
+const report={generatedAt:new Date().toISOString(),rosterSeason:roster.season,currentPlayers:roster.players.length,teams:Object.keys(roster.teams).length,playersWithIntelligenceRecords:records.length,shotEvents:(intelligence.shotEvents||[]).length,playersWithShotEvents:new Set((intelligence.shotEvents||[]).map(shot=>shot.playerId)).size,verifiedMetricValues:records.reduce((sum,record)=>sum+Object.values(record.seasons||{}).reduce((n,season)=>n+Object.values(season.metrics||{}).filter(item=>item?.source&&item?.verifiedAt).length,0),0),verifiedContractSeasons:Object.values(intelligence.contracts||{}).reduce((n,seasons)=>n+Object.keys(seasons).length,0),validatedTwinResults:records.reduce((sum,record)=>sum+Object.values(record.twins||{}).reduce((n,list)=>n+list.filter(item=>item?.source&&item?.verifiedAt&&item?.methodology).length,0),0),licensedFilmClips:records.reduce((sum,record)=>sum+(record.film||[]).filter(item=>item?.licensed===true&&item?.source&&item?.verifiedAt).length,0),priorityTeams:['HOU','DEN','CHA','ORL','PHX'].map(team=>({team,players:roster.players.filter(p=>p.team===team).length,shotEvents:(intelligence.shotEvents||[]).filter(shot=>roster.players.find(p=>p.nbaPlayerId===Number(shot.playerId))?.team===team).length}))};
+fs.mkdirSync(path.join(root,'outputs'),{recursive:true});fs.writeFileSync(path.join(root,'outputs/player-intelligence-coverage.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));

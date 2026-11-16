@@ -15,7 +15,9 @@ export function financialView({players,season,mode='cap',sources,scenario}){
   const knownPlayerTotal=priced.reduce((sum,item)=>sum+item.amount,0);
   const knownOtherTotal=nonPlayer.reduce((sum,item)=>sum+item.amount,0);
   const comparable=mode==='cap'||mode==='tax';
-  const complete=(comparable?!!cap:knownPlayerTotal+knownOtherTotal>0)&&unpriced.length===0&&(!scenario||!scenario.financialPending);
+  const team=players[0]?.team;
+  const allocationsAttested=!sources.allocationCoverage||sources.allocationCoverage?.[team]?.[season]?.[mode]==='complete';
+  const complete=(comparable?!!cap:knownPlayerTotal+knownOtherTotal>0)&&unpriced.length===0&&allocationsAttested&&(!scenario||!scenario.financialPending);
   const total=complete?knownPlayerTotal+knownOtherTotal:null;
   const scaleBase=comparable?cap:total;
   const maxPercent=complete&&comparable?Math.max(150,Math.ceil(total/cap*4)*25):comparable?150:100;

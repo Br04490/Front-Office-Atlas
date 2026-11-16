@@ -18,6 +18,9 @@ From this folder, install dependencies with `pnpm install` and run `node server.
 - `docs/FEATURE_INVENTORY.md` records visible features and deferred work.
 - `docs/EXECUTION_PLANNER_UPGRADE.md` documents the opt-in preparation service, official CBA form reference registry, API, retention, tests, and current limits.
 - `docs/SALARY_TOWER_EXPANSION.md` documents the shared team tower, official 2026–27 league thresholds, hypothetical roster scenario state, and financial-data boundaries.
+- `src/components/player-profile.js` is the shared NBA-ID profile route for roster, tower, search, and comparison entry points.
+- `src/shot-intelligence.js` and `src/components/shot-chart.js` validate and render actual shot events, never synthetic locations.
+- `src/data/player-intelligence.json` holds authorized imports. It starts empty; `outputs/player-intelligence-coverage.json` reports actual coverage.
 
 ## Current scope
 
@@ -30,3 +33,13 @@ Franchise selection now opens Season Trends with the compact Salary Cap Tower. R
 The player images are for the local preview. NBA terms of use apply; public CDN access does not establish publication rights. Clear rights before public deployment. Re-run verification before treating this snapshot as current on a later date.
 
 No GitHub remote or deployment is configured.
+
+## Player intelligence import
+
+The player profile opens for every player in the dated roster snapshot. Basketball statistics, shot locations, contracts, measurements, twins, relationships, and film currently have **zero connected records**. The profile marks each unavailable field and keeps Player Actions linked to the same NBA ID. Historical season choices do not imply historical data coverage.
+
+To import a permitted JSON export, run `node scripts/import-player-intelligence.mjs <authorized-export.json>`, then `node scripts/report-player-coverage.mjs`. The importer writes `src/data/player-intelligence.json` only after validating rights metadata, canonical NBA IDs, shot coordinates, unique shot events, source URLs, verification dates, metric samples, and any licensed film links. Pass a second output path to test an import without replacing the site dataset.
+
+The export must use `schemaVersion: 1`, a `rights` object with `authorizedForAtlas: true`, `basis`, `sourceUrl`, and `attribution`, plus optional `players`, `shotEvents`, `contracts`, and `leagueZoneBaselines`. Each shot needs `playerId`, 10-digit `gameId`, integer `gameEventId`, ISO `date`, NBA season, `locX` (−250 to 250), `locY` (−47.5 to 422.5), boolean `made`, `shotValue` (2 or 3), `source`, and `verifiedAt`. Player season metrics require a finite `value`, `sample`, `source`, and `verifiedAt`. See the import tests for a valid fixture.
+
+Partial contract imports can populate a player's contract view, but the Salary Cap Tower remains in its labeled player-count mode until every relevant allocation is verified and team/mode/season `allocationCoverage` is explicitly attested complete. The importer never marks that coverage complete. NBA.com statistics and media usage are subject to [NBA terms](https://www.nba.com/termsofuse); this importer does not scrape or download them. No private or licensed provider is connected by default.

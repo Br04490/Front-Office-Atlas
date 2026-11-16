@@ -1,0 +1,40 @@
+{
+  "generatedAt": "2026-11-15T22:21:48.192Z",
+  "rosterSeason": "2026-27",
+  "currentPlayers": 525,
+  "teams": 30,
+  "playersWithIntelligenceRecords": 0,
+  "shotEvents": 0,
+  "playersWithShotEvents": 0,
+  "verifiedMetricValues": 0,
+  "verifiedContractSeasons": 0,
+  "validatedTwinResults": 0,
+  "licensedFilmClips": 0,
+  "priorityTeams": [
+    {
+      "team": "HOU",
+      "players": 17,
+      "shotEvents": 0
+    },
+    {
+      "team": "DEN",
+      "players": 17,
+      "shotEvents": 0
+    },
+    {
+      "team": "CHA",
+      "players": 18,
+      "shotEvents": 0
+    },
+    {
+      "team": "ORL",
+      "players": 17,
+      "shotEvents": 0
+    },
+    {
+      "team": "PHX",
+      "players": 17,
+      "shotEvents": 0
+    }
+  ]
+}

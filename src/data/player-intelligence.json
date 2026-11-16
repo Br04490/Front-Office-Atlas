@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "description": "Authorized player intelligence imports keyed by official NBA player ID. Empty until permitted source exports are supplied.",
+  "players": {},
+  "shotEvents": [],
+  "contracts": {},
+  "allocationCoverage": {},
+  "metricDefinitions": {},
+  "leagueZoneBaselines": {},
+  "importedAt": null
+}

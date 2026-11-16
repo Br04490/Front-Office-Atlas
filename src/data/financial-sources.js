@@ -13,6 +13,7 @@ export const financialSources={
     verifiedAt:'2026-11-15'
   }},
   contracts:{},
+  allocationCoverage:{},
   nonPlayerAllocations:{},
   status:'official_thresholds_only',
   sources:['https://pr.nba.com/2026-27-salary-cap/']
