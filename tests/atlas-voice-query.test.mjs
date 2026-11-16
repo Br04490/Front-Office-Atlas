@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {teams} from '../src/data/teams.js';
+import {queryAtlasRoster} from '../src/atlas-voice-query.js';
+const players=JSON.parse(readFileSync(new URL('../src/data/players.json',import.meta.url))).players;
+test('spoken last-name initial searches all loaded NBA records',()=>{const result=queryAtlasRoster('Give me all the players whose last name starts with R',players,teams);assert.equal(result.kind,'players');assert.ok(result.players.length>0);assert.ok(result.players.every(p=>p.name.replace(/\s+(Jr\.?|Sr\.?|II|III|IV)$/i,'').split(' ').at(-1).toLowerCase().startsWith('r')))});
+test('team names and nicknames select the correct roster',()=>{for(const phrase of ['Show me the Houston Rockets players','List players on the Rockets']){const result=queryAtlasRoster(phrase,players,teams);assert.equal(result.players.length,players.filter(p=>p.team==='HOU').length);assert.ok(result.players.every(p=>p.team==='HOU'))}});
+test('player names and team directory resolve without inferred stats',()=>{const target=players.find(p=>p.name.split(' ').length===2);const player=queryAtlasRoster(`Find ${target.name}`,players,teams);assert.equal(player.players[0].nbaPlayerId,target.nbaPlayerId);const directory=queryAtlasRoster('Show me all NBA teams',players,teams);assert.equal(directory.kind,'teams');assert.equal(directory.teams.length,30)});
+test('full names inside natural questions and surname filters work',()=>{const target=players.find(p=>p.name.split(' ').length===2);assert.equal(queryAtlasRoster(`What team does ${target.name} play for?`,players,teams).players[0].nbaPlayerId,target.nbaPlayerId);const name=target.name.split(' ').at(-1);assert.ok(queryAtlasRoster(`Show players whose last name is ${name}`,players,teams).players.some(p=>p.nbaPlayerId===target.nbaPlayerId))});
+test('unknown queries report no match',()=>assert.equal(queryAtlasRoster('Find Zzz Qqq',players,teams).kind,'none'));
