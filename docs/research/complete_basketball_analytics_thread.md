@@ -9,7 +9,7 @@ Give me a list of every stats in basketball index we will aggregate different st
 
 ## Assistant
 
-Basketball Index tracks over **700 individual metrics organized into 28 categories** across four pillars: **Impact**, **Skill (Talent Grades)**, **Productivity**, and **Context**. 
+Basketball Index tracks over **700 individual metrics organized into 28 categories** across four pillars: **Impact**, **Skill (Talent Grades)**, **Productivity**, and **Context**.
 
 Because listing all 700+ raw columns (many of which are per-game, per-75, and percentile variants of the same stat) would obscure how the system works, the breakdown below covers **every composite stat, underlying component metric, and all 28 categories**, along with the exact equations and aggregation logic used to build them.
 
