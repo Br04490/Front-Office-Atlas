@@ -1,0 +1,9 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {mergePlayerIntelligence} from '../src/player-intelligence-merge.js';
+
+const rights={authorizedForAtlas:true,basis:'test authorization',sourceUrl:'https://example.org/source',attribution:'Example'};
+const base={schemaVersion:1,players:{'1':{seasons:{'2025-26':{metrics:{points:{value:20,source:'https://example.org/source',verifiedAt:'2026-11-16',sample:'season'}}}}}},shotEvents:[],contracts:{},metricDefinitions:{},leagueZoneBaselines:{}};
+test('merge preserves prior seasons and adds independent verified inputs',()=>{const incoming={schemaVersion:1,rights,players:{'1':{seasons:{'2024-25':{metrics:{rebounds:{value:7,source:'https://example.org/source',verifiedAt:'2026-11-16',sample:'season'}}}}}},shotEvents:[],contracts:{},metricDefinitions:{},leagueZoneBaselines:{}};const result=mergePlayerIntelligence(base,incoming);assert.equal(result.players['1'].seasons['2025-26'].metrics.points.value,20);assert.equal(result.players['1'].seasons['2024-25'].metrics.rebounds.value,7);assert.equal(base.players['1'].seasons['2024-25'],undefined);assert.equal(result.sourceImports.length,1)});
+test('merge rejects conflicting values and duplicate shot identities',()=>{const conflicting={schemaVersion:1,rights,players:{'1':{seasons:{'2025-26':{metrics:{points:{value:21,source:'https://example.org/source',verifiedAt:'2026-11-16',sample:'season'}}}}}},shotEvents:[]};assert.throws(()=>mergePlayerIntelligence(base,conflicting),/Conflicting source values/);const shot={playerId:1,season:'2025-26',gameId:'A',gameEventId:3,made:true};const changed={...shot,made:false};assert.throws(()=>mergePlayerIntelligence({...base,shotEvents:[shot]},{schemaVersion:1,rights,players:{},shotEvents:[changed]}),/Conflicting shot event/)});
+test('merge requires explicit source rights',()=>assert.throws(()=>mergePlayerIntelligence(base,{schemaVersion:1,players:{}}),/rights not verified/));
