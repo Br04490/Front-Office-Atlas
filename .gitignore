@@ -1,3 +1,5 @@
 node_modules/
 .atlas-private/
 work/
+src/data/nba360-local.json
+src/data/nba360-teams-local.json
