@@ -4,7 +4,7 @@ import path from 'node:path';
 import {preparationApi,presentationApi} from './services/preparation.mjs';
 import {sheetExtractApi} from './services/sheet-extract.mjs';
 const root=process.cwd();
-const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.png':'image/png','.json':'application/json; charset=utf-8'};
+const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.png':'image/png','.svg':'image/svg+xml','.json':'application/json; charset=utf-8'};
 http.createServer((req,res)=>{
  const url=new URL(req.url,'http://localhost:3000');
  if(url.pathname==='/api/sheets/extract'){if(req.headers.origin&&!['http://localhost:3000','http://127.0.0.1:3000'].includes(req.headers.origin)){res.writeHead(403).end('Origin denied');return}sheetExtractApi(req,res);return}
