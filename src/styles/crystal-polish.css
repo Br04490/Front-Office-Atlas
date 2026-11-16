@@ -1,11 +1,13 @@
 /* Crystal finish: low-cost CSS reflections and route-aware visual identity. */
 :root{--crystal-ease:cubic-bezier(.22,.7,.25,1)}
-#atlas-watermark{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;isolation:isolate}
+#atlas-watermark{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden;isolation:isolate}
+#atlas-watermark[data-context="team"]{z-index:0}
 #atlas-watermark .atlas-watermark-league,#atlas-watermark .atlas-watermark-team{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:opacity .48s var(--crystal-ease)}
 #atlas-watermark[data-context="league"] .atlas-watermark-league{opacity:1}
 #atlas-watermark[data-context="team"] .atlas-watermark-team{opacity:1}
-#atlas-watermark .atlas-watermark-league img{width:min(65vw,760px);height:min(85vh,760px);object-fit:contain;opacity:.36;filter:drop-shadow(0 0 38px #ffffffc9) drop-shadow(0 16px 44px #72b5ea45);transform:translate(8vw,3vh)}
-#atlas-watermark .atlas-watermark-league span{position:absolute;left:52%;top:75%;color:#4c91bf;font-size:9px;font-weight:800;letter-spacing:.24em;opacity:.72}
+#atlas-watermark .nba-silhouette{position:absolute;right:25%;top:6%;width:min(52vw,570px);height:min(94vh,900px);-webkit-mask:url('../assets/nba-silhouette-mask.png') center/contain no-repeat;mask:url('../assets/nba-silhouette-mask.png') center/contain no-repeat}
+#atlas-watermark .nba-silhouette-glow{background:#7dc9fb;opacity:.12;filter:blur(25px);transform:scale(1.045)}
+#atlas-watermark .nba-silhouette-figure{background:linear-gradient(105deg,#83c7f2 4%,#d8f2ff 29%,#6bb8ed 48%,#f8fcff 61%,#8fcdf5 81%,#5aa9e1 100%);opacity:.24;filter:drop-shadow(0 0 14px #7fcaff);animation:nba-glow 9s ease-in-out infinite alternate}
 #atlas-watermark .atlas-watermark-team img{width:min(63vw,720px);height:min(73vh,700px);object-fit:contain;opacity:.18;filter:grayscale(.18) drop-shadow(0 0 36px #fff);transform:translate(16vw,5vh)}
 #atlas-watermark .atlas-watermark-league:after{content:'✦';position:absolute;top:17%;left:75%;color:#fff;font-size:23px;text-shadow:0 0 16px #72c9ff;opacity:.8}
 .topbar{justify-content:space-between}
@@ -38,12 +40,13 @@
 .team-hero .watermark{opacity:0}
 @keyframes crystal-panel-in{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
 @keyframes crystal-glint{from{opacity:0;transform:scale(.5)}45%{opacity:1}to{opacity:0;transform:scale(1.35)}}
+@keyframes nba-glow{from{opacity:.22}to{opacity:.28}}
 @media(max-height:770px){.sidebar{overflow-y:auto;overflow-x:visible;scrollbar-width:thin}.sidebar .side-link.bottom{margin-top:0}.sidebar-popover{position:fixed;left:105px;top:115px}}
 @media(max-width:1100px){body{min-width:0}.shell{padding-left:105px;padding-right:18px}.sidebar{margin-left:-87px}.home-top{grid-template-columns:1.45fr 1fr}.feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.team-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.tabs{overflow-x:auto}.tabs button{flex:0 0 auto;padding-inline:14px}.sidebar-popover{left:74px}}
-@media(max-width:760px){.shell{padding-left:84px;padding-right:10px}.sidebar{margin-left:-78px;width:64px}.side-link{width:52px}.topbar{padding:0 14px}.home-top,.two-panels{grid-template-columns:1fr}.hero{min-height:320px;padding:30px}.hero-copy{position:relative;z-index:2}.team-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.team-hero{padding:18px;gap:10px}.team-emblem{width:100px;height:100px}.team-emblem img{width:80px;height:80px}.team-heading{min-width:0}.team-heading h1{font-size:29px}.sidebar-popover{left:65px}.atlas-watermark-league img{width:86vw}}
+@media(max-width:760px){.shell{padding-left:84px;padding-right:10px}.sidebar{margin-left:-78px;width:64px}.side-link{width:52px}.topbar{padding:0 14px}.home-top,.two-panels{grid-template-columns:1fr}.hero{min-height:320px;padding:30px}.hero-copy{position:relative;z-index:2}.team-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.team-hero{padding:18px;gap:10px}.team-emblem{width:100px;height:100px}.team-emblem img{width:80px;height:80px}.team-heading{min-width:0}.team-heading h1{font-size:29px}.sidebar-popover{left:65px}#atlas-watermark .nba-silhouette{width:min(68vw,420px);height:86vh;right:2%;top:10%}}
 @media(max-width:520px){.feature-grid{grid-template-columns:1fr}.team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.brand small{display:none}.top-actions{gap:3px}.top-actions .avatar{display:none}.team-hero .team-status{display:none}.atlas-watermark-league span{display:none}}
 @media(prefers-reduced-motion:reduce){#atlas-watermark *, .sidebar-popover,.atlas-voice-panel,.atlas-query-result,.ws-result{animation:none!important;transition:none!important}}
-@media(prefers-reduced-transparency:reduce){.glass,.sidebar-popover,.atlas-voice-panel{backdrop-filter:none;-webkit-backdrop-filter:none;background:#f7fbff}.hero,.team-hero{background:#f4faff}#atlas-watermark img{opacity:.08!important}}
+@media(prefers-reduced-transparency:reduce){.glass,.sidebar-popover,.atlas-voice-panel{backdrop-filter:none;-webkit-backdrop-filter:none;background:#f7fbff}.hero,.team-hero{background:#f4faff}#atlas-watermark img{opacity:.08!important}#atlas-watermark .nba-silhouette{opacity:.07!important}}
 @supports not (backdrop-filter:blur(1px)){.glass,.sidebar-popover,.atlas-voice-panel{background:#f4faff}}
 .topbar .top-actions{margin-left:auto}
 #atlas-watermark .atlas-watermark-team img{width:min(48vw,560px);height:min(60vh,560px);opacity:.105;transform:translate(23vw,12vh);filter:grayscale(.08) drop-shadow(0 0 30px #fff)}
