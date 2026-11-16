@@ -1,0 +1,241 @@
+{
+  "generatedAt": "2026-11-16T17:04:15.111Z",
+  "sourceFiles": [
+    "docs/research/complete_basketball_analytics_thread.md",
+    "docs/research/atlas_metric_registry_seed.json"
+  ],
+  "totalResearchMetrics": 11,
+  "validatedModels": 0,
+  "calculatedResearchValues": 0,
+  "metrics": [
+    {
+      "id": "atlas.research.sce.v0",
+      "symbol": "SCE",
+      "name": "Self-Creation Efficiency",
+      "draftEquation": "0.30*z(rts_pct)+0.25*z(self_created_ppp)+0.20*z(unassisted_fgm_per75)+0.15*z(tightly_guarded_shot_freq)-0.10*z(handle_tov_per75)",
+      "status": "research_unvalidated",
+      "calculatedValues": 0,
+      "availableDependencies": [],
+      "missingDependencies": [
+        "rts_pct",
+        "self_created_ppp",
+        "unassisted_fgm_per75",
+        "tightly_guarded_shot_freq",
+        "handle_tov_per75"
+      ],
+      "blockers": [
+        "Overall rTS overlaps self-created PPP and unassisted makes; revise or test correlation.",
+        "Heuristic weights lack held-out calibration.",
+        "5 required inputs are absent from the permitted ACB snapshot.",
+        "No validated same-competition cohort, fitted model or held-out result is available."
+      ],
+      "sourceDocument": "docs/research/complete_basketball_analytics_thread.md"
+    },
+    {
+      "id": "atlas.research.obg.v0",
+      "symbol": "OBG",
+      "name": "Off-Ball Gravity & Movement",
+      "draftEquation": "0.25*z(screen_ast_per75)+0.25*z(cut_offscreen_ppp)-0.20*z(avg_3pt_defender_distance_ft)+0.15*z(offball_velocity)+0.15*z(teammate_rim_fg_onoff_lift)",
+      "status": "research_unvalidated",
+      "calculatedValues": 0,
+      "availableDependencies": [],
+      "missingDependencies": [
+        "screen_ast_per75",
+        "cut_offscreen_ppp",
+        "avg_3pt_defender_distance_ft",
+        "offball_velocity",
+        "teammate_rim_fg_onoff_lift"
+      ],
+      "blockers": [
+        "Defender distance is an indirect gravity proxy; validate against tracked defensive response.",
+        "Teammate rim lift is confounded by lineups and role.",
+        "5 required inputs are absent from the permitted ACB snapshot.",
+        "No validated same-competition cohort, fitted model or held-out result is available."
+      ],
+      "sourceDocument": "docs/research/complete_basketball_analytics_thread.md"
+    },
+    {
+      "id": "atlas.research.pcoe.v0",
+      "symbol": "PCOE",
+      "name": "Playmaking Creation Over Expectation",
+      "draftEquation": "0.40*z(potential_ast_per75+ft_ast_per75)+0.30*z(rim_corner3_pass_share)+0.30*z(expected_bad_pass_tov_per75-actual_bad_pass_tov_per75)",
+      "status": "research_unvalidated",
+      "calculatedValues": 0,
+      "availableDependencies": [],
+      "missingDependencies": [
+        "potential_ast_per75",
+        "ft_ast_per75",
+        "rim_corner3_pass_share",
+        "expected_bad_pass_tov_per75",
+        "actual_bad_pass_tov_per75"
+      ],
+      "blockers": [
+        "Expected bad-pass turnover model must be fitted on a separate training sample.",
+        "Pass destination and free-throw assist definitions need a shared source.",
+        "5 required inputs are absent from the permitted ACB snapshot.",
+        "No validated same-competition cohort, fitted model or held-out result is available."
+      ],
+      "sourceDocument": "docs/research/complete_basketball_analytics_thread.md"
+    },
+    {
+      "id": "atlas.research.dvms.v0",
+      "symbol": "DVMS",
+      "name": "Defensive Versatility & Matchup Stopper",
+      "draftEquation": "0.35*z(expected_matchup_pts_per75-actual_matchup_pts_per75)+0.25*z(matchup_difficulty)+0.20*z(guarded_position_entropy)+0.20*z(screen_navigation_resistance)",
+      "status": "research_unvalidated",
+      "calculatedValues": 0,
+      "availableDependencies": [],
+      "missingDependencies": [
+        "expected_matchup_pts_per75",
+        "actual_matchup_pts_per75",
+        "matchup_difficulty",
+        "guarded_position_entropy",
+        "screen_navigation_resistance"
+      ],
+      "blockers": [
+        "Position entropy measures assignment variety, not stopper quality.",
+        "Expected matchup points and screen navigation require validated attribution.",
+        "5 required inputs are absent from the permitted ACB snapshot.",
+        "No validated same-competition cohort, fitted model or held-out result is available."
+      ],
+      "sourceDocument": "docs/research/complete_basketball_analytics_thread.md"
+    },
+    {
+      "id": "atlas.research.rdpp.v0",
+      "symbol": "RDPP",
+      "name": "Rim Deterrence & Paint Protection",
+      "draftEquation": "0.45*z(rim_pts_saved_per75)+0.30*z(opponent_rim_frequency_off-minus-on)+0.25*(0.5*z(contested_dreb_pct)+0.5*z(boxouts_per75))",
+      "status": "research_unvalidated",
+      "calculatedValues": 0,
+      "availableDependencies": [],
+      "missingDependencies": [
+        "rim_pts_saved_per75",
+        "opponent_rim_frequency_off-minus-on",
+        "contested_dreb_pct",
+        "boxouts_per75"
+      ],
+      "blockers": [
+        "The transcript adds contested-rebound percentage to box-outs per 75 before standardizing; the seed proposes separate z-scores.",
+        "Rim deterrence on/off needs lineup and opponent adjustment.",
+        "4 required inputs are absent from the permitted ACB snapshot.",
+        "No validated same-competition cohort, fitted model or held-out result is available."
+      ],
+      "sourceDocument": "docs/research/complete_basketball_analytics_thread.md"
+    },
+    {
+      "id": "atlas.research.twpe.v0",
+      "symbol": "TWPE",
+      "name": "Two-Way Possession Engine",
+      "draftEquation": "z(1.5*stl_per75+1.4*charges_per75+1.2*contested_oreb_per75+0.6*deflections_per75-1.5*live_ball_tov_per75)",
+      "status": "research_unvalidated",
+      "calculatedValues": 0,
+      "availableDependencies": [],
+      "missingDependencies": [
+        "stl_per75",
+        "charges_per75",
+        "contested_oreb_per75",
+        "deflections_per75",
+        "live_ball_tov_per75"
+      ],
+      "blockers": [
+        "Offensive and defensive events use different possession denominators.",
+        "Weights and double-counted extra-possession outcomes need validation.",
+        "5 required inputs are absent from the permitted ACB snapshot.",
+        "No validated same-competition cohort, fitted model or held-out result is available."
+      ],
+      "sourceDocument": "docs/research/complete_basketball_analytics_thread.md"
+    },
+    {
+      "id": "atlas.research.uni.v0",
+      "symbol": "UNI",
+      "name": "Unified Net Impact",
+      "draftEquation": "ridge_prior_centered(offense_stint_response,defense_stint_response,player_design_matrix,stint_possessions,calibrated_off_prior,calibrated_def_prior,lambda)",
+      "status": "research_unvalidated",
+      "calculatedValues": 0,
+      "availableDependencies": [],
+      "missingDependencies": [
+        "offense_stint_response",
+        "defense_stint_response",
+        "player_design_matrix",
+        "stint_possessions",
+        "calibrated_off_prior",
+        "calibrated_def_prior"
+      ],
+      "blockers": [
+        "The transcript labels prior-only output as complete impact; a fitted stint model is required for UNI.",
+        "Luck adjustment, regularization and point scale require held-out calibration.",
+        "6 required inputs are absent from the permitted ACB snapshot.",
+        "No validated same-competition cohort, fitted model or held-out result is available."
+      ],
+      "sourceDocument": "docs/research/complete_basketball_analytics_thread.md"
+    },
+    {
+      "id": "atlas.research.uni_war.v0",
+      "symbol": "UNI_WAR",
+      "name": "Unified Wins Above Replacement",
+      "draftEquation": "(uni_pts_per100-replacement_level_pts_per100)*player_possessions/100/empirically_calibrated_points_per_win",
+      "status": "research_unvalidated",
+      "calculatedValues": 0,
+      "availableDependencies": [],
+      "missingDependencies": [
+        "uni_pts_per100",
+        "replacement_level_pts_per100",
+        "player_possessions",
+        "empirically_calibrated_points_per_win"
+      ],
+      "blockers": [
+        "Replacement level and points-per-win constants are draft assumptions, not validated values.",
+        "4 required inputs are absent from the permitted ACB snapshot.",
+        "No validated same-competition cohort, fitted model or held-out result is available."
+      ],
+      "sourceDocument": "docs/research/complete_basketball_analytics_thread.md"
+    },
+    {
+      "id": "atlas.research.additional_1.v0",
+      "symbol": "Custom True Creation Index",
+      "name": "Custom True Creation Index",
+      "draftEquation": "pts_per75 + 2.15*potential_ast_per75 + 1.85*ft_ast_per75 - 2.2*tov_per75",
+      "status": "research_unvalidated",
+      "calculatedValues": 0,
+      "availableDependencies": [],
+      "missingDependencies": [],
+      "blockers": [
+        "Potential assists are chances, not points; coefficients need conversion and validation.",
+        "Input lineage and denominators are not registered in this snapshot.",
+        "No validated same-competition cohort, fitted model or held-out result is available."
+      ],
+      "sourceDocument": "docs/research/complete_basketball_analytics_thread.md"
+    },
+    {
+      "id": "atlas.research.additional_2.v0",
+      "symbol": "Custom Two-Way Havoc Rate",
+      "name": "Custom Two-Way Havoc Rate",
+      "draftEquation": "1.5*stl_per75 + 1.4*charges_per75 + 1.0*blocks_per75 + 0.6*deflections_per75",
+      "status": "research_unvalidated",
+      "calculatedValues": 0,
+      "availableDependencies": [],
+      "missingDependencies": [],
+      "blockers": [
+        "Input lineage and denominators are not registered in this snapshot.",
+        "No validated same-competition cohort, fitted model or held-out result is available."
+      ],
+      "sourceDocument": "docs/research/complete_basketball_analytics_thread.md"
+    },
+    {
+      "id": "atlas.research.additional_3.v0",
+      "symbol": "Context-Adjusted True Shooting",
+      "name": "Context-Adjusted True Shooting",
+      "draftEquation": "ts_pct - expected_ts_pct_given_usage_selfcreated_share_shot_quality",
+      "status": "research_unvalidated",
+      "calculatedValues": 0,
+      "availableDependencies": [],
+      "missingDependencies": [],
+      "blockers": [
+        "Expected TS model must be trained and tested out of sample.",
+        "Input lineage and denominators are not registered in this snapshot.",
+        "No validated same-competition cohort, fitted model or held-out result is available."
+      ],
+      "sourceDocument": "docs/research/complete_basketball_analytics_thread.md"
+    }
+  ]
+}

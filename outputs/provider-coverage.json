@@ -1,0 +1,322 @@
+{
+  "generatedAt": "2026-11-16T17:04:14.936Z",
+  "baseline": "2c3cb12",
+  "source": {
+    "provider": "SkillCorner",
+    "competition": "Liga ACB",
+    "season": "2025-2026",
+    "commit": "4bbed2e35e8fdd2cf083e8c8b280b3e5381a2c66",
+    "license": "MIT"
+  },
+  "counts": {
+    "providersCataloged": 30,
+    "operationalLocalSnapshots": 1,
+    "credentialedCommercialConnections": 0,
+    "sourceMetricDefinitions": 12,
+    "researchMetricDrafts": 11,
+    "validatedResearchMetrics": 0,
+    "calculatedResearchMetricValues": 0,
+    "playerTeamRecords": 323,
+    "uniqueProviderPlayerIds": 318,
+    "nbaIdentityCrosswalks": 0,
+    "gamesWithEvents": 1,
+    "possessions": 151,
+    "events": 368,
+    "sampledTrackingFrames": 88,
+    "licensedFilmAssets": 0
+  },
+  "providers": [
+    {
+      "status": "partially_connected",
+      "capabilities": [
+        "ACB tracking sample",
+        "dynamic events",
+        "season shot, drive and pick aggregates"
+      ],
+      "documentationUrls": [
+        "https://github.com/SkillCorner/opendata-basketball"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "NBA optical tracking and basketball insights"
+      ],
+      "documentationUrls": [
+        "https://www.geniussports.com/newsroom/nba-and-genius-sports-second-spectrum-expand-partnership-to-deepen-nba-league-pass-innovations-with-enhanced-basketball-analytics-and-develop-new-next-gen-platform/"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "basketball performance technology"
+      ],
+      "documentationUrls": [
+        "https://www.geniussports.com/"
+      ]
+    },
+    {
+      "status": "awaiting_access",
+      "capabilities": [
+        "live game events",
+        "shots",
+        "possessions",
+        "ball screens",
+        "sensor locations"
+      ],
+      "documentationUrls": [
+        "https://developer.shottracker.com/docs/basketball/event"
+      ]
+    },
+    {
+      "status": "awaiting_access",
+      "capabilities": [
+        "NBA schedules",
+        "rosters",
+        "game statistics",
+        "live event positions"
+      ],
+      "documentationUrls": [
+        "https://developer.sportradar.com/basketball/reference/nba-overview"
+      ]
+    },
+    {
+      "status": "awaiting_access",
+      "capabilities": [
+        "playtype and player event data"
+      ],
+      "documentationUrls": [
+        "https://developer.sportradar.com/sportradar-updates/changelog/synergy-basketball-api-release"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "team video and coaching workflows"
+      ],
+      "documentationUrls": [
+        "https://www.hudl.com/"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "basketball video library",
+        "scouting statistics"
+      ],
+      "documentationUrls": [
+        "https://sportscode.hudl.com/products/instat"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "basketball event timelines"
+      ],
+      "documentationUrls": [
+        "https://support.hudl.com/s/article/open-instat-games-sportscode?language=en_US&topic=Integrations_BB"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "video breakdown"
+      ],
+      "documentationUrls": [
+        "https://www.hudl.com/products/assist"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "basketball video analysis",
+        "presentation tools"
+      ],
+      "documentationUrls": [
+        "https://www.catapult.com/sports/basketball/video-analysis"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "basketball video analysis"
+      ],
+      "documentationUrls": [
+        "https://support.spiideo.com/en/articles/5105671-welcome-to-spiideo-perform"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "automated sports video"
+      ],
+      "documentationUrls": [
+        "https://www.pixellot.tv/"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "automated basketball highlights"
+      ],
+      "documentationUrls": [
+        "https://wsc-sports.com/blog/news/fc-barcelona-to-create-personalised-basketball-highlights-using-wsc-sports-automation-technology/"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "LEBRON",
+        "O-LEBRON",
+        "D-LEBRON",
+        "LEBRON WAR",
+        "talent and context metrics"
+      ],
+      "documentationUrls": [
+        "https://www.bball-index.com/"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "EPM leaderboard"
+      ],
+      "documentationUrls": [
+        "https://dunksandthrees.com/epm"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "NBA contextual statistics"
+      ],
+      "documentationUrls": [
+        "https://cleaningtheglass.com/"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "play-by-play analysis"
+      ],
+      "documentationUrls": [
+        "https://www.pbpstats.com/"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "NBA and WNBA analytics dashboards"
+      ],
+      "documentationUrls": [
+        "https://databallr.com/"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "DPM next-game impact forecast"
+      ],
+      "documentationUrls": [
+        "https://www.darko.app/about"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "NBA game statistics and tracking views"
+      ],
+      "documentationUrls": [
+        "https://www.nba.com/stats/"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "FIBA game statistics"
+      ],
+      "documentationUrls": [
+        "https://about.fiba.basketball/en/services/data-and-video-solutions/fiba-live-stats"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "NCAA Division I and II records"
+      ],
+      "documentationUrls": [
+        "https://www.ncaa.org/championships/statistics-and-records/mens-basketball/"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "basketball data tools"
+      ],
+      "documentationUrls": [
+        "https://hoopr.sportsdataverse.org/"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "basketball coaching and scouting tools"
+      ],
+      "documentationUrls": [
+        "https://fastmodelsports.com/"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "basketball play diagramming"
+      ],
+      "documentationUrls": [
+        "https://support.fastmodelsports.com/"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "scouting reports"
+      ],
+      "documentationUrls": [
+        "https://support.fastmodelsports.com/"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "recruiting boards"
+      ],
+      "documentationUrls": [
+        "https://support.fastmodelsports.com/"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "prospect scouting"
+      ],
+      "documentationUrls": [
+        "https://support.fastmodelsports.com/"
+      ]
+    },
+    {
+      "status": "documentation_verified",
+      "capabilities": [
+        "NBA contract and salary tables"
+      ],
+      "documentationUrls": [
+        "https://www.spotrac.com/nba/"
+      ]
+    }
+  ],
+  "limitations": [
+    "ACB player identities are not mapped to the NBA roster.",
+    "The event and tracking index covers one open-data game; season aggregates cover a larger published sample.",
+    "No licensed film files, NBA tracking feed, commercial credentials, or trained research model are connected.",
+    "The eleven original metric equations remain unvalidated research drafts.",
+    "Provider catalog entries describe documented capabilities and access state; they are not operational integrations."
+  ]
+}

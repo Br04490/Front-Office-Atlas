@@ -1,0 +1,35 @@
+// Catalog entries describe documented products, not Atlas access to paid feeds.
+const reviewed='2026-11-16';
+const item=(providerId,providerName,category,documentationUrl,capabilities=[],extra={})=>({providerId,providerName,providerCategories:[category],sports:['basketball'],competitions:[],verifiedCapabilities:capabilities,metricFamilies:[],eventFamilies:[],filmCapabilities:[],dataFormats:[],integrationMethods:[],documentationUrls:documentationUrl?[documentationUrl]:[],adapterVersion:'0',status:documentationUrl?'documentation_verified':'cataloged',requiresCredentials:true,requiresSubscription:true,requiresCommercialLicense:true,dataRightsReviewed:false,permittedUses:[],restrictedUses:['Atlas import, playback and redistribution pending authorization'],sourceAttributionRequired:true,availableSeasons:[],availableCompetitions:[],supportsHistoricalImport:false,supportsIncrementalSync:false,supportsWebhooks:false,supportsVideoLinks:false,lastVerifiedAt:documentationUrl?reviewed:null,lastSuccessfulSync:null,usedBy:[],...extra});
+export const providerCatalog=[
+ item('skillcorner','SkillCorner Basketball','tracking','https://github.com/SkillCorner/opendata-basketball',['ACB tracking sample','dynamic events','season shot, drive and pick aggregates'],{metricFamilies:['shooting','drives','picks'],eventFamilies:['shots','drives','picks','possessions'],dataFormats:['CSV','JSON','JSONL.GZ'],integrationMethods:['versioned open-data import'],adapterVersion:'1.0.0',status:'partially_connected',requiresCredentials:false,requiresSubscription:false,requiresCommercialLicense:false,dataRightsReviewed:true,permittedUses:['MIT-licensed open sample with attribution'],restrictedUses:['No private SkillCorner API access or NBA tracking implied'],availableSeasons:['2025-2026'],availableCompetitions:['Liga ACB'],supportsHistoricalImport:true,usedBy:['ACB explorer','metric studio','event search','tracking viewer'],lastSuccessfulSync:reviewed}),
+ item('second-spectrum','Second Spectrum / Genius Sports','tracking','https://www.geniussports.com/newsroom/nba-and-genius-sports-second-spectrum-expand-partnership-to-deepen-nba-league-pass-innovations-with-enhanced-basketball-analytics-and-develop-new-next-gen-platform/',['NBA optical tracking and basketball insights']),
+ item('genius-performance-studio','Genius Sports Performance Studio','tracking','https://www.geniussports.com/',['basketball performance technology']),
+ item('shottracker','ShotTracker','tracking','https://developer.shottracker.com/docs/basketball/event',['live game events','shots','possessions','ball screens','sensor locations'],{eventFamilies:['shots','possessions','ball screens'],dataFormats:['JSON'],integrationMethods:['HMAC REST','subscription-token WebSocket','HTTPS callback'],supportsWebhooks:true,status:'awaiting_access',adapterVersion:'1.0.0',usedBy:['future event import','future tracking']}),
+ item('sportradar-nba','Sportradar NBA','game data','https://developer.sportradar.com/basketball/reference/nba-overview',['NBA schedules','rosters','game statistics','live event positions'],{dataFormats:['JSON'],integrationMethods:['authenticated API'],status:'awaiting_access'}),
+ item('synergy','Sportradar Synergy Basketball','film','https://developer.sportradar.com/sportradar-updates/changelog/synergy-basketball-api-release',['playtype and player event data'],{eventFamilies:['playtype events'],dataFormats:['JSON'],integrationMethods:['authenticated API'],status:'awaiting_access',adapterVersion:'1.0.0'}),
+ item('hudl','Hudl','film','https://www.hudl.com/',['team video and coaching workflows']),
+ item('hudl-instat','Hudl Instat','film','https://sportscode.hudl.com/products/instat',['basketball video library','scouting statistics'],{filmCapabilities:['film analysis','playlist transfer to Sportscode']}),
+ item('hudl-sportscode','Hudl Sportscode','film','https://support.hudl.com/s/article/open-instat-games-sportscode?language=en_US&topic=Integrations_BB',['basketball event timelines'],{filmCapabilities:['video timeline','Instat game opening']}),
+ item('hudl-assist','Hudl Assist','film','https://www.hudl.com/products/assist',['video breakdown']),
+ item('catapult-pro-video','Catapult Pro Video','film','https://www.catapult.com/sports/basketball/video-analysis',['basketball video analysis','presentation tools'],{filmCapabilities:['video analysis','presentation']}),
+ item('spiideo','Spiideo Perform','film','https://support.spiideo.com/en/articles/5105671-welcome-to-spiideo-perform',['basketball video analysis']),
+ item('pixellot','Pixellot','film','https://www.pixellot.tv/',['automated sports video']),
+ item('wsc-sports','WSC Sports','film','https://wsc-sports.com/blog/news/fc-barcelona-to-create-personalised-basketball-highlights-using-wsc-sports-automation-technology/',['automated basketball highlights']),
+ item('basketball-index','Basketball Index','analytics','https://www.bball-index.com/',['LEBRON','O-LEBRON','D-LEBRON','LEBRON WAR','talent and context metrics'],{metricFamilies:['impact','talent grades']}),
+ item('dunks-threes','Dunks & Threes','analytics','https://dunksandthrees.com/epm',['EPM leaderboard'],{metricFamilies:['EPM']}),
+ item('cleaning-glass','Cleaning the Glass','analytics','https://cleaningtheglass.com/',['NBA contextual statistics']),
+ item('pbp-stats','PBP Stats','analytics','https://www.pbpstats.com/',['play-by-play analysis']),
+ item('databallr','databallr','analytics','https://databallr.com/',['NBA and WNBA analytics dashboards']),
+ item('darko','DARKO','analytics','https://www.darko.app/about',['DPM next-game impact forecast'],{metricFamilies:['DPM']}),
+ item('nba-stats','NBA.com/stats','game data','https://www.nba.com/stats/',['NBA game statistics and tracking views'],{requiresSubscription:false,requiresCommercialLicense:true}),
+ item('fiba-livestats','FIBA LiveStats','game data','https://about.fiba.basketball/en/services/data-and-video-solutions/fiba-live-stats',['FIBA game statistics'],{dataFormats:['XML'],integrationMethods:['documented API or XML export subject to permission']}),
+ item('ncaa-stats','NCAA statistics','game data','https://www.ncaa.org/championships/statistics-and-records/mens-basketball/',['NCAA Division I and II records'],{requiresSubscription:false}),
+ item('sportsdataverse','SportsDataverse hoopR','game data','https://hoopr.sportsdataverse.org/',['basketball data tools'],{requiresSubscription:false}),
+ item('fastmodel','FastModel Sports','coaching','https://fastmodelsports.com/',['basketball coaching and scouting tools']),
+ item('fastdraw','FastDraw','coaching','https://support.fastmodelsports.com/',['basketball play diagramming']),
+ item('fastscout','FastScout','scouting','https://support.fastmodelsports.com/',['scouting reports']),
+ item('fastrecruit','FastRecruit','scouting','https://support.fastmodelsports.com/',['recruiting boards']),
+ item('prospectview','FastModel ProspectView','scouting','https://support.fastmodelsports.com/',['prospect scouting']),
+ item('spotrac','Spotrac','contracts','https://www.spotrac.com/nba/',['NBA contract and salary tables'])
+];

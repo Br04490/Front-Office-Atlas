@@ -1,0 +1,345 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "document_type": "atlas_metric_registry_seed",
+  "version": "0.1.0",
+  "date": "2026-11-16",
+  "warning": "SPECIFICATION ONLY. No proprietary metric values or real NBA player records are included. Formula drafts reflect the uploaded thread and have not been validated.",
+  "metric_id_naming": "provider.family.metric_name.version",
+  "provider_registry": [
+    {
+      "id": "bball_index",
+      "name": "Basketball Index",
+      "status": "catalog_public__values_depend_on_access",
+      "url": "https://www.bball-index.com/",
+      "data_transport": "approved API/export only when licensed; otherwise external link and metric dictionary",
+      "notes": "Free LEBRON suite and certain dashboards; $5 membership does not establish API/bulk rights."
+    },
+    {
+      "id": "skillcorner_open_basketball",
+      "name": "SkillCorner Open Data Basketball",
+      "status": "open_dataset_sample",
+      "url": "https://github.com/SkillCorner/opendata-basketball",
+      "data_transport": "repo releases: season aggregate CSV + sample game events + git-lfs tracking",
+      "notes": "10 ACB games of full event/tracking data; offense-only aggregate data from 293 ACB games (2025-26). Follow MIT file license and requested credit."
+    },
+    {
+      "id": "skillcorner_commercial",
+      "name": "SkillCorner Basketball Commercial",
+      "status": "requires_agreement",
+      "url": "https://skillcorner.com/sports/basketball",
+      "data_transport": "licensed API or flat files",
+      "notes": "25fps tracking, events and dynamic events across NBA/NCAA/international; no access assumed."
+    },
+    {
+      "id": "nba_stats",
+      "name": "NBA Stats",
+      "status": "access_subject_to_permissions",
+      "url": "https://www.nba.com/stats/help/glossary",
+      "data_transport": "lawful accessible feeds or approved exports",
+      "notes": "Tracking, hustle, play types, shot zones, player game records. Some metrics not available."
+    },
+    {
+      "id": "dunks_and_threes",
+      "name": "Dunks and Threes",
+      "status": "public_information__api_requires_subscription",
+      "url": "https://dunksandthrees.com/about/epm",
+      "data_transport": "licensed API if subscribed",
+      "notes": "EPM and Estimated Skills as distinct vendor metrics; do not claim to reproduce."
+    },
+    {
+      "id": "pbpstats",
+      "name": "PBP Stats",
+      "status": "verify_access_and_reuse",
+      "url": "https://www.pbpstats.com/",
+      "data_transport": "authorized API/imports",
+      "notes": "Possession, WOWY, lineup statistics; permission and quality audit required."
+    },
+    {
+      "id": "atlas_custom",
+      "name": "Atlas Custom Metrics",
+      "status": "team_defined",
+      "url": null,
+      "data_transport": "validated local formula/model pipeline",
+      "notes": "Separate from official provider metrics. Store owner, version and validation."
+    }
+  ],
+  "bball_index_categories": {
+    "Skill": [
+      "Perimeter Shooting",
+      "Finishing",
+      "Playmaking",
+      "One on One",
+      "Post Play",
+      "Off-Ball Movement",
+      "Screening & Rolling",
+      "Efficiency",
+      "Perimeter Defense",
+      "Interior Defense",
+      "Offensive Rebounding",
+      "Defensive Rebounding"
+    ],
+    "Impact": [
+      "Player Impact on Team Per 100 Possessions",
+      "Team 4-Factor Impact"
+    ],
+    "Productivity": [
+      "Per 75 Possessions",
+      "Per Game"
+    ],
+    "Context": [
+      "Teammate Strength",
+      "Opportunity & Usage",
+      "Play Type Frequencies",
+      "Positions Defended",
+      "Offensive Roles Defended",
+      "Player Caliber Defended",
+      "Usage Tiers Defended",
+      "Guarded Data",
+      "Guarded by Defensive Data",
+      "Guarded by Matchup Data",
+      "Contextual Data",
+      "Biographical Data"
+    ]
+  },
+  "require_per_metric": [
+    "metric_id",
+    "display_name",
+    "provider_id",
+    "provider_original_label",
+    "description",
+    "source_url",
+    "season",
+    "competition",
+    "unit",
+    "numerator",
+    "denominator",
+    "grain",
+    "data_access_status",
+    "formula_status",
+    "sample_size",
+    "cohort",
+    "timestamp",
+    "license_rights",
+    "derivation_chain",
+    "calculation_version",
+    "validation_status"
+  ],
+  "custom_metric_recipes": [
+    {
+      "id": "atlas.research.sce.v0",
+      "symbol": "SCE",
+      "name": "Self-Creation Efficiency",
+      "draft_equation": "0.30*z(rts_pct)+0.25*z(self_created_ppp)+0.20*z(unassisted_fgm_per75)+0.15*z(tightly_guarded_shot_freq)-0.10*z(handle_tov_per75)",
+      "dependencies": [
+        "rts_pct",
+        "self_created_ppp",
+        "unassisted_fgm_per75",
+        "tightly_guarded_shot_freq",
+        "handle_tov_per75"
+      ],
+      "source": "uploaded complete_basketball_analytics_thread.md",
+      "status": "research_unvalidated",
+      "implementation_note": "Revisit correlation/double counting between rTS and self-created efficiency; calibrate coefficients."
+    },
+    {
+      "id": "atlas.research.obg.v0",
+      "symbol": "OBG",
+      "name": "Off-Ball Gravity & Movement",
+      "draft_equation": "0.25*z(screen_ast_per75)+0.25*z(cut_offscreen_ppp)-0.20*z(avg_3pt_defender_distance_ft)+0.15*z(offball_velocity)+0.15*z(teammate_rim_fg_onoff_lift)",
+      "dependencies": [
+        "screen_ast_per75",
+        "cut_offscreen_ppp",
+        "avg_3pt_defender_distance_ft",
+        "offball_velocity",
+        "teammate_rim_fg_onoff_lift"
+      ],
+      "source": "uploaded complete_basketball_analytics_thread.md",
+      "status": "research_unvalidated",
+      "implementation_note": "Contest distance alone is not validated gravity; off-ball speed and teammate lift require tracking/stint data; source may be licensed."
+    },
+    {
+      "id": "atlas.research.pcoe.v0",
+      "symbol": "PCOE",
+      "name": "Playmaking Creation Over Expectation",
+      "draft_equation": "0.40*z(potential_ast_per75+ft_ast_per75)+0.30*z(rim_corner3_pass_share)+0.30*z(expected_bad_pass_tov_per75-actual_bad_pass_tov_per75)",
+      "dependencies": [
+        "potential_ast_per75",
+        "ft_ast_per75",
+        "rim_corner3_pass_share",
+        "expected_bad_pass_tov_per75",
+        "actual_bad_pass_tov_per75"
+      ],
+      "source": "uploaded complete_basketball_analytics_thread.md",
+      "status": "research_unvalidated",
+      "implementation_note": "Train expectation model on separate sample, validate out of sample; pass destination details not universally available."
+    },
+    {
+      "id": "atlas.research.dvms.v0",
+      "symbol": "DVMS",
+      "name": "Defensive Versatility & Matchup Stopper",
+      "draft_equation": "0.35*z(expected_matchup_pts_per75-actual_matchup_pts_per75)+0.25*z(matchup_difficulty)+0.20*z(guarded_position_entropy)+0.20*z(screen_navigation_resistance)",
+      "dependencies": [
+        "expected_matchup_pts_per75",
+        "actual_matchup_pts_per75",
+        "matchup_difficulty",
+        "guarded_position_entropy",
+        "screen_navigation_resistance"
+      ],
+      "source": "uploaded complete_basketball_analytics_thread.md",
+      "status": "research_unvalidated",
+      "implementation_note": "Guarded-position entropy measures diversity not necessarily defensive quality; requires matchup coverage observations."
+    },
+    {
+      "id": "atlas.research.rdpp.v0",
+      "symbol": "RDPP",
+      "name": "Rim Deterrence & Paint Protection",
+      "draft_equation": "0.45*z(rim_pts_saved_per75)+0.30*z(opponent_rim_frequency_off-minus-on)+0.25*(0.5*z(contested_dreb_pct)+0.5*z(boxouts_per75))",
+      "dependencies": [
+        "rim_pts_saved_per75",
+        "opponent_rim_frequency_off-minus-on",
+        "contested_dreb_pct",
+        "boxouts_per75"
+      ],
+      "source": "uploaded complete_basketball_analytics_thread.md",
+      "status": "research_unvalidated",
+      "implementation_note": "Correct original mix of percentage and count by separately standardizing; test defensive attribution."
+    },
+    {
+      "id": "atlas.research.twpe.v0",
+      "symbol": "TWPE",
+      "name": "Two-Way Possession Engine",
+      "draft_equation": "z(1.5*stl_per75+1.4*charges_per75+1.2*contested_oreb_per75+0.6*deflections_per75-1.5*live_ball_tov_per75)",
+      "dependencies": [
+        "stl_per75",
+        "charges_per75",
+        "contested_oreb_per75",
+        "deflections_per75",
+        "live_ball_tov_per75"
+      ],
+      "source": "uploaded complete_basketball_analytics_thread.md",
+      "status": "research_unvalidated",
+      "implementation_note": "Different events use offensive vs defensive possessions; standardize within domain, justify tradeoffs."
+    },
+    {
+      "id": "atlas.research.uni.v0",
+      "symbol": "UNI",
+      "name": "Unified Net Impact",
+      "draft_equation": "ridge_prior_centered(offense_stint_response,defense_stint_response,player_design_matrix,stint_possessions,calibrated_off_prior,calibrated_def_prior,lambda)",
+      "dependencies": [
+        "offense_stint_response",
+        "defense_stint_response",
+        "player_design_matrix",
+        "stint_possessions",
+        "calibrated_off_prior",
+        "calibrated_def_prior"
+      ],
+      "source": "uploaded complete_basketball_analytics_thread.md",
+      "status": "research_unvalidated",
+      "implementation_note": "Requires authorized stint data; never label prior proxy as fitted RAPM; tune lambda and calibrate point units with held-out data."
+    },
+    {
+      "id": "atlas.research.uni_war.v0",
+      "symbol": "UNI_WAR",
+      "name": "Unified Wins Above Replacement",
+      "draft_equation": "(uni_pts_per100-replacement_level_pts_per100)*player_possessions/100/empirically_calibrated_points_per_win",
+      "dependencies": [
+        "uni_pts_per100",
+        "replacement_level_pts_per100",
+        "player_possessions",
+        "empirically_calibrated_points_per_win"
+      ],
+      "source": "uploaded complete_basketball_analytics_thread.md",
+      "status": "research_unvalidated",
+      "implementation_note": "Replacement baseline and points-per-win must be estimated and validated; not an official BBall Index number."
+    }
+  ],
+  "additional_draft_metrics": [
+    {
+      "name": "Custom True Creation Index",
+      "expression": "pts_per75 + 2.15*potential_ast_per75 + 1.85*ft_ast_per75 - 2.2*tov_per75",
+      "status": "draft_unvalidated"
+    },
+    {
+      "name": "Custom Two-Way Havoc Rate",
+      "expression": "1.5*stl_per75 + 1.4*charges_per75 + 1.0*blocks_per75 + 0.6*deflections_per75",
+      "status": "draft_unvalidated"
+    },
+    {
+      "name": "Context-Adjusted True Shooting",
+      "expression": "ts_pct - expected_ts_pct_given_usage_selfcreated_share_shot_quality",
+      "status": "draft_requires_trained_expectation_model"
+    }
+  ],
+  "source_layers": [
+    "raw_fact",
+    "provider_published",
+    "derived_standard",
+    "atlas_experimental",
+    "team_custom",
+    "model_prediction"
+  ],
+  "formula_engine": {
+    "allowed_operations": [
+      "+",
+      "-",
+      "*",
+      "/",
+      "^",
+      "safe_div",
+      "per75",
+      "per100",
+      "z",
+      "percentile",
+      "log",
+      "sqrt",
+      "min",
+      "max",
+      "clip",
+      "weighted_mean",
+      "bayes_shrink"
+    ],
+    "disallowed": [
+      "eval",
+      "exec",
+      "arbitrary_python",
+      "SQL_from_user_text",
+      "dynamic_import",
+      "unbounded_model_training"
+    ],
+    "validation": [
+      "type_and_unit_check",
+      "sample_size",
+      "cohort_reference",
+      "licensing",
+      "null_propagation",
+      "dependency_cycle",
+      "no_double_counting",
+      "reproducible_model_version",
+      "time_split_holdout",
+      "variance_check"
+    ]
+  },
+  "scoping": [
+    "NBA 2026-27",
+    "NBA 2025-26",
+    "ACB 2025-26 open sample; do not mix with NBA league percentile without transfer calibration"
+  ],
+  "interface_locations": [
+    "existing Analytics > Metric Studio tab",
+    "existing player profile Stats tab",
+    "existing Scouting flow",
+    "existing Player Finder",
+    "existing Twins engine",
+    "existing Executive Planner"
+  ],
+  "defaults": {
+    "source_preference": [
+      "provider_published_when_authorized",
+      "verified_free_raw_stat",
+      "atlas_derived_standard"
+    ],
+    "do_not_forge_paid_data": true,
+    "require_valid_denominator": true,
+    "disable_custom_metric_on_missing_required_input": true
+  }
+}

@@ -1,0 +1,11 @@
+import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+import {providerCatalog} from '../src/data/provider-catalog.js';
+import {researchAudit} from '../src/research-audit.js';
+import {validateSnapshot} from '../src/provider-model.js';
+const snapshot=JSON.parse(readFileSync(new URL('../src/data/provider-snapshot.json',import.meta.url)));
+const validationErrors=validateSnapshot(snapshot);
+if(validationErrors.length)throw Error(validationErrors.join('; '));
+const report={generatedAt:new Date().toISOString(),baseline:'2c3cb12',source:{provider:'SkillCorner',competition:snapshot.competition,season:snapshot.season,commit:snapshot.sourceCommit,license:snapshot.sourceLicense},counts:{providersCataloged:providerCatalog.length,operationalLocalSnapshots:1,credentialedCommercialConnections:0,sourceMetricDefinitions:snapshot.metricDefinitions.length,researchMetricDrafts:researchAudit(snapshot).length,validatedResearchMetrics:0,calculatedResearchMetricValues:0,playerTeamRecords:snapshot.players.length,uniqueProviderPlayerIds:new Set(snapshot.players.map(p=>p.id)).size,nbaIdentityCrosswalks:0,gamesWithEvents:snapshot.games.length,possessions:snapshot.possessions.length,events:snapshot.events.length,sampledTrackingFrames:snapshot.trackingFrames.length,licensedFilmAssets:0},providers:providerCatalog.map(p=>({id:p.id,name:p.name,status:p.status,access:p.access,capabilities:p.verifiedCapabilities,documentationUrls:p.documentationUrls})),limitations:['ACB player identities are not mapped to the NBA roster.','The event and tracking index covers one open-data game; season aggregates cover a larger published sample.','No licensed film files, NBA tracking feed, commercial credentials, or trained research model are connected.','The eleven original metric equations remain unvalidated research drafts.','Provider catalog entries describe documented capabilities and access state; they are not operational integrations.']};
+mkdirSync(new URL('../outputs/',import.meta.url),{recursive:true});
+writeFileSync(new URL('../outputs/provider-coverage.json',import.meta.url),JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify(report.counts,null,2));
