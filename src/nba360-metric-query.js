@@ -5,10 +5,12 @@ const aliases=[
   ['assists',/\b(?:assists|apg)\b/],['minutes',/\b(?:minutes|mpg)\b/],
   ['tsPct',/\b(?:true shooting|ts percentage|ts pct|ts%)\b/],
   ['efgPct',/\b(?:effective field goal|efg|effective fg)\b/],
+  ['threePointAttemptRate',/\b(?:three point attempt rate|3 point attempt rate|3pa rate)\b/],
+  ['freeThrowRate',/\b(?:free throw rate|ftr)\b/],
   ['threePct',/\b(?:three point percentage|3 point percentage|three percentage|3pt percentage)\b/],
   ['netRating',/\bnet rating\b/],['games',/\b(?:games played|games)\b/]
 ];
-const rateKeys=new Set(['tsPct','efgPct','threePct']);
+const rateKeys=new Set(['tsPct','efgPct','threePct','threePointAttemptRate','freeThrowRate']);
 export function queryNbaMetrics(raw,players,teams,intelligence){
   const text=normalizeAtlas(raw).replace(/\bts\s+percent\b/,'ts percentage');
   const found=aliases.find(([,pattern])=>pattern.test(text));

@@ -11,6 +11,8 @@ test('season importer validates source totals and binds exact roster ID',()=>{
   assert.equal(result.coverage.matchedSeasons,1);
   assert.equal(result.players[123].seasons['2026-27'].metrics.points.value,5);
   assert.equal(result.players[123].seasons['2026-27'].metrics.minutes.value,30);
+  assert.equal(result.players[123].seasons['2026-27'].metrics.threePointAttemptRate.value,.4);
+  assert.equal(result.players[123].seasons['2026-27'].metrics.freeThrowRate.value,.2);
   assert.throws(()=>importSeasonTotals(csv.replace(',10,8,4,4,10,',',11,8,4,4,10,'),roster,{sourceUrl:'https://example.test/totals.csv'}),/Invalid basketball totals/);
   assert.equal(importSeasonTotals(csv.replace(',HOU,2,',',LAL,2,'),roster,{sourceUrl:'https://example.test/totals.csv'}).coverage.conflicts.length,1);
 });

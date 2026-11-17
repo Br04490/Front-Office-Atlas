@@ -27,13 +27,17 @@ export function importSnapshots(db,playerData,teamData){
       assert(Number.isInteger(Number(id))&&Number.isFinite(metric.value)&&/^https:\/\//.test(metric.source),'Invalid player metric identity or provenance');
       insertMetric.run(Number(id),season,key,metric.value,metric.unit||'',metric.source,metric.sourceField||null,metric.sourceTeam||null,metric.kind||'provider_reported',metric.verifiedAt,metric.sample||null);
     }
-    for(const [abbr,row] of Object.entries(teamData.teamSeasons)){
-      assert(row.team===abbr&&row.wins+row.losses===row.games,'Invalid team standing');
-      insertStanding.run(abbr,row.season,row.wins,row.losses,row.games,row.pointsPerGame,row.opponentPointsPerGame,row.offRatingEstimated,row.defRatingEstimated,row.netRatingEstimated,row.paceEstimated,row.source,row.verifiedAt);
-    }
-    for(const [abbr,games] of Object.entries(teamData.teamGames||{}))for(const game of games){
-      assert(game.points-game.opponentPoints===game.pointDiff,'Invalid team game result');
-      insertGame.run(abbr,teamData.season,game.date,game.opponent,game.home?1:0,game.result,game.points,game.opponentPoints,game.pointDiff,game.rebounds,game.assists,game.source,game.verifiedAt);
+    const teamHistory=teamData.history||{[teamData.season]:{teamSeasons:teamData.teamSeasons,teamGames:teamData.teamGames}};
+    for(const [season,seasonData] of Object.entries(teamHistory)){
+      assert(Object.keys(seasonData.teamSeasons||{}).length===30,'Expected 30 team standings per season');
+      for(const [abbr,row] of Object.entries(seasonData.teamSeasons)){
+        assert(row.team===abbr&&row.season===season&&row.wins+row.losses===row.games,'Invalid team standing');
+        insertStanding.run(abbr,row.season,row.wins,row.losses,row.games,row.pointsPerGame,row.opponentPointsPerGame,row.offRatingEstimated,row.defRatingEstimated,row.netRatingEstimated,row.paceEstimated,row.source,row.verifiedAt);
+      }
+      for(const [abbr,games] of Object.entries(seasonData.teamGames||{}))for(const game of games){
+        assert(game.points-game.opponentPoints===game.pointDiff,'Invalid team game result');
+        insertGame.run(abbr,season,game.date,game.opponent,game.home?1:0,game.result,game.points,game.opponentPoints,game.pointDiff,game.rebounds,game.assists,game.source,game.verifiedAt);
+      }
     }
     for(const file of [...(playerData.sourceFiles||[]),...(teamData.sourceFiles||[])])insertSource.run(file.name||file.sourceUrl,file.sourceUrl,file.sha256,'2026-11-16',now,'BoxScore Lab CC BY 4.0; NBA-origin downstream publication rights require review');
     db.exec('COMMIT');

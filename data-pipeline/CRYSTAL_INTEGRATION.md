@@ -7,8 +7,8 @@ The 17 original starter-kit files are copied unchanged. `schemas/atlas_extension
 The current local source CSVs were imported earlier into `src/data/nba360-local.json` and `src/data/nba360-teams-local.json`. On a fresh checkout these ignored files will be absent. To rebuild them, download the permitted dated BoxScore Lab CSVs and run:
 
 ```powershell
-node scripts/import-boxscorelab.mjs work/nba360-source/2025-26-player-season-totals.csv work/nba360-source/2026-27-player-season-totals.csv
-node scripts/import-boxscorelab-teams.mjs
+node scripts/import-boxscorelab.mjs work/nba360-source/2022-23-player-season-totals.csv work/nba360-source/2023-24-player-season-totals.csv work/nba360-source/2024-25-player-season-totals.csv work/nba360-source/2025-26-player-season-totals.csv work/nba360-source/2026-27-player-season-totals.csv
+node scripts/import-boxscorelab-teams.mjs 2022-23 2023-24 2024-25 2025-26 2026-27
 node data-pipeline/scripts/import-local-snapshot.mjs
 node server.mjs
 ```
