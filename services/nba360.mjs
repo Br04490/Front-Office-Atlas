@@ -13,7 +13,7 @@ export function nba360Api(req,res,url){
       const db=new DatabaseSync(defaultDatabase,{readOnly:true});
       try{cache={modified,snapshot:readSnapshot(db),coverage:coverage(db)}}finally{db.close()}
     }
-    const payload=url.pathname.endsWith('/coverage')?cache.coverage:cache.snapshot;
-    res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'private, max-age=60'}).end(JSON.stringify(payload));
+    const payload=url.pathname.endsWith('/coverage')?{...cache.coverage,dbModifiedAt:new Date(modified).toISOString()}:cache.snapshot;
+    res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'private, no-cache'}).end(JSON.stringify(payload));
   }catch(error){res.writeHead(500,{'Content-Type':'application/json'}).end(JSON.stringify({status:'error',reason:'Warehouse read failed'}))}
 }
