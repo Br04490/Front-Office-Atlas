@@ -9,7 +9,7 @@ import {validateSnapshot,resolveIdentity,metricValue,leaderboard,searchEvents,ev
 test('catalog manifests are unique, sourced, and truthful about access',()=>{
  assert.equal(new Set(providerCatalog.map(p=>p.providerId)).size,providerCatalog.length);
  for(const provider of providerCatalog)assert.deepEqual(validateProvider(provider),[],provider.providerId);
- assert.equal(providerCatalog.filter(p=>['connected','partially_connected'].includes(p.status)).length,1);
+ assert.deepEqual(providerCatalog.filter(p=>['connected','partially_connected'].includes(p.status)).map(p=>p.providerId).sort(),['boxscore-lab','skillcorner']);
  assert.equal(providerAccess(providerById('shottracker'),'metrics').allowed,false);
  assert.equal(providerAccess(providerById('synergy'),'film').allowed,false);
  assert.equal(providerAccess(providerById('skillcorner'),'film').allowed,false);

@@ -1,0 +1,51 @@
+﻿category,metric_code,description,calculation_status,needed_inputs,granularity
+Traditional,PTS,Points,box_score,boxscores,game
+Traditional,REB,Total rebounds,box_score,boxscores,game
+Traditional,AST,Assists,box_score,boxscores,game
+Traditional,TOV,Turnovers,box_score,boxscores,game
+Efficiency,eFG_pct,Effective field goal percentage,derived_from_box,boxscores,game
+Efficiency,TS_pct,True shooting percentage (0.44 FTA convention),derived_from_box,boxscores,game
+Efficiency,rTS,TS relative to league or role context,derived_requires_league_baseline,league_and_box,season
+Efficiency,zTS,Playtype-adjusted true shooting (not reconstructed without authorized methodology/inputs),premium_or_research,playtype_difficulty,season
+Efficiency,USG_pct,Usage percentage,requires_possessions_team_box,team_and_player,game
+Efficiency,ORtg,Offensive rating,requires_possession_data,possession,game
+Efficiency,DRtg,Defensive rating,requires_possession_data,possession,game
+Efficiency,Pace,Possessions per 48 minutes,requires_possession_data,possession,game
+Shot Quality,xFG_pct,Expected field-goal percentage,research_model,shots_location_action,game
+Shot Quality,xPTS,Expected points per field-goal attempt,research_model,shots_location_action,game
+Shot Quality,POE,Points over expected,research_model,shots_and_xpts,game
+Shot Quality,shot_difficulty,Shot difficulty context,research_model,shot_context,game
+Shot Quality,shot_selection,Expected shot diet value versus league,research_model,shots_and_xpts,season
+Shot Quality,command,Free throw command (2026 paper method),requires_60Hz_tracking,ball_3d,game
+Shot Quality,touch,Launch speed/angle consistency,requires_60Hz_tracking,ball_3d,season
+Impact,RAPM,Regularized adjusted plus-minus,research_model,lineups_stints,season
+Impact,O_RAPM,Offensive RAPM,research_model,possession_lineups,season
+Impact,D_RAPM,Defensive RAPM,research_model,possession_lineups,season
+Impact,xRAPM,Expected scoring-based RAPM,research_model,xshots_lineups,season
+Impact,WAR,Wins above replacement (model-specific),research_model,impact_minutes,season
+Impact,BPM_alt,Independent box plus minus model,research_model,box_league,season
+Impact,LEBRON_official,Basketball Index proprietary,licensed_metric_only,bbindex_license,season
+Impact,EPM_official,Dunks & Threes proprietary,licensed_metric_only,epm_license,season
+Impact,DARKO_official,DARKO proprietary,licensed_metric_only,darko_license,season
+Lineups,ON_OFF_net,On/off net rating,requires_pbp,lineups,game
+Lineups,net_rating,Lineup net rating,requires_pbp,possession_lineups,game
+Lineups,lineup_fit,Independent predicted five-player synergy,experimental,lineups_and_skills,season
+Lineups,replacement_minutes,Replacement minutes scenario,scenario_model,minutes_depth,scenario
+Roles,archetype,Player statistical archetype,research_model,box_tracking,season
+Roles,role_fit,Role-to-team fit score,experimental,roster_and_roles,scenario
+Roles,twin_similarity,Similarity model,research_model,stats_and_context,season
+Roles,contract_twin,Cap-contract comparability,requires_licensed_contracts,contracts_cba,season
+Playtype,transition_PPP,Transition points per possession,requires_categorized_plays,playtype,season
+Playtype,iso_PPP,Isolation points per possession,requires_categorized_plays,playtype,season
+Playtype,pnr_BH_PPP,Pick-and-roll ballhandler PPP,requires_categorized_plays,playtype,season
+Playtype,spotup_PPP,Spot-up PPP,requires_categorized_plays,playtype,season
+Defense,DFG_pct,Defended FG%,requires_matchup_tracking,defender_shots,season
+Defense,rim_deterrence,Rim deterrence proxy,research_model,shot_loc_lineups,season
+Defense,screen_navigations,Screen navigation event grade,tracking_or_film_required,tracking_film,season
+Contracts,annual_salary_usd,Annual salary,requires_authorized_contracts,contracts,season
+Contracts,cap_pct,Cap charge as % salary cap,requires_authorized_cap,contracts_cba,season
+Contracts,apron_room_usd,Amount below apron,requires_verified_totals,contracts_cba,season
+Contracts,trade_eligibility,CBA trade eligibility,rules_engine,contract_cba,scenario
+Trends,last8_net_rating,Net rating last eight games,requires_pbp_or_team_totals,games_and_poss,last8
+Trends,run_events,Scoring runs and negative runs,requires_pbp,playbyplay,game
+Trends,worst_possessions,Worst possessions (defined scoring model),requires_pbp,playbyplay,game

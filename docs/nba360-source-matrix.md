@@ -1,0 +1,20 @@
+# NBA 360 source and connector matrix — November 16, 2026
+
+The supplied 33-row GitHub repository catalog and 50-row metric registry are preserved byte for byte in `data-pipeline/`. Repository code licenses do **not** license their upstream NBA, ESPN, tracking, contract, or film records. No repository from that research catalog was cloned or added as a runtime dependency. This matrix records the adapters actually used and the blocked feeds.
+
+| Source | Useful families | Access, cadence and rights | Atlas status |
+| --- | --- | --- | --- |
+| [BoxScore Lab](https://boxscorelab.com/downloads/) | Player season totals; team standings; team game results | Public dated CC BY 4.0 CSVs; methodology attributes NBA Stats upstream; NBA-origin downstream rights need separate review. Nightly source builds claimed, Atlas snapshot imported once. | **Local private snapshot:** 507 players, 908 player seasons, 30 standings, 394 team game rows. Importer and read-only SQLite API operational. Dataset excluded from Git. |
+| [NBA.com / NBA Stats](https://www.nba.com/termsofuse) | Official rosters, game and shot statistics | Public display is not permission for a comprehensive regularly refreshed database; Section 9 limits use. | Roster snapshot pre-exists; no new NBA Stats bulk scraper or shot ingest. |
+| [nba_api](https://github.com/swar/nba_api) | Python client wrappers for NBA endpoints | MIT code; upstream NBA data rights separate. | Research candidate only; not installed. |
+| [BALLDONTLIE NBA](https://docs.balldontlie.io/) | Free teams, player directory, game scores | Server API key; free 5 requests/minute; player game stats paid; daily schedule can poll every 15 minutes. | Python starter preserved and tested; Node score poller tested with fixture, **awaiting BDL_API_KEY**, 0 real BDL rows. |
+| [pbpstats](https://github.com/dblackrun/pbpstats) | Possession, lineup and on/off reconstruction | Open source code; underlying PBP rights separate. | No NBA PBP input, no dependency installed. Fixture on/off calculator tested only. |
+| [hoopR and SportsDataverse](https://hoopr.sportsdataverse.org/) | Historical box, roster, game and modeling research | Open package code and some published datasets; upstream rights differ by feed. | Research candidates, no historical import until rights and ID mapping reviewed. |
+| [SkillCorner open basketball](https://github.com/SkillCorner/opendata-basketball) | ACB season aggregates, one event/tracking sample | Open published sample with attribution; not an NBA feed. | Existing ACB explorer operational and isolated from NBA tables. |
+| [ESPN](https://www.espn.com/) | Box scores, game logs, play by play | No Atlas export agreement or approved bulk API. | Awaiting licensed feed; no scraping. |
+| [Spotrac](https://www.spotrac.com/nba/) / HoopsHype | Contracts, annual salary and cap terms | Public pages do not authorize a bulk mirror; source-specific rights review needed. | 0 verified contract rows; manual authorized import slots only. |
+| [Basketball Index](https://www.bball-index.com/), [Dunks & Threes](https://dunksandthrees.com/epm), DARKO | Proprietary impact, fit and talent grades | Provider permission or subscription needed. | Registry slots only; no values copied or implied. |
+| Synergy, Hudl, Sportscode, Instat, ShotTracker, Catapult, Second Spectrum, NBA tracking | Playtype, film, tracking, defense and events | Credentials, licenses and use rights vary by provider. | Existing provider registry documents capability; 0 NBA operational feeds. |
+| Direct staff/contracted import | Dated player game logs, contracts, shots and possessions | Explicit permitted-use manifest, canonical NBA IDs and source URL required. | Game-log and shot import validators ready; no actual supplied NBA data. |
+
+The score poller rechecks the current and previous Chicago dates every 15 minutes **only after a server-side key is set**. A final-game transition does not imply player stats, shots or tracking have arrived. The local Node SQLite warehouse is persistent for this Preview; production deployment needs durable storage, authentication for private licensed records, backup, and source permissions.

@@ -1,0 +1,6 @@
+{
+ "_notice":"SYNTHETIC TEST FIXTURE, NOT REAL NBA RESULTS",
+ "data":[
+  {"id":90000001,"date":"2026-11-15","season":2026,"status":"Final","status_state":"final","postseason":false,"home_team_score":102,"visitor_team_score":97,"home_team":{"id":14,"abbreviation":"FAK","full_name":"Example Home","conference":"Test","division":"Test"},"visitor_team":{"id":15,"abbreviation":"DUM","full_name":"Example Away","conference":"Test","division":"Test"}}
+ ],"meta":{"next_cursor":null}
+}
