@@ -1,0 +1,42 @@
+{
+  "teams": [
+    {
+      "pool": "NCAA_D1",
+      "providerTeamId": "duke",
+      "name": "Duke Blue Devils",
+      "nickname": "Blue Devils",
+      "season": "2026-27",
+      "conference": "Atlantic Coast Conference",
+      "conferenceSourceUrl": "https://theacc.com/schedule.aspx?schedule=4772",
+      "city": "Durham",
+      "state": "NC",
+      "officialSiteUrl": "https://goduke.com",
+      "rosterUrl": "https://goduke.com/sports/mens-basketball/roster/2026-27",
+      "coachingUrl": "https://goduke.com/sports/mens-basketball/coaches",
+      "sourceUrl": "https://goduke.com/sports/mens-basketball/roster/2026-27",
+      "officialRosterCount": 14,
+      "headCoach": {
+        "name": "Jon Scheyer",
+        "title": "Head Coach",
+        "bioUrl": "https://goduke.com/sports/mens-basketball/roster/coaches/jon-scheyer/5423",
+        "sourceUrl": "https://goduke.com/sports/mens-basketball/coaches"
+      },
+      "players": [
+        {"providerPlayerId":"24885","name":"Caleb Foster","jersey":"1","position":"G","height":"6-5","weight":"200","classOrExperience":"Sr","hometown":"Harrisburg, NC","rosterStatus":"listed","bioUrl":"https://goduke.com/sports/mens-basketball/roster/caleb-foster/24885"},
+        {"providerPlayerId":"24883","name":"Cayden Boozer","jersey":"2","position":"G","height":"6-4","weight":"195","classOrExperience":"So","hometown":"Miami, FL","rosterStatus":"listed","bioUrl":"https://goduke.com/sports/mens-basketball/roster/cayden-boozer/24883"},
+        {"providerPlayerId":"24889","name":"Deron Rippey Jr.","jersey":"3","position":"G","height":"6-3","weight":"185","classOrExperience":"Fr","hometown":"Brooklyn, NY","rosterStatus":"listed","bioUrl":"https://goduke.com/sports/mens-basketball/roster/deron-rippey-jr/24889"},
+        {"providerPlayerId":"24888","name":"Sebastian Wilkins","jersey":"5","position":"G/F","height":"6-8","weight":"220","classOrExperience":"So","hometown":"Boston, MA","rosterStatus":"listed","bioUrl":"https://goduke.com/sports/mens-basketball/roster/sebastian-wilkins/24888"},
+        {"providerPlayerId":"24887","name":"Dame Sarr","jersey":"7","position":"G/F","height":"6-8","weight":"200","classOrExperience":"So","hometown":"Oderzo, Italy","rosterStatus":"listed","bioUrl":"https://goduke.com/sports/mens-basketball/roster/dame-sarr/24887"},
+        {"providerPlayerId":"24890","name":"Drew Scharnowski","jersey":"8","position":"F","height":"6-10","weight":"240","classOrExperience":"Sr","hometown":"Burlington, IL","previousSchool":"Belmont","rosterStatus":"listed","bioUrl":"https://goduke.com/sports/mens-basketball/roster/drew-scharnowski/24890"},
+        {"providerPlayerId":"24891","name":"Bryson Howard","jersey":"12","position":"G","height":"6-4","weight":"190","classOrExperience":"Fr","hometown":"Dallas, TX","rosterStatus":"listed","bioUrl":"https://goduke.com/sports/mens-basketball/roster/bryson-howard/24891"},
+        {"providerPlayerId":"24892","name":"John Blackwell","jersey":"13","position":"G","height":"6-5","weight":"205","classOrExperience":"Sr","hometown":"Bloomfield Hills, MI","previousSchool":"Wisconsin","rosterStatus":"listed","bioUrl":"https://goduke.com/sports/mens-basketball/roster/john-blackwell/24892"},
+        {"providerPlayerId":"24893","name":"Cameron Williams","jersey":"14","position":"F","height":"7-0","weight":"215","classOrExperience":"Fr","hometown":"Phoenix, AZ","rosterStatus":"listed","bioUrl":"https://goduke.com/sports/mens-basketball/roster/cameron-williams/24893"},
+        {"providerPlayerId":"24894","name":"Maxime Meyer","jersey":"15","position":"C","height":"7-1","weight":"225","classOrExperience":"Fr","hometown":"Toronto, Canada","rosterStatus":"listed","bioUrl":"https://goduke.com/sports/mens-basketball/roster/maxime-meyer/24894"},
+        {"providerPlayerId":"24886","name":"Patrick Ngongba II","jersey":"21","position":"C","height":"6-11","weight":"250","classOrExperience":"Jr","hometown":"Manassas, VA","rosterStatus":"listed","bioUrl":"https://goduke.com/sports/mens-basketball/roster/patrick-ngongba-ii/24886"},
+        {"providerPlayerId":"24895","name":"Jacob Theodosiou","jersey":"26","position":"G","height":"6-4","weight":"205","classOrExperience":"Sr","hometown":"Waterloo, Canada","previousSchool":"Loyola Maryland","rosterStatus":"listed","bioUrl":"https://goduke.com/sports/mens-basketball/roster/jacob-theodosiou/24895"},
+        {"providerPlayerId":"24896","name":"Joaquim Boumtje Boumtje","jersey":"30","position":"F/C","height":"7-2","weight":"250","classOrExperience":"Fr","hometown":"Oviedo, FL","rosterStatus":"listed","bioUrl":"https://goduke.com/sports/mens-basketball/roster/joaquim-boumtje-boumtje/24896"},
+        {"providerPlayerId":"24897","name":"Nick Arnold","jersey":"55","position":"G","height":"5-11","weight":"175","classOrExperience":"Fr","hometown":"Mooresville, NC","rosterStatus":"listed","bioUrl":"https://goduke.com/sports/mens-basketball/roster/nick-arnold/24897"}
+      ]
+    }
+  ]
+}

@@ -7,8 +7,10 @@ import {nba360Api} from './services/nba360.mjs';
 import {decisionOutputApi} from './services/decision-output.mjs';
 import {phase1Api} from './services/phase1.mjs';
 import {startNbaScoreRefresh} from './services/nba360-refresh.mjs';
+import {bootstrapVerifiedRosters} from './data-pipeline/src/bootstrap-verified-rosters.mjs';
 const root=process.cwd();
 const port=Number(process.env.ATLAS_PORT)||3000;
+bootstrapVerifiedRosters();
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.png':'image/png','.svg':'image/svg+xml','.json':'application/json; charset=utf-8'};
 http.createServer((req,res)=>{
  const url=new URL(req.url,'http://localhost:3000');
