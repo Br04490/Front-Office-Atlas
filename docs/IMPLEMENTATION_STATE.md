@@ -38,4 +38,6 @@ Phase 1 snapshot API pushed and verified at `52a9a1666d2a1ce1f170d698482445de8d8
 
 Phase 1 browsing views pushed and verified at `7aba56a0ca03351fdb237d3c1ca9122cd06329ae`. Subsequent source review found the official G League stats endpoint operational for a prior season but without current player rows, and identified official restrictions on downloading and republishing a comprehensive G League statistics database. No endpoint records were admitted.
 
+G League source-access review pushed and verified at `0f4dd353ce4c338cf3c805c6525f1c023474e002`. Phase 1 remains incomplete: 0 verified D1 programs, 0 coaches, 0 complete rosters, 0 imported D1 players, 0 approved photos, 0 D1 player statistics; the corresponding G League values are also zero. The source audit found 356 multi-sport D1 candidates but could not certify a complete men's basketball directory. Authorized roster/statistics media feeds and official school-by-school validation remain the next data-dependent work.
+
 See [DATA_COVERAGE.md](DATA_COVERAGE.md), [KNOWN_BLOCKERS.md](KNOWN_BLOCKERS.md), [SOURCE_REGISTRY.md](SOURCE_REGISTRY.md), and [TEST_RESULTS.md](TEST_RESULTS.md). This document describes verified work, not completion of the full directive.
