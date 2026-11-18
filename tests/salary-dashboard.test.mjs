@@ -49,7 +49,7 @@ test('expanded dashboard retains every player face, rule cards and source-aware 
  const html=premiumSalaryDashboard(team,roster);
  assert.equal((html.match(/class="cap-portrait"/g)||[]).length,roster.length);
  assert.match(html,/UNVERIFIED/);assert.match(html,/Cap Zone Legend/);assert.match(html,/Hard Cap/);
- assert.match(html,/No reconciled team payroll/);
+ assert.match(html,/Missing cap charges prevent a verified player total/);
 });
 test('reconciled fixture renders grouped portraits with one payroll fill',()=>{
  const previous={contracts:financialSources.contracts,nonPlayerAllocations:financialSources.nonPlayerAllocations,allocationCoverage:financialSources.allocationCoverage};
