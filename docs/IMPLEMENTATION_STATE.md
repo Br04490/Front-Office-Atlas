@@ -30,4 +30,6 @@ Non-NBA identity importer pushed and verified at `b845f0c8237acb5e51983920d1cf3e
 
 Phase 1A foundation pushed and verified at `a135a58ff90a5ca38e5012da88391bf28e93de5b`. The next milestone adds a transactional NCAA/G League roster-batch importer with dated official team and player sources, coach-title checks, separate photo rights, roster-count completeness and explicit changed-source reconciliation. The Settings data-health view reports separate team, coach, complete-roster, approved-photo and statistical-player counts from the warehouse. This does not establish any non-NBA records as loaded.
 
+Phase 1 roster-batch importer pushed and verified at `ff334de36bcdd93ba222b0e896d71c44ae65d1ca`. The next milestone audits the pinned ncaapyscraper school catalog: 356 D1 candidates among 977 school rows, below the directive's claimed current population and without proof of men's basketball sponsorship. It remains an audit source, not a loaded directory.
+
 See [DATA_COVERAGE.md](DATA_COVERAGE.md), [KNOWN_BLOCKERS.md](KNOWN_BLOCKERS.md), [SOURCE_REGISTRY.md](SOURCE_REGISTRY.md), and [TEST_RESULTS.md](TEST_RESULTS.md). This document describes verified work, not completion of the full directive.

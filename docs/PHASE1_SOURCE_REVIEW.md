@@ -11,3 +11,7 @@ This review separates open-source client code from rights to the underlying bask
 | [Official G League conferences](https://gleague.nba.com/nba-g-league-conferences) | Official current names, conference presentation, and affiliations, including Mexico City without an NBA parent. | Read-only verification reference. Atlas has not duplicated the league directory or its marks. |
 
 Source review gates: current season, official team/program identity, coach title, full listed roster, stable provider IDs, dated source URL, a rights basis covering Atlas use, and a separate photo permission. A failed or uncertain gate is recorded as missing coverage rather than filled with inferred values.
+
+## Pinned school-catalog audit
+
+`node data-pipeline/scripts/audit-ncaa-school-catalog.mjs` reads only the pinned [schools.csv](https://github.com/fakhar-ud-din/ncaapyscraper/blob/09212ce41fed51eec5170f82d138100039473b53/ncaapyscraper/schools.csv) catalog and reports its hash. On 2026-11-18 it had 977 school rows, 356 unique Division I **candidates**, all with a conference and mappable campus state. SHA-256: `666e47e92acef780a014e98c6ad5e52f3efbbfbbe822c5ab088aa708315db43c`. The file is multi-sport and its 356 D1 rows cannot establish a complete 2026–27 men's basketball program directory. No candidate was admitted as a verified program.

@@ -1,0 +1,12 @@
+import {createHash} from 'node:crypto';
+import {parseCsv} from '../src/game-log-import.mjs';
+import {campusRegion} from '../../src/campus-region.js';
+const revision='09212ce41fed51eec5170f82d138100039473b53';
+const url=`https://raw.githubusercontent.com/fakhar-ud-din/ncaapyscraper/${revision}/ncaapyscraper/schools.csv`;
+const response=await fetch(url,{signal:AbortSignal.timeout(20000)});
+if(!response.ok)throw Error(`Catalog request failed: ${response.status}`);
+const bytes=Buffer.from(await response.arrayBuffer());
+const rows=parseCsv(bytes.toString('utf8'),['key','name','conference','division','state','site']);
+const d1=rows.filter(row=>row.division==='1'),keys=new Set(d1.map(row=>row.key));
+const report={source:url,sha256:createHash('sha256').update(bytes).digest('hex'),catalogRows:rows.length,divisionOneCandidates:d1.length,uniqueCandidateKeys:keys.size,withConference:d1.filter(row=>row.conference).length,withCampusRegion:d1.filter(row=>campusRegion(row.state)).length,missingRegion:d1.filter(row=>!campusRegion(row.state)).map(row=>({key:row.key,state:row.state})),status:'CANDIDATES ONLY: this multi-sport catalog does not establish current 2026-27 men\'s basketball sponsorship, coaches, rosters or completeness'};
+console.log(JSON.stringify(report,null,2));

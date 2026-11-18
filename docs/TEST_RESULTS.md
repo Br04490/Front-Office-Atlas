@@ -52,4 +52,9 @@
 - Focused fixture tests verify atomic team/player/coach import, campus region, incomplete-roster status, pending photos, distinct player keys, and newer explicit reconciliation that removes stale memberships and coach records. Mexico City cannot be assigned an NBA parent.
 - Syntax and whitespace checks passed. Fixture data existed only in an in-memory test warehouse; live Phase 1 coverage remains zero.
 
+## Pinned NCAA school-catalog audit
+
+- Read pinned `ncaapyscraper` source revision `09212ce41fed51eec5170f82d138100039473b53`: 977 total schools, 356 Division I candidate keys, 356 with conference and mappable campus state. Hash recorded in `PHASE1_SOURCE_REVIEW.md`.
+- Audit does not treat multi-sport candidate rows as verified current men's basketball programs and imports none into Atlas.
+
 The user's existing Preview on port 3000 served the previous page version during this audit. Port 3001 was launched from this branch for the verified local UI check.
