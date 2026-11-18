@@ -1,0 +1,12 @@
+export function phase1Snapshot(db,season='2026-27'){
+ const teams=db.prepare('SELECT * FROM atlas_external_teams WHERE season=? AND pool IN (\'NCAA_D1\',\'G_LEAGUE\') ORDER BY pool,conference,official_name').all(season).map(row=>({...row,headCoach:null,players:[]}));
+ const coaches=db.prepare('SELECT * FROM atlas_external_coaches WHERE season=?').all(season);
+ const players=db.prepare('SELECT m.*,b.full_name,b.date_of_birth,b.height,b.weight,b.hometown,b.position,b.jersey_number,b.class_or_experience,b.previous_school,b.bio_url,b.photo_url,b.photo_status,b.photo_rights_basis FROM atlas_external_memberships m JOIN atlas_external_player_bio b ON b.player_key=m.player_key WHERE m.season=?').all(season);
+ const metrics=db.prepare('SELECT * FROM atlas_external_player_metrics WHERE season=?').all(season);
+ const byTeam=new Map(teams.map(team=>[[team.pool,team.source_provider,team.provider_team_id,team.season].join('|'),team]));
+ for(const coach of coaches){const team=byTeam.get([coach.pool,coach.source_provider,coach.provider_team_id,coach.season].join('|'));if(team)team.headCoach={name:coach.coach_name,title:coach.title,interim:!!coach.interim,bioUrl:coach.bio_url,photoUrl:coach.photo_rights_basis?coach.photo_url:null,sourceUrl:coach.source_url,verifiedAt:coach.verified_at}}
+ const byPlayer=new Map;
+ for(const row of players){const team=byTeam.get([row.pool,row.source_provider,row.provider_team_id,row.season].join('|'));if(!team)continue;const player={key:row.player_key,name:row.full_name,teamId:row.provider_team_id,teamName:team.official_name,pool:row.pool,position:row.position,jersey:row.jersey_number,height:row.height,weight:row.weight,dateOfBirth:row.date_of_birth,hometown:row.hometown,classOrExperience:row.class_or_experience,previousSchool:row.previous_school,bioUrl:row.bio_url,photoUrl:row.photo_status==='approved'?row.photo_url:null,photoStatus:row.photo_status,rosterStatus:row.membership_status,twoWayStatus:row.two_way_status,assignmentStatus:row.assignment_status,sourceUrl:row.source_url,verifiedAt:row.verified_at,metrics:{}};team.players.push(player);byPlayer.set(row.player_key,player)}
+ for(const row of metrics){const player=byPlayer.get(row.player_key);if(player)player.metrics[row.metric_code]={value:row.metric_value,unit:row.unit,games:row.games,method:row.method,sourceUrl:row.source_url,verifiedAt:row.verified_at}}
+ return {season,teams,coverage:{teams:teams.length,players:players.length,coaches:coaches.length,metrics:metrics.length}};
+}

@@ -57,4 +57,9 @@
 - Read pinned `ncaapyscraper` source revision `09212ce41fed51eec5170f82d138100039473b53`: 977 total schools, 356 Division I candidate keys, 356 with conference and mappable campus state. Hash recorded in `PHASE1_SOURCE_REVIEW.md`.
 - Audit does not treat multi-sport candidate rows as verified current men's basketball programs and imports none into Atlas.
 
+## Phase 1 read-only snapshot API
+
+- Fixture test joins an admitted school, coach and athlete from SQLite while withholding a photo without approved rights.
+- Local port 3003 `GET /api/phase1/snapshot` returned HTTP 200 with 0 teams, 0 players, 0 coaches and 0 metrics, matching the live warehouse. Existing Preview on port 3002 returned HTTP 200.
+
 The user's existing Preview on port 3000 served the previous page version during this audit. Port 3001 was launched from this branch for the verified local UI check.

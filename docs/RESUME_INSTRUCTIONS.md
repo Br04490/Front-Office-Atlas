@@ -2,7 +2,7 @@
 
 1. Open the existing repository and inspect `git status -sb`, `git log -5 --oneline`, and `git ls-remote origin refs/heads/codex/atlas-complete-data-operations-2026-11-18`. Never reset or overwrite unfinished work.
 2. Read `AGENTS.md`, `IMPLEMENTATION_STATE.md`, `DATA_COVERAGE.md`, `KNOWN_BLOCKERS.md`, `SOURCE_REGISTRY.md`, and `TEST_RESULTS.md`.
-3. Continue on `codex/atlas-complete-data-operations-2026-11-18`. The latest verified pushed checkpoint before the school-catalog audit is `ff334de36bcdd93ba222b0e896d71c44ae65d1ca`. Verify the remote branch before work.
+3. Continue on `codex/atlas-complete-data-operations-2026-11-18`. The latest verified pushed checkpoint before the Phase 1 snapshot API is `28cfa8f6e1c71749bec965667c8956e80190d0f8`. Verify the remote branch before work.
 4. Preserve the approved UI and existing NBA cards. Work in small tested commits, push this feature branch after each completed milestone, and verify the remote SHA. Never merge or force-push.
 5. Next independent work: connect authorized NBA contract records through `data-pipeline/scripts/import-contract-years.mjs` with an explicit rights manifest, then build reconciled team-season charge coverage. Until then, salary explorer and Cap Sheet Studio team totals are intentionally unverified for any selected player with a missing charge.
 6. The latest directive prioritizes NCAA D1 and G League Phase 1 before high school or EuroLeague expansion. Use [PHASE1_SOURCE_REVIEW.md](PHASE1_SOURCE_REVIEW.md) and [ACCESS_NEEDED.md](ACCESS_NEEDED.md) to resolve source rights before importing public records or photos. Do not treat the new schema as populated coverage.

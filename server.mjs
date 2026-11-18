@@ -5,6 +5,7 @@ import {preparationApi,presentationApi} from './services/preparation.mjs';
 import {sheetExtractApi} from './services/sheet-extract.mjs';
 import {nba360Api} from './services/nba360.mjs';
 import {decisionOutputApi} from './services/decision-output.mjs';
+import {phase1Api} from './services/phase1.mjs';
 import {startNbaScoreRefresh} from './services/nba360-refresh.mjs';
 const root=process.cwd();
 const port=Number(process.env.ATLAS_PORT)||3000;
@@ -12,6 +13,7 @@ const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=u
 http.createServer((req,res)=>{
  const url=new URL(req.url,'http://localhost:3000');
  if(url.pathname.startsWith('/api/nba360/')){nba360Api(req,res,url);return}
+ if(url.pathname.startsWith('/api/phase1/')){phase1Api(req,res,url);return}
  if(url.pathname==='/api/decision-packages'){if(req.headers.origin&&!['http://localhost:3000','http://127.0.0.1:3000',`http://localhost:${port}`,`http://127.0.0.1:${port}`].includes(req.headers.origin)){res.writeHead(403).end('Origin denied');return}decisionOutputApi(req,res);return}
  if(url.pathname==='/api/sheets/extract'){if(req.headers.origin&&!['http://localhost:3000','http://127.0.0.1:3000'].includes(req.headers.origin)){res.writeHead(403).end('Origin denied');return}sheetExtractApi(req,res);return}
  if(url.pathname==='/api/presentations'){if(req.headers.origin&&!['http://localhost:3000','http://127.0.0.1:3000'].includes(req.headers.origin)){res.writeHead(403).end('Origin denied');return}presentationApi(req,res);return}
