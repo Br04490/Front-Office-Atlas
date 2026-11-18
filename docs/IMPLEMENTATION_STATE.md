@@ -18,4 +18,6 @@ First resumed milestone pushed and verified at `809c249f8c78b0016add3bb898abf1cc
 
 Cap Sheet Studio milestone pushed and verified at `4ece8af2a03c2c13f1c04619bc37246842b9f06e`. The subsequent contract-admission milestone tightens current-team identity validation and blocks unreconciled duplicate sources. `node data-pipeline/scripts/contract-coverage.mjs 2026-27` reports missing cap charges by franchise; on the current local database it finds 525 roster identities and 0 contract rows.
 
+Contract-admission milestone pushed and verified at `9a558d4c4ea7c4697f1b289fce3f29ba925d9fbb`. The next milestone extends the existing Settings data-health page into a five-pool coverage view. It reads actual local NBA warehouse and roster counts while showing zero imported NCAA, high school, EuroLeague and G League records.
+
 See [DATA_COVERAGE.md](DATA_COVERAGE.md), [KNOWN_BLOCKERS.md](KNOWN_BLOCKERS.md), [SOURCE_REGISTRY.md](SOURCE_REGISTRY.md), and [TEST_RESULTS.md](TEST_RESULTS.md). This document describes verified work, not completion of the full directive.

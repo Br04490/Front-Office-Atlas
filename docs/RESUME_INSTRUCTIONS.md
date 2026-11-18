@@ -2,7 +2,7 @@
 
 1. Open the existing repository and inspect `git status -sb`, `git log -5 --oneline`, and `git ls-remote origin refs/heads/codex/atlas-complete-data-operations-2026-11-18`. Never reset or overwrite unfinished work.
 2. Read `AGENTS.md`, `IMPLEMENTATION_STATE.md`, `DATA_COVERAGE.md`, `KNOWN_BLOCKERS.md`, `SOURCE_REGISTRY.md`, and `TEST_RESULTS.md`.
-3. Continue on `codex/atlas-complete-data-operations-2026-11-18`. The latest verified pushed checkpoint before the contract-admission work is `4ece8af2a03c2c13f1c04619bc37246842b9f06e`; the first resumed checkpoint is `809c249f8c78b0016add3bb898abf1ccb4fbf81f`. Verify the remote branch before work.
+3. Continue on `codex/atlas-complete-data-operations-2026-11-18`. The latest verified pushed checkpoint before the five-pool coverage update is `9a558d4c4ea7c4697f1b289fce3f29ba925d9fbb`. Verify the remote branch before work.
 4. Preserve the approved UI and existing NBA cards. Work in small tested commits, push this feature branch after each completed milestone, and verify the remote SHA. Never merge or force-push.
 5. Next independent work: connect authorized NBA contract records through `data-pipeline/scripts/import-contract-years.mjs` with an explicit rights manifest, then build reconciled team-season charge coverage. Until then, salary explorer and Cap Sheet Studio team totals are intentionally unverified for any selected player with a missing charge.
 6. Follow with the operational cap-sheet and transaction workflows before expanding analytics. For NCAA, high school, EuroLeague and G League, use dated official identities and approved media rights; do not infer missing rosters or statistics.

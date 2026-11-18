@@ -51,6 +51,11 @@ test('data health labels empty source domains as absent records',()=>{
  const html=dataHealth({sources:1,playerMetricValues:10,players:2,teamGames:0,playerGameLogs:0,shotEvents:0,possessions:0,contractYears:0,bdlGames:0,sourceSnapshots:[]});
  assert.match(html,/Shot events/);assert.match(html,/0 records/);assert.match(html,/Local SQLite is a development database/);
 });
+test('five-pool coverage reports actual NBA identities without counting missing pools',()=>{
+ const html=dataHealth({sources:1,playerMetricValues:10,players:2,teamGames:0,playerGameLogs:0,shotEvents:0,possessions:0,contractYears:0,bdlGames:0,sourceSnapshots:[]},[{team:'HOU',imageStatus:'official_image_found'},{team:'BOS',imageStatus:'missing_or_placeholder'}]);
+ assert.match(html,/2 teams · 2 roster identities/);assert.match(html,/1 image URLs found/);
+ assert.match(html,/0 \/ 100 ranked prospects/);assert.match(html,/EuroLeague/);assert.match(html,/NBA G League/);
+});
 test('dated game trends filter authorized logs and compute percentages from attempts',()=>{
  const logs=[
   {gameId:'1',date:'2026-11-01',seasonType:'Regular Season',opponent:'BOS',fieldGoalsMade:2,fieldGoalAttempts:4,points:10,source:'https://example.org/fixture',verifiedAt:'2026-11-16'},
