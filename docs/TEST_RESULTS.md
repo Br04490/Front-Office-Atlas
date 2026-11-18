@@ -68,4 +68,9 @@
 - Focused tests cover source-backed team counts, pending athlete photos, external profile shell, eligibility tab and missing statistics. Import tests reject unlicensed team logos.
 - Browser on port 3003 showed new NCAA D1 and G League sidebar links, each with 0 admitted teams and players; original NBA team directory still listed 30 franchises and the NBA roster view opened. Existing port 3002 Preview stayed live.
 
+## G League source access check
+
+- Official `LeagueDashPlayerStats` endpoint returned HTTP 200, 69 headers, 0 player rows for 2026–27 and 526 for 2025–26. This was a read-only behavior check; no response rows were stored or imported.
+- Official FAQ and NBA terms were reviewed for download and comprehensive-database restrictions; see `ACCESS_NEEDED.md`.
+
 The user's existing Preview on port 3000 served the previous page version during this audit. Port 3001 was launched from this branch for the verified local UI check.

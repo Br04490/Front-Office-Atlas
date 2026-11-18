@@ -36,4 +36,6 @@ Pinned catalog audit pushed and verified at `28cfa8f6e1c71749bec965667c8956e8019
 
 Phase 1 snapshot API pushed and verified at `52a9a1666d2a1ce1f170d698482445de8d8fa515`. The next milestone adds NCAA D1 and G League links to the existing sidebar and source-backed directory/team views. External athletes use the existing player-profile shell with league-specific eligibility/status text. The live warehouse has zero admitted records, so the browser correctly shows an empty state rather than fabricated teams or players.
 
+Phase 1 browsing views pushed and verified at `7aba56a0ca03351fdb237d3c1ca9122cd06329ae`. Subsequent source review found the official G League stats endpoint operational for a prior season but without current player rows, and identified official restrictions on downloading and republishing a comprehensive G League statistics database. No endpoint records were admitted.
+
 See [DATA_COVERAGE.md](DATA_COVERAGE.md), [KNOWN_BLOCKERS.md](KNOWN_BLOCKERS.md), [SOURCE_REGISTRY.md](SOURCE_REGISTRY.md), and [TEST_RESULTS.md](TEST_RESULTS.md). This document describes verified work, not completion of the full directive.
