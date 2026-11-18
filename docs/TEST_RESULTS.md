@@ -27,4 +27,11 @@
 - Two focused tests: a hypothetical roster change creates a draft and reaches `NEEDS REVIEW` when contracts/CBA/authentication are missing; a changed scenario blocks stale review.
 - Local port 3001 preview: Automated Sheets → Review & Approval displays the queue and gives a clear missing-scenario message when no proposal exists.
 
+## Five decision outputs milestone
+
+- `pnpm test`: 99 passed, 0 failed. Eight Python data-pipeline tests passed.
+- Two focused tests verify five distinct valid PPTX files and a machine-readable draft/financial/approval manifest, and reject missing evidence.
+- HTTP smoke test on port 3002: `POST /api/decision-packages` returned 200, `application/zip`, 41,925 bytes for an explicitly labeled fixture. The home page also returned 200.
+- `node --check` passed for the server, new service, and changed frontend modules; `git diff --check` reported no whitespace errors.
+
 The user's existing Preview on port 3000 served the previous page version during this audit. Port 3001 was launched from this branch for the verified local UI check.

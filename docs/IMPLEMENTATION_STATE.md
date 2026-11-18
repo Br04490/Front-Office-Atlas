@@ -22,4 +22,6 @@ Contract-admission milestone pushed and verified at `9a558d4c4ea7c4697f1b289fce3
 
 Five-pool coverage milestone pushed and verified at `3e31ceafcd334fcd91fac51fd6af63bf806fedef`. The following transaction-review milestone adds an in-memory case queue to Automated Sheets → Review & Approval. It captures current hypothetical NBA IDs, runs deterministic data checks, records an audit trail, blocks stale scenario revisions, and can offer existing internal preparation documents. It cannot mark a case internally approved or officially confirmed without authenticated approvers, verified CBA rules and complete financial inputs.
 
+Transaction-review milestone pushed and verified at `0035e64be4f09677b422df85d1e29a7d28618cf5`. The next milestone adds five audience-specific editable PowerPoint decks as one ZIP from a reviewed decision title, evidence and source notes. The decks are internal drafts with explicit missing financial and approval states. No NBA transaction, contract, metric or film value is inferred.
+
 See [DATA_COVERAGE.md](DATA_COVERAGE.md), [KNOWN_BLOCKERS.md](KNOWN_BLOCKERS.md), [SOURCE_REGISTRY.md](SOURCE_REGISTRY.md), and [TEST_RESULTS.md](TEST_RESULTS.md). This document describes verified work, not completion of the full directive.
