@@ -28,4 +28,6 @@ Five-decision-output milestone pushed and verified at `79b70a0a051698c3bb96edf49
 
 Non-NBA identity importer pushed and verified at `b845f0c8237acb5e51983920d1cf3e9cdc9393b4`. The new NCAA D1/G League Phase 1 directive begins with league-aware player keys while preserving NBA numeric source IDs, six campus-based geographic regions, and additive tables for external teams, coaches, player bios, memberships, metrics, game logs and reviewed identity links. Source and access gates are recorded separately; no new source data is claimed.
 
+Phase 1A foundation pushed and verified at `a135a58ff90a5ca38e5012da88391bf28e93de5b`. The next milestone adds a transactional NCAA/G League roster-batch importer with dated official team and player sources, coach-title checks, separate photo rights, roster-count completeness and explicit changed-source reconciliation. The Settings data-health view reports separate team, coach, complete-roster, approved-photo and statistical-player counts from the warehouse. This does not establish any non-NBA records as loaded.
+
 See [DATA_COVERAGE.md](DATA_COVERAGE.md), [KNOWN_BLOCKERS.md](KNOWN_BLOCKERS.md), [SOURCE_REGISTRY.md](SOURCE_REGISTRY.md), and [TEST_RESULTS.md](TEST_RESULTS.md). This document describes verified work, not completion of the full directive.

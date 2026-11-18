@@ -46,4 +46,10 @@
 - New tests verify NBA numeric source IDs coexist with league-aware canonical keys, campus regions are independent of conference, and the additive external schema opens without NBA data changes.
 - JavaScript syntax checks and `git diff --check` passed. No D1 or G League identities, coaches, photos or statistics were imported.
 
+## NCAA D1 and G League roster-batch importer
+
+- `pnpm test`: 107 passed, 0 failed. Python data-pipeline tests: 8 passed.
+- Focused fixture tests verify atomic team/player/coach import, campus region, incomplete-roster status, pending photos, distinct player keys, and newer explicit reconciliation that removes stale memberships and coach records. Mexico City cannot be assigned an NBA parent.
+- Syntax and whitespace checks passed. Fixture data existed only in an in-memory test warehouse; live Phase 1 coverage remains zero.
+
 The user's existing Preview on port 3000 served the previous page version during this audit. Port 3001 was launched from this branch for the verified local UI check.
