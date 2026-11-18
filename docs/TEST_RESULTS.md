@@ -12,4 +12,9 @@
 - Five focused JavaScript tests: all 15 sheet types, shared-model fixture arithmetic, incomplete contracts, scenario treatment, and live pending state passed.
 - Local port 3001 preview: Automated Sheets → Cap Sheets rendered 15 sheet choices, actual 2026–27 first-apron value $209,015,000 with source link, and pending team salary. CSV export is wired to the displayed sheet; XLSX and PDF remain pending.
 
+## Contract admission milestone
+
+- Existing contract importer test now checks current roster/team mismatch rejection, duplicate-source rejection even when dollars match, and team-by-team contract coverage accounting.
+- Live contract coverage command: 525 roster identities, 0 contract-year rows, 0 priced players; official team salary remains incomplete.
+
 The user's existing Preview on port 3000 served the previous page version during this audit. Port 3001 was launched from this branch for the verified local UI check.

@@ -16,4 +16,6 @@ The first resume milestone is the repository audit and preservation of the unfin
 
 First resumed milestone pushed and verified at `809c249f8c78b0016add3bb898abf1ccb4fbf81f` on the active feature branch. The next milestone adds the Cap Sheet Studio to the existing Automated Sheets workspace. It offers 15 worksheet views through the shared financial model and scenario state, with source-backed league thresholds, explicit missing charges, original/scenario columns and CSV export. It does not claim complete payroll or legally valid transactions while contract coverage is zero. XLSX formula and PDF exports remain pending.
 
+Cap Sheet Studio milestone pushed and verified at `4ece8af2a03c2c13f1c04619bc37246842b9f06e`. The subsequent contract-admission milestone tightens current-team identity validation and blocks unreconciled duplicate sources. `node data-pipeline/scripts/contract-coverage.mjs 2026-27` reports missing cap charges by franchise; on the current local database it finds 525 roster identities and 0 contract rows.
+
 See [DATA_COVERAGE.md](DATA_COVERAGE.md), [KNOWN_BLOCKERS.md](KNOWN_BLOCKERS.md), [SOURCE_REGISTRY.md](SOURCE_REGISTRY.md), and [TEST_RESULTS.md](TEST_RESULTS.md). This document describes verified work, not completion of the full directive.
