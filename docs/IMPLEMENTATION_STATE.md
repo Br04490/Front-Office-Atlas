@@ -34,4 +34,6 @@ Phase 1 roster-batch importer pushed and verified at `ff334de36bcdd93ba222b0e896
 
 Pinned catalog audit pushed and verified at `28cfa8f6e1c71749bec965667c8956e80190d0f8`. The next milestone exposes admitted Phase 1 teams, coaches, roster memberships, bios, approved photo references and metrics from SQLite through a read-only `/api/phase1/snapshot` endpoint. Empty coverage remains an explicit zero response.
 
+Phase 1 snapshot API pushed and verified at `52a9a1666d2a1ce1f170d698482445de8d8fa515`. The next milestone adds NCAA D1 and G League links to the existing sidebar and source-backed directory/team views. External athletes use the existing player-profile shell with league-specific eligibility/status text. The live warehouse has zero admitted records, so the browser correctly shows an empty state rather than fabricated teams or players.
+
 See [DATA_COVERAGE.md](DATA_COVERAGE.md), [KNOWN_BLOCKERS.md](KNOWN_BLOCKERS.md), [SOURCE_REGISTRY.md](SOURCE_REGISTRY.md), and [TEST_RESULTS.md](TEST_RESULTS.md). This document describes verified work, not completion of the full directive.

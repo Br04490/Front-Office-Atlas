@@ -4,6 +4,8 @@ Run `node data-pipeline/scripts/import-phase1-rosters.mjs <teams.json> <rights-m
 
 Each player requires a provider-scoped `providerPlayerId`, name, roster status and HTTPS official bio URL. Optional position, jersey, measurements and school history are stored only when supplied. Photo URLs are withheld unless the individual record says `photoStatus: "approved"` and includes a distinct `photoRightsBasis`. A coach requires name, exact `Head Coach` or `Interim Head Coach` title, HTTPS bio and verification source. Missing coaches remain missing.
 
+Team logos require an HTTPS `logoUrl` and a separate `logoRightsBasis`; the importer rejects logo URLs without media permission.
+
 The rights manifest requires `provider`, `authorizedForAtlas: true`, `rightsBasis`, HTTPS `sourceUrl`, ISO `verifiedAt`, and the SHA-256 of the exact JSON batch bytes. A changed snapshot for the same team/source requires `reconcileExisting: true` and a later verification date. Reconciliation replaces that team's current-season roster memberships and coach inside one transaction. Previous biography records remain available for historical identity review. A roster is marked complete only when the number of imported player identities equals the officially listed count and is greater than zero.
 
 Fixture tests exercise these rules in memory. No school or G League records have been admitted to the committed project database. Public source pages, scraper code licenses and image URLs alone do not satisfy the rights manifest.

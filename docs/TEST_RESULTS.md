@@ -62,4 +62,10 @@
 - Fixture test joins an admitted school, coach and athlete from SQLite while withholding a photo without approved rights.
 - Local port 3003 `GET /api/phase1/snapshot` returned HTTP 200 with 0 teams, 0 players, 0 coaches and 0 metrics, matching the live warehouse. Existing Preview on port 3002 returned HTTP 200.
 
+## Phase 1 browsing views
+
+- `pnpm test`: 110 passed, 0 failed. Python pipeline tests: 8 passed.
+- Focused tests cover source-backed team counts, pending athlete photos, external profile shell, eligibility tab and missing statistics. Import tests reject unlicensed team logos.
+- Browser on port 3003 showed new NCAA D1 and G League sidebar links, each with 0 admitted teams and players; original NBA team directory still listed 30 franchises and the NBA roster view opened. Existing port 3002 Preview stayed live.
+
 The user's existing Preview on port 3000 served the previous page version during this audit. Port 3001 was launched from this branch for the verified local UI check.

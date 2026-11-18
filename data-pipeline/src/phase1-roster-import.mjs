@@ -19,6 +19,7 @@ export function importPhase1Rosters(db,batch,manifest){
   if(team.pool==='G_LEAGUE'&&team.nbaAffiliateAbbr&&!nbaTeams.some(nba=>nba.abbr===team.nbaAffiliateAbbr))throw Error('Unknown NBA affiliate abbreviation');
   if(!Number.isInteger(team.officialRosterCount)||team.officialRosterCount<0)throw Error('Official listed roster count is required');
   requireSource(team.rosterUrl,'Roster');requireSource(team.sourceUrl,'Team');
+  if(team.logoUrl&&(!validUrl(team.logoUrl)||!filled(team.logoRightsBasis)))throw Error('Team logo requires HTTPS URL and separate rights basis');
   const key=[team.pool,provider,team.providerTeamId,team.season].join('|');if(seenTeams.has(key))throw Error('Duplicate team in batch');seenTeams.add(key);
   const seenPlayers=new Set;
   for(const player of team.players){

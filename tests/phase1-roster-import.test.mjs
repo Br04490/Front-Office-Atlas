@@ -25,6 +25,7 @@ test('G League fixture rejects invented affiliate and photo rights claims',()=>{
   const batch={teams:[{...fixture.teams[0],pool:'G_LEAGUE',conference:'Eastern',state:null,players:[{...fixture.teams[0].players[0],photoUrl:'https://example.org/photo',photoStatus:'approved'}]}]};
   assert.throws(()=>importPhase1Rosters(db,batch,manifest),/photo requires/);
   assert.throws(()=>importPhase1Rosters(db,{teams:[{...batch.teams[0],name:'Mexico City Capitanes',nbaAffiliateAbbr:'HOU',players:[]}]},manifest),/no NBA parent/);
+  assert.throws(()=>importPhase1Rosters(db,{teams:[{...batch.teams[0],logoUrl:'https://example.org/logo',players:[]}]},manifest),/logo requires/);
   assert.equal(db.prepare('SELECT COUNT(*) AS n FROM atlas_external_teams').get().n,0);
  }finally{db.close()}
 });

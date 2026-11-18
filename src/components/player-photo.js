@@ -1,6 +1,7 @@
 const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 export function playerPhoto(player,className='roster-photo'){
   const safeClass=esc(className);
+  if(player.pool){return player.photoStatus==='approved'&&player.photoUrl?`<span class="${safeClass}"><img src="${esc(player.photoUrl)}" alt="Verified photograph of ${esc(player.name)}" loading="lazy"><span class="photo-fallback">PHOTO UNAVAILABLE</span></span>`:`<span class="${safeClass} photo-unavailable"><span class="photo-silhouette"></span><span class="photo-fallback">PHOTO PENDING</span></span>`}
   if(player.imageDisplayStatus==='show_local_thumbnail'&&player.uniformStatus==='verified_current_team'){
     return `<span class="${safeClass}"><img src="./src/assets/players/260x190/${player.nbaPlayerId}.png" alt="Official NBA headshot of ${esc(player.name)} in ${esc(player.team)} uniform" loading="lazy"><span class="photo-fallback">PHOTO UNAVAILABLE</span></span>`;
   }
