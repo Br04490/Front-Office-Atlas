@@ -10,3 +10,16 @@
 .cap-sheet-studio .contract-table td,.cap-sheet-studio .contract-table th{font-size:11px;font-variant-numeric:tabular-nums}
 .cap-sheet-studio .contract-table td:first-child{font-weight:800;color:#143452}
 @media(max-width:760px){.cap-sheet-controls{grid-template-columns:1fr}.cap-sheet-head{align-items:flex-start}.cap-sheet-status{display:grid}}
+.tx-review{margin-bottom:20px;border:1px solid #d9eaff}
+.tx-review h3{font:800 23px Outfit,Manrope,sans-serif;color:#123557;margin:4px 0}
+.tx-review p{font-size:12px;color:#4c6d88}
+.tx-case-list{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0}
+.tx-case-list button,.tx-case-actions button{border:1px solid #bbd6ec;background:#eaf6ff;color:#174a74;border-radius:9px;padding:8px 12px;font-size:11px;font-weight:800}
+.tx-case-list button.active{background:#c8e7ff;border-color:#79b8e9}
+.tx-case{border:1px solid #d3e7f7;border-radius:14px;background:#f7fcff;padding:14px}
+.tx-case h4{font:800 17px Outfit,Manrope,sans-serif;margin:0}
+.tx-case-actions{display:flex;gap:8px;flex-wrap:wrap}
+.tx-checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0}
+.tx-checks>div{background:#eaf5ff;border-radius:9px;padding:9px}
+.tx-checks strong,.tx-checks span{display:block;font-size:11px}.tx-checks span{color:#4e6b86;margin-top:3px}
+@media(max-width:760px){.tx-checks{grid-template-columns:1fr}}

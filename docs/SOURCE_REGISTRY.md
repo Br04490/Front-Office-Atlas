@@ -10,5 +10,6 @@
 | SkillCorner official open basketball data | Pinned public research sample | Existing integration preserved; does not populate NBA contract or roster domains |
 | Basketball Index, Spotrac, tracking and film providers | Commercial or permission-dependent | Registry slots and authorized imports only; no protected values populated |
 | NCAA, high school rankings, EuroLeague and G League | Official roster/standings sources to be evaluated per rights and freshness | No imported player pool yet |
+| [NBA G League teams](https://gleague.nba.com/teams) and [FAQ](https://gleague.nba.com/faq) | Official 2026–27 directory describes 31 expected clubs; page content restricts redistribution | Source evaluated, bulk import blocked pending permitted reuse or feed |
 
 The original [33-entry repository catalog](../data-pipeline/github_repositories_catalog.csv), [50-entry metric registry](../data-pipeline/atlas_metrics_registry.csv), and [source rights catalog](../data-pipeline/data_sources_and_rights.csv) remain untouched. See the individual provenance URLs in warehouse `sourceSnapshots` and `src/data/financial-sources.js`.

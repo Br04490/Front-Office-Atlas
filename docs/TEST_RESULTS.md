@@ -22,4 +22,9 @@
 - Added a test that counts NBA roster identities and image URL presence while keeping four unimported pools at zero.
 - Local port 3001 preview Settings view showed 30 NBA teams, 525 roster identities, 508 players with season metrics, 521 NBA image URLs found and 0 contract years; NCAA, high school, EuroLeague and G League each show zero imported identities.
 
+## Transaction review milestone
+
+- Two focused tests: a hypothetical roster change creates a draft and reaches `NEEDS REVIEW` when contracts/CBA/authentication are missing; a changed scenario blocks stale review.
+- Local port 3001 preview: Automated Sheets → Review & Approval displays the queue and gives a clear missing-scenario message when no proposal exists.
+
 The user's existing Preview on port 3000 served the previous page version during this audit. Port 3001 was launched from this branch for the verified local UI check.

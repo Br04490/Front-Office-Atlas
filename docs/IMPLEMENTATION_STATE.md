@@ -20,4 +20,6 @@ Cap Sheet Studio milestone pushed and verified at `4ece8af2a03c2c13f1c04619bc372
 
 Contract-admission milestone pushed and verified at `9a558d4c4ea7c4697f1b289fce3f29ba925d9fbb`. The next milestone extends the existing Settings data-health page into a five-pool coverage view. It reads actual local NBA warehouse and roster counts while showing zero imported NCAA, high school, EuroLeague and G League records.
 
+Five-pool coverage milestone pushed and verified at `3e31ceafcd334fcd91fac51fd6af63bf806fedef`. The following transaction-review milestone adds an in-memory case queue to Automated Sheets → Review & Approval. It captures current hypothetical NBA IDs, runs deterministic data checks, records an audit trail, blocks stale scenario revisions, and can offer existing internal preparation documents. It cannot mark a case internally approved or officially confirmed without authenticated approvers, verified CBA rules and complete financial inputs.
+
 See [DATA_COVERAGE.md](DATA_COVERAGE.md), [KNOWN_BLOCKERS.md](KNOWN_BLOCKERS.md), [SOURCE_REGISTRY.md](SOURCE_REGISTRY.md), and [TEST_RESULTS.md](TEST_RESULTS.md). This document describes verified work, not completion of the full directive.

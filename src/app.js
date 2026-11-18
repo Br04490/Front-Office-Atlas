@@ -3,6 +3,7 @@ import {SalaryCapTower} from './components/salary-cap-tower.js';
 import {capDashboardState} from './components/salary-cap-dashboard.js';
 import {capExplorerState,explorerAction} from './cap-explorer.js';
 import {capSheetState,buildCapSheet,capSheetCsv} from './cap-sheet-studio.js';
+import {transactionReviewState,createReviewCase,verifyReviewCase} from './transaction-review.js';
 import {seasons as financialSeasons} from './financial-model.js';
 import {financialSources} from './data/financial-sources.js';
 import {contractCenter,contractCenterState} from './components/contract-center.js';
@@ -91,6 +92,7 @@ document.addEventListener('click',e=>{const face=e.target.closest('[data-cap-pla
 document.addEventListener('change',e=>{if(e.target.matches('[data-cap-mode]')){capExplorerState.mode=e.target.value==='official'?'official':'explorer';capExplorerState.selectedPlayer=null;render()}},true);
 document.addEventListener('change',e=>{const field=e.target.dataset.capSheetField;if(!field)return;capSheetState[field]=e.target.value;render()},true);
 document.addEventListener('click',e=>{if(!e.target.closest('[data-cap-sheet-export="csv"]'))return;e.stopPropagation();const sheet=buildCapSheet({players,team:capSheetState.team,season:capSheetState.season,type:capSheetState.type});const url=URL.createObjectURL(new Blob([capSheetCsv(sheet)],{type:'text/csv;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download=`atlas-${sheet.team}-${sheet.season}-${sheet.type}.csv`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000)},true);
+document.addEventListener('click',e=>{const button=e.target.closest('[data-tx-action]');if(!button)return;e.stopPropagation();const action=button.dataset.txAction,selected=transactionReviewState.cases.find(item=>item.id===transactionReviewState.selectedId);if(action==='create')createReviewCase(players,scenarioState.current.team||state.team,scenarioState.season);if(action==='select')transactionReviewState.selectedId=button.dataset.txId;if(action==='verify'&&selected)verifyReviewCase(selected,players);if(action==='prepare'&&selected)offerPreparation({action:'scenario',team:selected.team,source:'Transaction Review Queue',scenarioId:selected.id,notes:`Internal review draft · ${selected.season} · outgoing NBA IDs ${selected.outgoing.join(', ')||'none'} · incoming NBA IDs ${selected.incoming.join(', ')||'none'} · ${selected.status}`},true);render()},true);
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target?.dataset?.teamGame){e.preventDefault();state.teamGameDate=e.target.dataset.teamGame;state.tab='games';render();return}if((e.key==='Enter'||e.key===' ')&&e.target?.dataset?.shotId){e.preventDefault();profileState.selectedShot=e.target.dataset.shotId;render();return}if(e.key==='Escape'&&document.querySelector('.tower-action-menu')){e.preventDefault();playerAction('close')}});
 window.addEventListener('resize',placePlayerPanel);
 window.addEventListener('focus',revalidateNbaWarehouse);
