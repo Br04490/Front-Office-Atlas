@@ -83,3 +83,57 @@ CREATE TABLE IF NOT EXISTS atlas_external_players (
  PRIMARY KEY(pool,source_provider,provider_player_id,season)
 );
 CREATE INDEX IF NOT EXISTS idx_atlas_external_pool ON atlas_external_players(pool,season,team_id);
+CREATE TABLE IF NOT EXISTS atlas_external_teams (
+ pool TEXT NOT NULL, source_provider TEXT NOT NULL, provider_team_id TEXT NOT NULL,
+ season TEXT NOT NULL, official_name TEXT NOT NULL, nickname TEXT,
+ conference TEXT, conference_source_url TEXT, city TEXT, state_code TEXT,
+ campus_region TEXT, nba_affiliate_abbr TEXT, official_site_url TEXT,
+ roster_source_url TEXT, coaching_source_url TEXT, logo_url TEXT,
+ official_roster_count INTEGER, roster_completeness TEXT NOT NULL DEFAULT 'unverified',
+ verified_at TEXT NOT NULL, source_url TEXT NOT NULL, rights_basis TEXT NOT NULL,
+ source_sha256 TEXT NOT NULL,
+ PRIMARY KEY(pool,source_provider,provider_team_id,season)
+);
+CREATE INDEX IF NOT EXISTS idx_atlas_external_teams_conference ON atlas_external_teams(pool,season,conference,campus_region);
+CREATE TABLE IF NOT EXISTS atlas_external_coaches (
+ pool TEXT NOT NULL, source_provider TEXT NOT NULL, provider_team_id TEXT NOT NULL,
+ season TEXT NOT NULL, coach_name TEXT NOT NULL, title TEXT NOT NULL,
+ interim INTEGER NOT NULL DEFAULT 0, bio_url TEXT NOT NULL,
+ photo_url TEXT, photo_rights_basis TEXT,
+ verified_at TEXT NOT NULL, source_url TEXT NOT NULL,
+ PRIMARY KEY(pool,source_provider,provider_team_id,season),
+ FOREIGN KEY(pool,source_provider,provider_team_id,season)
+ REFERENCES atlas_external_teams(pool,source_provider,provider_team_id,season)
+);
+CREATE TABLE IF NOT EXISTS atlas_external_player_bio (
+ player_key TEXT PRIMARY KEY, full_name TEXT NOT NULL, date_of_birth TEXT,
+ height TEXT, weight TEXT, hometown TEXT, position TEXT, jersey_number TEXT,
+ class_or_experience TEXT, previous_school TEXT, bio_url TEXT,
+ photo_url TEXT, photo_status TEXT NOT NULL DEFAULT 'pending',
+ photo_rights_basis TEXT, verified_at TEXT NOT NULL, source_url TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS atlas_external_memberships (
+ player_key TEXT NOT NULL, pool TEXT NOT NULL, source_provider TEXT NOT NULL,
+ provider_team_id TEXT NOT NULL, season TEXT NOT NULL,
+ membership_status TEXT NOT NULL, two_way_status TEXT,
+ assignment_status TEXT, source_url TEXT NOT NULL, verified_at TEXT NOT NULL,
+ PRIMARY KEY(player_key,pool,source_provider,provider_team_id,season)
+);
+CREATE TABLE IF NOT EXISTS atlas_external_player_metrics (
+ player_key TEXT NOT NULL, season TEXT NOT NULL, metric_code TEXT NOT NULL,
+ metric_value REAL NOT NULL, unit TEXT NOT NULL, games INTEGER,
+ source_url TEXT NOT NULL, verified_at TEXT NOT NULL, method TEXT NOT NULL,
+ PRIMARY KEY(player_key,season,metric_code,source_url)
+);
+CREATE TABLE IF NOT EXISTS atlas_external_player_game_logs (
+ player_key TEXT NOT NULL, game_id TEXT NOT NULL, game_date TEXT NOT NULL,
+ season TEXT NOT NULL, team_id TEXT NOT NULL, opponent_id TEXT NOT NULL,
+ stats_json TEXT NOT NULL, source_url TEXT NOT NULL, verified_at TEXT NOT NULL,
+ PRIMARY KEY(player_key,game_id,source_url)
+);
+CREATE TABLE IF NOT EXISTS atlas_external_identity_links (
+ player_key TEXT NOT NULL, linked_player_key TEXT NOT NULL,
+ match_basis TEXT NOT NULL, source_url TEXT NOT NULL, verified_at TEXT NOT NULL,
+ review_status TEXT NOT NULL CHECK(review_status IN ('proposed','verified','rejected')),
+ PRIMARY KEY(player_key,linked_player_key)
+);

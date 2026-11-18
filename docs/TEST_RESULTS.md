@@ -40,4 +40,10 @@
 - Focused tests admit one fictional fixture only in an in-memory database, verify idempotent coverage, and reject missing rights, invalid top-100 rank, duplicate identity and changed source hash.
 - JavaScript syntax checks and `git diff --check` passed. No external player data was written to the project warehouse.
 
+## NCAA D1 and G League Phase 1A foundation
+
+- `pnpm test`: 105 passed, 0 failed. Python data-pipeline tests: 8 passed.
+- New tests verify NBA numeric source IDs coexist with league-aware canonical keys, campus regions are independent of conference, and the additive external schema opens without NBA data changes.
+- JavaScript syntax checks and `git diff --check` passed. No D1 or G League identities, coaches, photos or statistics were imported.
+
 The user's existing Preview on port 3000 served the previous page version during this audit. Port 3001 was launched from this branch for the verified local UI check.

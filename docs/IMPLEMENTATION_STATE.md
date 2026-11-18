@@ -26,4 +26,6 @@ Transaction-review milestone pushed and verified at `0035e64be4f09677b422df85d1e
 
 Five-decision-output milestone pushed and verified at `79b70a0a051698c3bb96edf499694d5a64b2c584`. The next milestone adds a rights-gated, transactional non-NBA identity importer for NCAA D1, high school top 100, EuroLeague and G League; Settings coverage reads admitted database rows. No outside identities have been admitted without a licensed source file.
 
+Non-NBA identity importer pushed and verified at `b845f0c8237acb5e51983920d1cf3e9cdc9393b4`. The new NCAA D1/G League Phase 1 directive begins with league-aware player keys while preserving NBA numeric source IDs, six campus-based geographic regions, and additive tables for external teams, coaches, player bios, memberships, metrics, game logs and reviewed identity links. Source and access gates are recorded separately; no new source data is claimed.
+
 See [DATA_COVERAGE.md](DATA_COVERAGE.md), [KNOWN_BLOCKERS.md](KNOWN_BLOCKERS.md), [SOURCE_REGISTRY.md](SOURCE_REGISTRY.md), and [TEST_RESULTS.md](TEST_RESULTS.md). This document describes verified work, not completion of the full directive.
