@@ -24,4 +24,6 @@ Five-pool coverage milestone pushed and verified at `3e31ceafcd334fcd91fac51fd6a
 
 Transaction-review milestone pushed and verified at `0035e64be4f09677b422df85d1e29a7d28618cf5`. The next milestone adds five audience-specific editable PowerPoint decks as one ZIP from a reviewed decision title, evidence and source notes. The decks are internal drafts with explicit missing financial and approval states. No NBA transaction, contract, metric or film value is inferred.
 
+Five-decision-output milestone pushed and verified at `79b70a0a051698c3bb96edf499694d5a64b2c584`. The next milestone adds a rights-gated, transactional non-NBA identity importer for NCAA D1, high school top 100, EuroLeague and G League; Settings coverage reads admitted database rows. No outside identities have been admitted without a licensed source file.
+
 See [DATA_COVERAGE.md](DATA_COVERAGE.md), [KNOWN_BLOCKERS.md](KNOWN_BLOCKERS.md), [SOURCE_REGISTRY.md](SOURCE_REGISTRY.md), and [TEST_RESULTS.md](TEST_RESULTS.md). This document describes verified work, not completion of the full directive.

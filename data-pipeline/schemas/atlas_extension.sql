@@ -74,3 +74,12 @@ CREATE TABLE IF NOT EXISTS atlas_possessions (
   PRIMARY KEY(game_id,possession_id,team_abbr,source_url)
 );
 CREATE INDEX IF NOT EXISTS idx_atlas_possessions_team ON atlas_possessions(team_abbr,season,game_id);
+CREATE TABLE IF NOT EXISTS atlas_external_players (
+ pool TEXT NOT NULL, source_provider TEXT NOT NULL, provider_player_id TEXT NOT NULL,
+ player_name TEXT NOT NULL, team_id TEXT NOT NULL, team_name TEXT NOT NULL,
+ season TEXT NOT NULL, roster_status TEXT NOT NULL, rank_number INTEGER,
+ source_url TEXT NOT NULL, verified_at TEXT NOT NULL, rights_basis TEXT NOT NULL,
+ source_sha256 TEXT NOT NULL,
+ PRIMARY KEY(pool,source_provider,provider_player_id,season)
+);
+CREATE INDEX IF NOT EXISTS idx_atlas_external_pool ON atlas_external_players(pool,season,team_id);

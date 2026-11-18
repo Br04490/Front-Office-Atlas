@@ -34,4 +34,10 @@
 - HTTP smoke test on port 3002: `POST /api/decision-packages` returned 200, `application/zip`, 41,925 bytes for an explicitly labeled fixture. The home page also returned 200.
 - `node --check` passed for the server, new service, and changed frontend modules; `git diff --check` reported no whitespace errors.
 
+## Four-pool identity importer milestone
+
+- `pnpm test`: 101 passed, 0 failed. Python data-pipeline tests: 8 passed.
+- Focused tests admit one fictional fixture only in an in-memory database, verify idempotent coverage, and reject missing rights, invalid top-100 rank, duplicate identity and changed source hash.
+- JavaScript syntax checks and `git diff --check` passed. No external player data was written to the project warehouse.
+
 The user's existing Preview on port 3000 served the previous page version during this audit. Port 3001 was launched from this branch for the verified local UI check.
