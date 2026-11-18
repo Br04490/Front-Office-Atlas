@@ -1,0 +1,12 @@
+.cap-sheet-studio{margin-bottom:20px;border:1px solid #e1f0ff;box-shadow:0 12px 30px #4a8dbb20}
+.cap-sheet-head{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.cap-sheet-head h3{font:800 24px Outfit,Manrope,sans-serif;color:#102b4b;margin:3px 0}
+.cap-sheet-head p:not(.eyebrow){font-size:12px;color:#51718e;margin:0 0 12px}
+.cap-sheet-controls{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin:12px 0}
+.cap-sheet-controls label{font-size:10px;font-weight:800;color:#57748f}
+.cap-sheet-controls select{display:block;width:100%;margin-top:4px;padding:9px;border:1px solid #c4dff3;border-radius:9px;background:#f6fbff;color:#173957}
+.cap-sheet-status{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:#e9f5ffab;border:1px solid #d5eafa;border-radius:12px;padding:11px;margin-bottom:12px;font-size:11px;color:#234863}
+.cap-sheet-status strong{font-variant-numeric:tabular-nums}
+.cap-sheet-studio .contract-table td,.cap-sheet-studio .contract-table th{font-size:11px;font-variant-numeric:tabular-nums}
+.cap-sheet-studio .contract-table td:first-child{font-weight:800;color:#143452}
+@media(max-width:760px){.cap-sheet-controls{grid-template-columns:1fr}.cap-sheet-head{align-items:flex-start}.cap-sheet-status{display:grid}}

@@ -2,6 +2,7 @@ import {renderTeamTrend,renderTeamGames} from './nba360-team-views.js';
 import {SalaryCapTower} from './components/salary-cap-tower.js';
 import {capDashboardState} from './components/salary-cap-dashboard.js';
 import {capExplorerState,explorerAction} from './cap-explorer.js';
+import {capSheetState,buildCapSheet,capSheetCsv} from './cap-sheet-studio.js';
 import {seasons as financialSeasons} from './financial-model.js';
 import {financialSources} from './data/financial-sources.js';
 import {contractCenter,contractCenterState} from './components/contract-center.js';
@@ -88,6 +89,8 @@ document.addEventListener('input',e=>{if(e.target.dataset.contractFilter==='quer
 document.addEventListener('error',e=>{if(e.target.matches?.('.roster-photo img,.search-photo img'))e.target.parentElement.classList.add('failed')},true);
 document.addEventListener('click',e=>{const face=e.target.closest('[data-cap-player]'),button=e.target.closest('[data-cap-action]');if(!face&&!button)return;e.stopPropagation();const roster=capDashboardState.rosterMode==='original'?players.filter(p=>p.team===state.team):proposedRoster(players,state.team),action=face?'select':button.dataset.capAction,id=face?.dataset.capPlayer||button?.dataset.capPlayerId;if(['trade','waive'].includes(action)){const player=players.find(p=>p.nbaPlayerId===Number(id));if(player){capExplorerState.selectedPlayer=null;scenarioState.selectedPlayer=player.nbaPlayerId;startPlayerDraft(action,player,state.team);render()}return}if(action==='contract'){capExplorerState.selectedPlayer=null;openPlayerProfile(id);selectProfileTab('contract');render();return}if(explorerAction(action,roster,state.team,scenarioState.season,financialSources,id)){render()}},true);
 document.addEventListener('change',e=>{if(e.target.matches('[data-cap-mode]')){capExplorerState.mode=e.target.value==='official'?'official':'explorer';capExplorerState.selectedPlayer=null;render()}},true);
+document.addEventListener('change',e=>{const field=e.target.dataset.capSheetField;if(!field)return;capSheetState[field]=e.target.value;render()},true);
+document.addEventListener('click',e=>{if(!e.target.closest('[data-cap-sheet-export="csv"]'))return;e.stopPropagation();const sheet=buildCapSheet({players,team:capSheetState.team,season:capSheetState.season,type:capSheetState.type});const url=URL.createObjectURL(new Blob([capSheetCsv(sheet)],{type:'text/csv;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download=`atlas-${sheet.team}-${sheet.season}-${sheet.type}.csv`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000)},true);
 document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target?.dataset?.teamGame){e.preventDefault();state.teamGameDate=e.target.dataset.teamGame;state.tab='games';render();return}if((e.key==='Enter'||e.key===' ')&&e.target?.dataset?.shotId){e.preventDefault();profileState.selectedShot=e.target.dataset.shotId;render();return}if(e.key==='Escape'&&document.querySelector('.tower-action-menu')){e.preventDefault();playerAction('close')}});
 window.addEventListener('resize',placePlayerPanel);
 window.addEventListener('focus',revalidateNbaWarehouse);

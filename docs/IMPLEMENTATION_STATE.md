@@ -14,4 +14,6 @@ Repository: `Br04490/Front-Office-Atlas`. Active feature branch: `codex/atlas-co
 
 The first resume milestone is the repository audit and preservation of the unfinished Cap Tower changes. Tests and local port 3001 preview checks passed for the explorer's unpriced state. A production build or TypeScript check is not available: `package.json` has `start` and `test` only and the application is JavaScript.
 
+First resumed milestone pushed and verified at `809c249f8c78b0016add3bb898abf1ccb4fbf81f` on the active feature branch. The next milestone adds the Cap Sheet Studio to the existing Automated Sheets workspace. It offers 15 worksheet views through the shared financial model and scenario state, with source-backed league thresholds, explicit missing charges, original/scenario columns and CSV export. It does not claim complete payroll or legally valid transactions while contract coverage is zero. XLSX formula and PDF exports remain pending.
+
 See [DATA_COVERAGE.md](DATA_COVERAGE.md), [KNOWN_BLOCKERS.md](KNOWN_BLOCKERS.md), [SOURCE_REGISTRY.md](SOURCE_REGISTRY.md), and [TEST_RESULTS.md](TEST_RESULTS.md). This document describes verified work, not completion of the full directive.
