@@ -1,10 +1,10 @@
 import {towerGeometry} from './financial-model.js';
 
-export const capExplorerState={mode:'explorer',team:null,season:null,excluded:[],undo:[],selectedPlayer:null,compare:false,lastChange:null};
+export const capExplorerState={mode:'explorer',team:null,season:null,excluded:[],undo:[],selectedPlayer:null,compare:false,lastChange:null,demo:false};
 const validAmount=value=>Number.isSafeInteger(value)&&value>=0;
 export function explorerSelection(players,team,season,sources,state=capExplorerState){
  const selected=state.team===team&&state.season===season?new Set(state.excluded):new Set();
- const records=players.map(player=>{const record=sources.contracts?.[player.nbaPlayerId]?.[season];const amount=record?.team===team&&record.source&&record.verifiedAt&&validAmount(record.cap)?record.cap:null;return {player,record,amount,excluded:selected.has(player.nbaPlayerId)} });
+ const records=players.map(player=>{const record=sources.contracts?.[player.nbaPlayerId]?.[season];const verified=record?.team===team&&record.source&&record.verifiedAt&&validAmount(record.cap);const amount=verified?record.cap:(state.demo?1_000_000:null);return {player,record,amount,excluded:selected.has(player.nbaPlayerId),demo:!verified&&state.demo} });
  const included=records.filter(row=>!row.excluded),known=included.filter(row=>validAmount(row.amount));
  const unknown=included.filter(row=>!validAmount(row.amount));
  const baselineComplete=records.every(row=>validAmount(row.amount));
@@ -24,6 +24,7 @@ export function explorerAction(action,players,team,season,sources,id,state=capEx
  if(action==='select'){state.selectedPlayer=Number(id);return true}
  if(action==='close'){state.selectedPlayer=null;return true}
  if(action==='compare'){state.compare=!state.compare;return true}
+ if(action==='demo-toggle'){state.demo=!state.demo;state.excluded=[];state.undo=[];state.lastChange=null;return true}
  if(action==='undo'){if(!state.undo.length)return false;state.excluded=state.undo.pop();state.lastChange=null;return true}
  if(action==='restore-all'){if(!state.excluded.length)return false;state.undo.push([...state.excluded]);state.excluded=[];state.lastChange={kind:'restore',amount:before.removed};return true}
  const player=players.find(row=>row.nbaPlayerId===Number(id));if(!player)return false;

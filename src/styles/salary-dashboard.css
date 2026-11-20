@@ -37,3 +37,4 @@
 /* V5 additive scenario history overlay */
 .cap-payroll-ghost{position:absolute;left:0;right:0;border-top:2px dashed #ffffffb8;z-index:2;pointer-events:none;filter:drop-shadow(0 0 5px #ffffff90)}
 .cap-payroll-ghost span{position:absolute;left:3px;bottom:4px;background:#ffffffb8;color:#31546d;padding:3px 5px;border-radius:5px;font-size:8px;font-weight:800}
+.cap-explorer-strip{position:relative}.cap-explorer-strip button{cursor:pointer}.cap-explorer-strip[dragover]{outline:2px solid #2388d3}.cap-portrait{cursor:grab}.cap-portrait:active{cursor:grabbing}.cap-portrait em{font-style:normal;font-size:7px;color:#5c7890}
