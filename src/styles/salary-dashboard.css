@@ -34,3 +34,6 @@
 .cap-threshold-line small{display:block;font-size:10px;color:#163652;font-weight:900;font-variant-numeric:tabular-nums}
 .cap-threshold-firstApron span{left:155px}
 @media(max-width:570px){.cap-threshold-firstApron span{left:106px}.cap-threshold-line small{font-size:8px}}
+/* V5 additive scenario history overlay */
+.cap-payroll-ghost{position:absolute;left:0;right:0;border-top:2px dashed #ffffffb8;z-index:2;pointer-events:none;filter:drop-shadow(0 0 5px #ffffff90)}
+.cap-payroll-ghost span{position:absolute;left:3px;bottom:4px;background:#ffffffb8;color:#31546d;padding:3px 5px;border-radius:5px;font-size:8px;font-weight:800}
