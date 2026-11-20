@@ -1,5 +1,7 @@
 # Front Office Atlas Crystal
 
+**Review the current Crystal feature branch:** [ChatGPT review handoff](docs/CHATGPT_REVIEW_HANDOFF.md) and [demo readiness report](docs/DEMO_READINESS_2026-11-19.md). This branch has an existing GitHub remote. The local warehouse and private source imports are intentionally excluded from GitHub, so a fresh checkout does not contain the populated local NCAA, grassroots or overseas data. The notes below describe the original preview and some historical stages; use the linked reports for current coverage.
+
 A local, standalone design preview for an NBA front-office intelligence portal. It uses buildless HTML, CSS, and JavaScript. Live league feeds are **not** connected; empty statistics remain labeled placeholders. The NBA player roster and photo data is a verified snapshot dated November 15, 2026.
 
 ## Preview
@@ -32,7 +34,7 @@ Franchise selection now opens Season Trends with the compact Salary Cap Tower. R
 
 The player images are for the local preview. NBA terms of use apply; public CDN access does not establish publication rights. Clear rights before public deployment. Re-run verification before treating this snapshot as current on a later date.
 
-No GitHub remote or deployment is configured.
+The existing GitHub remote is `Br04490/Front-Office-Atlas`. No public live deployment of the local warehouse is configured.
 
 ## Player intelligence import
 
