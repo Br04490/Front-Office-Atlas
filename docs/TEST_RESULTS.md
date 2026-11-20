@@ -74,3 +74,10 @@
 - Official FAQ and NBA terms were reviewed for download and comprehensive-database restrictions; see `ACCESS_NEEDED.md`.
 
 The user's existing Preview on port 3000 served the previous page version during this audit. Port 3001 was launched from this branch for the verified local UI check.
+# 2026-11-19 Prompt 1–3 local integration
+
+- `node --test tests/*.test.mjs`: 114 passed, 0 failed. This includes bounded foundation queries, Team Health ranking direction and stable Team DNA reference population.
+- `data-pipeline/.venv/Scripts/python.exe -m unittest discover -s data-pipeline/tests -q`: 9 passed, 0 failed.
+- `node --check` on new browser/server modules and `git diff --check`: passed.
+- Browser preview at `http://localhost:3004/`: approved Crystal home and navigation rendered; NCAA directory and Duke player navigation verified; Orlando Team Fit ranking and evidence rendered; an Orlando model persisted across reload. API queries confirmed 150 grassroots, 50 overseas, and Caleb Foster on Duke. After a source-unit audit, the restarted preview ranked 258 eligible NBA players with a minimum of 20 recorded three-point attempts; the top result showed 48 attempts with source, date, formula and weights.
+- No production build command is defined in `package.json`.

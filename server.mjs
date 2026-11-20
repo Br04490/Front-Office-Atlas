@@ -8,6 +8,8 @@ import {decisionOutputApi} from './services/decision-output.mjs';
 import {phase1Api} from './services/phase1.mjs';
 import {startNbaScoreRefresh} from './services/nba360-refresh.mjs';
 import {bootstrapVerifiedRosters} from './data-pipeline/src/bootstrap-verified-rosters.mjs';
+import {foundationApi} from './services/foundation.mjs';
+import {teamDnaApi} from './services/team-dna.mjs';
 const root=process.cwd();
 const port=Number(process.env.ATLAS_PORT)||3000;
 bootstrapVerifiedRosters();
@@ -16,6 +18,8 @@ http.createServer((req,res)=>{
  const url=new URL(req.url,'http://localhost:3000');
  if(url.pathname.startsWith('/api/nba360/')){nba360Api(req,res,url);return}
  if(url.pathname.startsWith('/api/phase1/')){phase1Api(req,res,url);return}
+ if(url.pathname.startsWith('/api/foundation/')){foundationApi(req,res,url);return}
+ if(url.pathname.startsWith('/api/team-dna/')){teamDnaApi(req,res,url);return}
  if(url.pathname==='/api/decision-packages'){if(req.headers.origin&&!['http://localhost:3000','http://127.0.0.1:3000',`http://localhost:${port}`,`http://127.0.0.1:${port}`].includes(req.headers.origin)){res.writeHead(403).end('Origin denied');return}decisionOutputApi(req,res);return}
  if(url.pathname==='/api/sheets/extract'){if(req.headers.origin&&!['http://localhost:3000','http://127.0.0.1:3000'].includes(req.headers.origin)){res.writeHead(403).end('Origin denied');return}sheetExtractApi(req,res);return}
  if(url.pathname==='/api/presentations'){if(req.headers.origin&&!['http://localhost:3000','http://127.0.0.1:3000'].includes(req.headers.origin)){res.writeHead(403).end('Origin denied');return}presentationApi(req,res);return}

@@ -137,3 +137,57 @@ CREATE TABLE IF NOT EXISTS atlas_external_identity_links (
  review_status TEXT NOT NULL CHECK(review_status IN ('proposed','verified','rejected')),
  PRIMARY KEY(player_key,linked_player_key)
 );
+CREATE TABLE IF NOT EXISTS atlas_foundation_people (
+ atlas_person_id TEXT PRIMARY KEY, display_name TEXT NOT NULL,
+ created_at TEXT NOT NULL, identity_basis TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS atlas_foundation_source_ids (
+ atlas_person_id TEXT NOT NULL, provider TEXT NOT NULL, provider_player_id TEXT NOT NULL,
+ link_status TEXT NOT NULL, season TEXT NOT NULL, source_url TEXT NOT NULL,
+ PRIMARY KEY(provider,provider_player_id,season)
+);
+CREATE INDEX IF NOT EXISTS idx_atlas_foundation_person_source ON atlas_foundation_source_ids(atlas_person_id,provider,season);
+CREATE TABLE IF NOT EXISTS atlas_foundation_teams (
+ league TEXT NOT NULL, season TEXT NOT NULL, provider TEXT NOT NULL,
+ provider_team_id TEXT NOT NULL, display_name TEXT NOT NULL,
+ conference TEXT, source_url TEXT NOT NULL, source_sha256 TEXT NOT NULL,
+ updated_at TEXT NOT NULL, PRIMARY KEY(league,season,provider,provider_team_id)
+);
+CREATE TABLE IF NOT EXISTS atlas_foundation_memberships (
+ atlas_person_id TEXT NOT NULL, league TEXT NOT NULL, season TEXT NOT NULL,
+ provider TEXT NOT NULL, provider_team_id TEXT NOT NULL, jersey TEXT,
+ position TEXT, roster_status TEXT NOT NULL, source_url TEXT NOT NULL,
+ source_sha256 TEXT NOT NULL, updated_at TEXT NOT NULL,
+ PRIMARY KEY(atlas_person_id,league,season,provider)
+);
+CREATE INDEX IF NOT EXISTS idx_atlas_foundation_roster ON atlas_foundation_memberships(league,season,provider_team_id);
+CREATE TABLE IF NOT EXISTS atlas_foundation_metrics (
+ atlas_person_id TEXT NOT NULL, league TEXT NOT NULL, season TEXT NOT NULL,
+ provider TEXT NOT NULL, provider_team_id TEXT NOT NULL, metric_code TEXT NOT NULL,
+ metric_value REAL NOT NULL, unit TEXT NOT NULL, metric_definition TEXT NOT NULL,
+ calculation_method TEXT NOT NULL, source_url TEXT NOT NULL,
+ source_sha256 TEXT NOT NULL, updated_at TEXT NOT NULL,
+ PRIMARY KEY(atlas_person_id,league,season,provider,metric_code)
+);
+CREATE INDEX IF NOT EXISTS idx_atlas_foundation_metric_query ON atlas_foundation_metrics(league,season,metric_code,metric_value);
+CREATE TABLE IF NOT EXISTS atlas_foundation_sources (
+ source_key TEXT PRIMARY KEY, source_url TEXT NOT NULL, source_sha256 TEXT NOT NULL,
+ season TEXT NOT NULL, fetched_at TEXT NOT NULL, rights_status TEXT NOT NULL,
+ row_count INTEGER NOT NULL
+);
+CREATE TABLE IF NOT EXISTS atlas_foundation_import_runs (
+ run_id TEXT PRIMARY KEY, started_at TEXT NOT NULL, finished_at TEXT NOT NULL,
+ status TEXT NOT NULL, team_count INTEGER NOT NULL, player_count INTEGER NOT NULL,
+ metric_count INTEGER NOT NULL, details TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS atlas_player_photos (
+ atlas_person_id TEXT NOT NULL, league TEXT NOT NULL, season TEXT NOT NULL,
+ provider_player_id TEXT NOT NULL, player_name TEXT NOT NULL, team_id TEXT NOT NULL,
+ photo_url TEXT, profile_url TEXT, image_status TEXT NOT NULL,
+ identity_status TEXT NOT NULL, usage_permission_status TEXT NOT NULL,
+ last_checked TEXT NOT NULL, http_status INTEGER, content_type TEXT,
+ width INTEGER, height INTEGER, file_size INTEGER, image_sha256 TEXT,
+ source_provider TEXT NOT NULL, note TEXT,
+ PRIMARY KEY(atlas_person_id,league,season)
+);
+CREATE INDEX IF NOT EXISTS idx_atlas_photos_status ON atlas_player_photos(league,season,image_status,usage_permission_status);

@@ -15,6 +15,25 @@ export function renderTeamTrend(snapshot,team,windowSize){
   return {kpis:`${cell('Offensive Rating',fmt(standing.offRatingEstimated),'Estimated · 2026–27')}${cell('Defensive Rating',fmt(standing.defRatingEstimated),'Estimated · 2026–27')}${cell('Net Rating',fmt(standing.netRatingEstimated),'Estimated · 2026–27')}${cell('W–L Record',`${standing.wins}–${standing.losses}`,`${standing.games} games · 2026–27`)}`,
     chart:`<div class="chart"><svg viewBox="0 0 600 170" preserveAspectRatio="none" role="img" aria-label="Point margin by game, last ${games.length} games"><path d="M0 85 H600" fill="none" stroke="#92a7bb" stroke-width="1" stroke-dasharray="4 6"/><polyline points="${points}" fill="none" stroke="#68baf2" stroke-width="3" vector-effect="non-scaling-stroke"/>${markers.map(({x,y,game})=>`<circle role="button" tabindex="0" data-team-game="${game.date}" aria-label="Open ${game.date} game versus ${game.opponent}" cx="${x}" cy="${y}" r="7" fill="${game.pointDiff>=0?'#66d8b3':'#f28d9b'}"><title>${game.date} vs ${game.opponent}: ${game.pointDiff>0?'+':''}${game.pointDiff}</title></circle>`).join('')}</svg></div><p class="muted">Last ${games.length} games · average margin ${rollingMargin>=0?'+':''}${fmt(rollingMargin)} points · zero line marks even score. Select a game marker for its source record.</p><p class="tiny-note">BoxScore Lab snapshot, verified ${standing.verifiedAt}. Ratings are source estimates. <a href="${standing.source}" target="_blank" rel="noopener noreferrer">Standings source</a> · <a href="${games[0]?.source||standing.source}" target="_blank" rel="noopener noreferrer">Game source</a></p>`};
 }
+export function teamHealthData(snapshot,team){
+ const standings=Object.values(snapshot?.teamSeasons||{}).filter(row=>row.season==='2026-27'&&row.games>0);
+ const selected=standings.find(row=>row.team===team);
+ if(!selected||standings.length!==30)return null;
+ const definitions=[['Points per game','pointsPerGame',false],['Opponent points per game','opponentPointsPerGame',true]];
+ const metrics=definitions.map(([label,key,lowerIsBetter])=>{
+  const ordered=standings.toSorted((a,b)=>lowerIsBetter?a[key]-b[key]:b[key]-a[key]);
+  const rank=ordered.findIndex(row=>row.team===team)+1;
+  return {label,key,value:selected[key],rank,percentile:Math.round(100*(standings.length-rank)/(standings.length-1)),lowerIsBetter,source:selected.source,verifiedAt:selected.verifiedAt,sample:selected.games};
+ });
+ const games=snapshot?.teamGames?.[team]||[];
+ const last8=games.length>=8?{games:8,averageMargin:games.slice(-8).reduce((sum,row)=>sum+row.pointDiff,0)/8,source:games.at(-1).source,verifiedAt:games.at(-1).verifiedAt}:null;
+ return {team,season:'2026-27',metrics,last8,missing:['Shooting efficiency','Three-point performance','Defensive rebounding','Offensive rebounding','Turnovers','Free throws','Possession-backed offensive efficiency','Possession-backed defensive efficiency','Verified pace','Shot quality']};
+}
+export function teamHealthPanel(snapshot,team){
+ const data=teamHealthData(snapshot,team);
+ if(!data)return `<section class="module-panel glass"><h3>Team Health</h3><p>Complete 30-team season comparison is unavailable.</p></section>`;
+ return `<section class="module-panel glass" aria-label="Team Health"><h3>Team Health · ${team} · ${data.season}</h3><p>Ranks compare all 30 NBA teams in the same dated source snapshot. Lower opponent scoring ranks higher.</p><div class="data-health-list">${data.metrics.map(item=>`<div><b>${item.label}</b><span>${item.value.toFixed(1)} · #${item.rank} of 30 · ${item.percentile}th percentile</span><small>${item.sample} games · checked ${item.verifiedAt} · <a href="${item.source}" target="_blank" rel="noopener noreferrer">Source ↗</a></small></div>`).join('')}</div>${data.last8?`<p>Last 8 games: ${data.last8.averageMargin>=0?'+':''}${data.last8.averageMargin.toFixed(1)} average point margin · <a href="${data.last8.source}" target="_blank" rel="noopener noreferrer">game source ↗</a></p>`:'<p>Last-8 trend pending enough sourced games.</p>'}<p>Pending inputs: ${data.missing.join(', ')}. Estimated ratings elsewhere on this page are labeled as estimates.</p></section>`;
+}
 export function renderTeamGames(snapshot,team,selectedDate=null){
   const standing=snapshot?.teamSeasons?.[team];
   const games=snapshot?.teamGames?.[team]||[];
