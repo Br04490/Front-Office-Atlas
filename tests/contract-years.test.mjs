@@ -8,7 +8,7 @@ import {importContractRows} from '../data-pipeline/src/contract-import.mjs';
 import {contractCoverage} from '../data-pipeline/src/contract-coverage.mjs';
 const roster=[{nbaPlayerId:123,team:'HOU'}];
 const rights={authorizedForAtlas:true,rightsBasis:'Explicit fixture permission',roster};
-const contract={nba_player_id:123,team:'HOU',season:'2026-27',contract_type:'standard',base_salary_usd:'1000000',cap_hit_usd:'900000',cash_paid_usd:'1000000',guaranteed_usd:'500000',no_trade:'0',source_url:'https://example.org/contract',verified_at:'2026-11-16'};
+const contract={nba_player_id:123,team:'HOU',season:'2026-27',contract_type:'standard',expiration_year:'2028',base_salary_usd:'1000000',cap_hit_usd:'900000',cash_paid_usd:'1000000',guaranteed_usd:'500000',no_trade:'0',source_url:'https://example.org/contract',verified_at:'2026-11-16'};
 test('authorized multi-year contract rows distinguish cap, cash, salary and guarantees',()=>{
   const dir=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-contracts-'));const db=openWarehouse(path.join(dir,'data.sqlite3'));
   try{
@@ -18,6 +18,7 @@ test('authorized multi-year contract rows distinguish cap, cash, salary and guar
     importContractRows(db,[{...contract,season:'2027-28',cap_hit_usd:'1100000'}],rights);
     assert.equal(coverage(db).contractYears,2);
     const current=readSnapshot(db).players.contracts[123]['2026-27'];
+    assert.equal(current.expirationYear,2028);
     assert.equal(current.cap,900000);
     assert.equal(current.cashPaid,1000000);
     assert.equal(current.guaranteed,500000);

@@ -15,7 +15,10 @@ test('possession warehouse derives source-linked on/off only after counted on an
     importPossessions(db,{rights,possessions},roster);
     importPossessions(db,{rights,possessions},roster);
     assert.equal(coverage(db).possessions,80);
-    const record=readSnapshot(db).players.players[1].seasons['2026-27'];
+    const snapshot=readSnapshot(db);
+    assert.equal(snapshot.teams.lineups.length,2);
+    assert.equal(snapshot.teams.lineups[0].def,20);
+    const record=snapshot.players.players[1].seasons['2026-27'];
     assert.equal(record.onOff[0].on.offensivePossessions,20);
     assert.equal(record.onOff[0].off.offensivePossessions,20);
     assert.match(onOffWorkspace(record),/Raw net difference/);

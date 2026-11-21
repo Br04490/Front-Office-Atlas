@@ -16,6 +16,14 @@ export function importContractRows(db,records,{authorizedForAtlas,rightsBasis,ro
       if(!rosterById.has(id)||!teamIds.has(row.team)||!/^20\d{2}-\d{2}$/.test(row.season||'')||!/^https:\/\//.test(row.source_url||'')||!/^\d{4}-\d{2}-\d{2}$/.test(row.verified_at||'')||!row.contract_type||seen.has(key))throw Error(`Invalid contract identity ${key}`);
       if(row.season==='2026-27'&&rosterById.get(id).team!==row.team)throw Error(`Current roster team mismatch for NBA ${id}: ${rosterById.get(id).team} versus ${row.team}`);
       seen.add(key);
+      // Optional licensed term fields can accompany the existing contract CSV.
+      if(row.expiration_year || row.extension_eligible!=null && row.extension_eligible!==''){
+        const year=row.expiration_year?Number(row.expiration_year):null;
+        if(year!==null&&(!Number.isInteger(year)||year<parseInt(row.season)||year>2100))throw Error('Invalid expiration year');
+        const eligibility=row.extension_eligible==null||row.extension_eligible===''?null:Number(row.extension_eligible);
+        if(eligibility!==null&&(![0,1].includes(eligibility)||!row.cba_citation?.trim()))throw Error('Extension status requires cited eligibility evidence');
+        db.prepare('INSERT OR REPLACE INTO atlas_contract_term_evidence VALUES (?,?,?,?,?,?)').run(id,row.season,row.source_url,year,eligibility,row.cba_citation||null);
+      }
       const base=amount(row.base_salary_usd),cap=amount(row.cap_hit_usd),cash=amount(row.cash_paid_usd),guaranteed=amount(row.guaranteed_usd);
       if(guaranteed!=null&&base!=null&&guaranteed>base)throw Error(`Guarantee exceeds base salary for ${key}`);
       for(const prior of existingCap.all(id,row.season,row.source_url))throw Error(`Conflicting cap hit or duplicate contract source ${prior.source_url} for ${key}; reconcile before import`);

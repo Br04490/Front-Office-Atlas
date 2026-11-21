@@ -32,6 +32,11 @@ export function foundationApi(req,res,url,filename=defaultDatabase){
    const rows=db.prepare(`SELECT m.atlas_person_id,p.display_name,m.provider_team_id,t.display_name AS team_name,t.conference,m.jersey,m.position,m.roster_status,m.source_url,m.updated_at FROM atlas_foundation_memberships m JOIN atlas_foundation_people p USING(atlas_person_id) JOIN atlas_foundation_teams t ON t.league=m.league AND t.season=m.season AND t.provider=m.provider AND t.provider_team_id=m.provider_team_id WHERE ${where} ORDER BY p.display_name,m.atlas_person_id LIMIT ? OFFSET ?`).all(...args,limit,offset);
    return send(res,200,{total,limit,offset,rows,sourceStatus:league==='NCAA_D1'?'provider_reported; official school roster validation pending':'user_supplied; source identity and current status unverified'});
   }
+  if(url.pathname==='/api/foundation/sandbox-values'){
+   const codes=['averages.avgSteals','averages.avgBlocks','averages.avgTurnovers','averages.fieldGoalPct','averages.freeThrowPct','averages.threePointFieldGoalPct','averages.avgPoints','averages.avgAssists','averages.avgRebounds','averages.avgMinutes'];
+   const rows=db.prepare(`SELECT atlas_person_id,metric_code,metric_value,unit,source_url,updated_at FROM atlas_foundation_metrics WHERE season='2026-27' AND league=? AND metric_code IN (${codes.map(()=>'?').join(',')})`).all(league,...codes);
+   return send(res,200,{season:'2026-27',rows});
+  }
   if(url.pathname==='/api/foundation/metrics'){
    const person=url.searchParams.get('person');if(!person)return send(res,400,{error:'person is required'});
    const rows=db.prepare("SELECT metric_code,metric_value,unit,metric_definition,calculation_method,source_url,updated_at FROM atlas_foundation_metrics WHERE atlas_person_id=? AND league=? AND season='2026-27' ORDER BY metric_code").all(person,league);

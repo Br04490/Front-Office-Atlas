@@ -191,3 +191,8 @@ CREATE TABLE IF NOT EXISTS atlas_player_photos (
  PRIMARY KEY(atlas_person_id,league,season)
 );
 CREATE INDEX IF NOT EXISTS idx_atlas_photos_status ON atlas_player_photos(league,season,image_status,usage_permission_status);
+CREATE TABLE IF NOT EXISTS atlas_contract_term_evidence (
+  nba_player_id INTEGER NOT NULL, season TEXT NOT NULL, source_url TEXT NOT NULL,
+  expiration_year INTEGER, extension_eligible INTEGER, cba_citation TEXT,
+  PRIMARY KEY(nba_player_id, season, source_url)
+);

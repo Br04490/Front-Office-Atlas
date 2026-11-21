@@ -65,11 +65,24 @@ export function readSnapshot(db){
     if(years[row.season]&&years[row.season].source!==row.source_url)throw Error(`Conflicting contract sources for NBA ${row.nba_player_id} ${row.season}`);
     years[row.season]={cap:row.cap_hit_usd,tax:null,cash:row.cash_paid_usd,aav:null,currency:'USD',team:row.team_abbr,baseSalary:row.base_salary_usd,cashPaid:row.cash_paid_usd,guaranteed:row.guaranteed_usd,likelyIncentives:row.likely_incentives_usd,unlikelyIncentives:row.unlikely_incentives_usd,optionType:row.option_type,optionDeadline:row.option_deadline,signedDate:row.signed_date,noTrade:row.no_trade===null?null:!!row.no_trade,birdRights:row.bird_rights,tradeRestriction:row.trade_restriction,capHold:row.cap_hold_usd,deadMoney:row.dead_money_usd,contractType:row.contract_type,source:row.source_url,verifiedAt:row.verified_at,rightsBasis:row.rights_basis};
   }
+  if(db.prepare("SELECT 1 FROM sqlite_master WHERE name='atlas_contract_term_evidence'").get()){
+    for(const term of db.prepare('SELECT * FROM atlas_contract_term_evidence').all()){
+      const record=contracts[term.nba_player_id]?.[term.season];
+      if(record?.source===term.source_url)Object.assign(record,{expirationYear:term.expiration_year,extensionEligible:term.extension_eligible==null?null:!!term.extension_eligible,cbaCitation:term.cba_citation});
+    }
+  }
   const shotEvents=db.prepare('SELECT * FROM atlas_shot_events ORDER BY game_date,game_event_id').all().map(row=>({playerId:row.nba_player_id,season:row.season,gameId:row.game_id,gameEventId:row.game_event_id,date:row.game_date,locX:row.loc_x,locY:row.loc_y,made:!!row.made,shotValue:row.shot_value,shotDistance:row.shot_distance,shotType:row.shot_type,period:row.period,opponent:row.opponent_abbr,source:row.source_url,verifiedAt:row.verified_at}));
+  const lineups=[];
   const possessionGroups=Map.groupBy(db.prepare('SELECT * FROM atlas_possessions').all(),row=>`${row.team_abbr}|${row.season}|${row.source_url}`);
   for(const [key,rows] of possessionGroups){
     const [team,season,source]=key.split('|');
     const possessions=rows.map(row=>({gameId:row.game_id,possessionId:row.possession_id,team,season,side:row.side,points:row.points,onCourtPlayerIds:JSON.parse(row.on_court_player_ids),source}));
+    for(const [members,sample] of Map.groupBy(rows,row=>JSON.parse(row.on_court_player_ids).sort((a,b)=>a-b).join(',')).entries()){
+      const off=sample.filter(row=>row.side==='offense'),def=sample.filter(row=>row.side==='defense');
+      lineups.push({team,season,ids:members.split(',').map(Number),off:off.length,def:def.length,
+        scored:off.reduce((n,r)=>n+r.points,0),allowed:def.reduce((n,r)=>n+r.points,0),source,
+        verifiedAt:sample.reduce((d,r)=>d>r.verified_at?d:r.verified_at,'')});
+    }
     const ids=new Set(possessions.flatMap(row=>row.onCourtPlayerIds));
     for(const id of ids){
       const result=calculateOnOff(possessions,{nbaPlayerId:id,team,season});
@@ -82,5 +95,5 @@ export function readSnapshot(db){
   for(const row of db.prepare('SELECT * FROM atlas_team_seasons WHERE season=?').all('2026-27'))teamSeasons[row.team_abbr]={season:row.season,team:row.team_abbr,wins:row.wins,losses:row.losses,games:row.games,pointsPerGame:row.points_per_game,opponentPointsPerGame:row.opponent_points_per_game,offRatingEstimated:row.off_rating_est,defRatingEstimated:row.def_rating_est,netRatingEstimated:row.net_rating_est,paceEstimated:row.pace_est,source:row.source_url,verifiedAt:row.verified_at};
   const teamGames={};
   for(const row of db.prepare('SELECT * FROM atlas_team_games WHERE season=? ORDER BY game_date').all('2026-27'))(teamGames[row.team_abbr]??=[]).push({date:row.game_date,opponent:row.opponent_abbr,home:!!row.home,result:row.result,points:row.points,opponentPoints:row.opponent_points,pointDiff:row.point_diff,rebounds:row.rebounds,assists:row.assists,source:row.source_url,verifiedAt:row.verified_at});
-  return {players:{schemaVersion:1,rights:{authorizedForAtlas:true,basis:'Local warehouse read',sourceUrl:'https://boxscorelab.com/downloads/'},players,shotEvents,contracts,metricDefinitions:{},leagueZoneBaselines:{}},teams:{schemaVersion:1,season:'2026-27',teamSeasons,teamGames}};
+  return {players:{schemaVersion:1,rights:{authorizedForAtlas:true,basis:'Local warehouse read',sourceUrl:'https://boxscorelab.com/downloads/'},players,shotEvents,contracts,metricDefinitions:{},leagueZoneBaselines:{}},teams:{lineups,schemaVersion:1,season:'2026-27',teamSeasons,teamGames}};
 }
