@@ -32,6 +32,25 @@ In strict adherence to NBA front-office protocol:
 - **No Fabricated Player Contracts or Medical Diagnoses**: Player data and rosters display authentic states (`VERIFIED_CURRENT`, `REPORTED_CURRENT`, `CALCULATED`, `SCENARIO`, `INCOMPLETE`, or `UNAVAILABLE`).
 - **Context Date**: October 1, 2026 (2026–27 Preseason / Training Camp period). Roster snapshots distinguish training camp invitees from final opening-night rosters.
 
+### Video Studio source archive
+
+`data/video-studio/` preserves the supplied Atlas graph and the SkillCorner
+basketball dataset, including the ten tracking files recovered from the
+[original SkillCorner repository](https://github.com/SkillCorner/opendata-basketball).
+The tracking files require Git LFS. SkillCorner's license and documentation are
+included in the archive; SkillCorner asks users of its data to credit them.
+
+The Atlas graph contains generated and unverified values, including contract
+defaults and prospect placeholders. It is retained as source material, not
+connected to the website as verified data. The SkillCorner data describes ACB
+games and must not be presented as NBA tracking data.
+
+The existing video tab loads SkillCorner's April 19, 2026 ACB game events for
+Alex Len and Trey Lyles using verified NBA-to-SkillCorner ID matches. Other
+archive data is not yet connected to the website. The identity matches are
+supported by Real Madrid's [Alex Len announcement](https://www.realmadrid.com/en-US/news/club/announcements/comunicado-oficial-alex-len-30-10-2025)
+and [Trey Lyles profile](https://www.realmadrid.com/en-US/basketball/first-team/players/trey-lyles).
+
 ---
 
 ## 🚀 Getting Started
