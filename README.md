@@ -53,6 +53,10 @@ archive data is not yet connected to the website. The identity matches are
 supported by Real Madrid's [Alex Len announcement](https://www.realmadrid.com/en-US/news/club/announcements/comunicado-oficial-alex-len-30-10-2025)
 and [Trey Lyles profile](https://www.realmadrid.com/en-US/basketball/first-team/players/trey-lyles).
 
+The prospect view uses separately licensed Wikimedia Commons photos for Cameron
+Boozer and AJ Dybantsa. Their credits, licenses, and crop information appear in
+each prospect's Lineage & Sources tab; the original seed records remain intact.
+
 ---
 
 ## 🚀 Getting Started
