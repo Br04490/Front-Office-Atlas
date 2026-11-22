@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { ProspectCategory, Prospect, Team } from '../types';
 import { ProspectService, TeamService } from '../services';
+import { getProspectPhoto } from '../data/prospectPhotos';
 import { EvidenceBadge } from '../components/EvidenceBadge';
 import { ProspectDetailDrawer } from '../components/ProspectDetailDrawer';
 import { 
@@ -249,6 +250,8 @@ export const ProspectsView: React.FC<ProspectsViewProps> = ({ onOpenCba }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredProspects.map((p) => {
               const topRank = p.rankings?.[0]?.rank || 1;
+              const photo = getProspectPhoto(p.id);
+              const photoUrl = photo?.url || p.headshot_url;
               return (
                 <div
                   key={p.id}
@@ -258,8 +261,8 @@ export const ProspectsView: React.FC<ProspectsViewProps> = ({ onOpenCba }) => {
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 rounded-xl overflow-hidden bg-neutral-900 border border-white/10 shrink-0">
-                        {p.headshot_url ? (
-                          <img src={p.headshot_url} alt={p.full_name} className="w-full h-full object-cover" />
+                        {photoUrl ? (
+                          <img src={photoUrl} alt={p.full_name} title={photo ? `Photo by ${photo.author}, ${photo.license}; details in Lineage & Sources` : undefined} className="w-full h-full object-cover" />
                         ) : (
                           <div className="w-full h-full flex items-center justify-center font-bold text-neutral-400">
                             {p.full_name[0]}

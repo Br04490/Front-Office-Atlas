@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Prospect, ProspectDraftFit, Team } from '../types';
 import { TeamService, ProspectService } from '../services';
+import { getProspectPhoto } from '../data/prospectPhotos';
 import { EvidenceBadge } from './EvidenceBadge';
 import { 
   X, 
@@ -54,6 +55,8 @@ export const ProspectDetailDrawer: React.FC<ProspectDetailDrawerProps> = ({
 
   if (!prospect) return null;
 
+  const photo = getProspectPhoto(prospect.id);
+  const photoUrl = photo?.url || prospect.headshot_url;
   const allTeams = TeamService.getAllTeams();
   const currentTeam = TeamService.getTeamBySlug(focusTeamSlug) || allTeams[0];
   const draftFit = ProspectService.getDraftFit(prospect.id, currentTeam.slug);
@@ -127,8 +130,8 @@ export const ProspectDetailDrawer: React.FC<ProspectDetailDrawerProps> = ({
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
             {/* Headshot */}
             <div className="relative w-20 h-20 rounded-2xl overflow-hidden bg-neutral-900 border-2 border-indigo-400/40 shadow-xl shrink-0">
-              {prospect.headshot_url ? (
-                <img src={prospect.headshot_url} alt={prospect.full_name} className="w-full h-full object-cover" />
+              {photoUrl ? (
+                <img src={photoUrl} alt={prospect.full_name} title={photo ? `Photo by ${photo.author}, ${photo.license}; details in Lineage & Sources` : undefined} className="w-full h-full object-cover" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center font-bold text-xl text-neutral-400">
                   {prospect.full_name[0]}
@@ -363,6 +366,12 @@ export const ProspectDetailDrawer: React.FC<ProspectDetailDrawerProps> = ({
                 Scouting Provenance & Audit Ledger
               </h3>
               <div className="space-y-2 text-neutral-300">
+                {photo && (
+                  <div>
+                    Photo: <a className="text-sky-400 underline" href={photo.sourceUrl} target="_blank" rel="noreferrer">{photo.author}</a>{' '}
+                    (<a className="text-sky-400 underline" href={photo.licenseUrl} target="_blank" rel="noreferrer">{photo.license}</a>). {photo.changes}
+                  </div>
+                )}
                 <div>Primary Source: <strong className="text-white">{prospect.source || 'NBA Scouting Bureau'}</strong></div>
                 <div>Verification Status: <strong className="text-emerald-400">{prospect.verification_status || 'VERIFIED CURRENT'}</strong></div>
                 <div>Audit As-Of Date: <strong className="text-white">{prospect.retrieved_at ? new Date(prospect.retrieved_at).toLocaleDateString() : 'October 1, 2026'}</strong></div>

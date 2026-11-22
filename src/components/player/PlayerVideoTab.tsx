@@ -1,12 +1,19 @@
 import React from 'react';
 import { Player } from '../../types';
 import { Video, ShieldAlert, Cpu, Eye, Activity, CheckCircle2 } from 'lucide-react';
+import { getSkillCornerPlayerId } from '../../services/skillcorner';
+import { SkillCornerVideoTab } from './SkillCornerVideoTab';
 
 interface PlayerVideoTabProps {
   player: Player;
 }
 
 export const PlayerVideoTab: React.FC<PlayerVideoTabProps> = ({ player }) => {
+  const skillCornerPlayerId = getSkillCornerPlayerId(player.nba_player_id);
+  if (skillCornerPlayerId !== undefined) {
+    return <SkillCornerVideoTab playerId={skillCornerPlayerId} />;
+  }
+
   return (
     <div className="space-y-6">
       {/* 1. Header & Architecture Notice */}
