@@ -37,6 +37,8 @@ In strict adherence to NBA front-office protocol:
 `data/video-studio/` preserves the supplied Atlas graph and the SkillCorner
 basketball dataset, including the ten tracking files recovered from the
 [original SkillCorner repository](https://github.com/SkillCorner/opendata-basketball).
+It also preserves the original Video Studio scripts and website files under
+`source/`; these are archived for reference, not run by this application.
 The tracking files require Git LFS. SkillCorner's license and documentation are
 included in the archive; SkillCorner asks users of its data to credit them.
 
